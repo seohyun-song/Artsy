@@ -1,4 +1,64 @@
+import { useTheme } from 'styled-components';
+import Ticket from '@components/Ticket/Ticket';
+import Container from '@components/Container/Container.jsx';
+import Button from '@components/@common/Button/Button.jsx';
+
+const tickets = [
+    {
+        category: '영화',
+        title: '영화제목입니다',
+        showDate: '2023-08-14',
+        rating: '5',
+    },
+    {
+        category: '뮤지컬',
+        title: '뮤지컬제목입니다',
+        showDate: '2023-08-14',
+        rating: '4',
+    },
+    {
+        category: '콘서트',
+        title: '콘서트제목제목입니다',
+        showDate: '2023-08-14',
+        rating: '4',
+    },
+    {
+        category: '연극',
+        title: '연극제목',
+        showDate: '2023-08-14',
+        rating: '4',
+    },
+    ,
+    {
+        category: '전시',
+        title: '전시제목',
+        showDate: '2023-08-14',
+        rating: '4',
+    },
+];
+
 const List = () => {
-    return <h1>List</h1>;
+    const theme = useTheme();
+    return (
+        <Container>
+            <div>
+                <h2>총 {tickets.length} 개</h2>
+            </div>
+            <div>
+                <Button size="small" color={theme.colors.point1}>
+                    티켓추가
+                </Button>
+            </div>
+            {tickets.map((ticket, idx) => (
+                <Ticket
+                    key={idx}
+                    category={ticket.category}
+                    title={ticket.title}
+                    showDate={ticket.showDate}
+                    rating={ticket.rating}
+                />
+            ))}
+        </Container>
+    );
 };
 export default List;
