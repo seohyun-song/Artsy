@@ -1,5 +1,5 @@
 import React from 'react';
-import * as T from './TextInput.styles';
+import * as T from './Input.styles';
 /**
  * input 컴포넌트
  * @param {string} labelText label태그 내 텍스트
@@ -26,7 +26,7 @@ const isTextAttributes = (InputType) => {
     }
 };
 
-const TextInput = ({
+const Input = ({
     labelText,
     errorMessage,
     inputType = 'text',
@@ -74,4 +74,4 @@ const TextInput = ({
     );
 };
 
-export default TextInput;
+export default Input;
