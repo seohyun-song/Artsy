@@ -8,12 +8,12 @@ import * as L from './List.styles';
 
 // dummy data
 const tickets = [
-    {
-        category: '영화',
-        title: '영화제목입니다',
-        showDate: '2023-08-14',
-        rating: '5',
-    },
+    // {
+    //     category: '영화',
+    //     title: '영화제목입니다',
+    //     showDate: '2023-08-14',
+    //     rating: '5',
+    // },
     {
         category: '뮤지컬',
         title: '뮤지컬제목입니다',
@@ -67,17 +67,18 @@ const categories = [
 const List = () => {
     const theme = useTheme();
     // 카테고리 필터링 테스트.
-
-    const selectRef = useRef(null);
+    const [category, setCategory] = useState('전체');
     const [filteredTicketList, setFilteredTicketList] = useState([]);
     const handleFilter = (e) => {
+        setCategory(e.target.value);
         setFilteredTicketList(() => {
-            if (selectRef.current.value === '전체') return setFilteredTicketList(tickets);
-            return setFilteredTicketList(tickets.filter((item) => item.category === selectRef.current.value));
+            if (e.target.value === '전체') return setFilteredTicketList(tickets);
+            return setFilteredTicketList(tickets.filter((item) => item.category === e.target.value));
         });
     };
 
     useEffect(() => {
+        setCategory('전체');
         setFilteredTicketList(tickets);
     }, []);
 
@@ -91,7 +92,7 @@ const List = () => {
             <L.FilterWrap>
                 <L.FilterInner>
                     {/* 필터 셀렉트 테스트 */}
-                    <select onChange={handleFilter} ref={selectRef}>
+                    <select onChange={handleFilter} value={category}>
                         <option>전체</option>
                         {categories.map((category, idx) => (
                             <option key={`${category.name}-${idx}`}>{category.name}</option>
