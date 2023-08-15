@@ -1,50 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import ticketApi from '@api/ticket';
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import * as L from './List.styles';
-
-// dummy data
-const tickets = [
-    // {
-    //     category: '영화',
-    //     title: '영화제목입니다',
-    //     showDate: '2023-08-14',
-    //     rating: '5',
-    // },
-    {
-        category: '뮤지컬',
-        title: '뮤지컬제목입니다',
-        showDate: '2023-08-14',
-        rating: '4',
-    },
-    {
-        category: '뮤지컬',
-        title: '뮤지컬제목입니다',
-        showDate: '2023-08-14',
-        rating: '4',
-    },
-    {
-        category: '콘서트',
-        title: '콘서트제목제목입니다',
-        showDate: '2023-08-14',
-        rating: '4',
-    },
-    {
-        category: '연극',
-        title: '연극제목',
-        showDate: '2023-08-14',
-        rating: '4',
-    },
-    {
-        category: '전시',
-        title: '전시제목',
-        showDate: '2023-08-14',
-        rating: '4',
-    },
-];
 
 const categories = [
     {
@@ -65,6 +27,8 @@ const categories = [
 ];
 
 const List = () => {
+    const queryClient = useQueryClient();
+    const { data } = useQuery('ticket', ticketApi.getTickets);
     const theme = useTheme();
     // 카테고리 필터링 테스트.
     const [category, setCategory] = useState('전체');
@@ -72,14 +36,14 @@ const List = () => {
     const handleFilter = (e) => {
         setCategory(e.target.value);
         setFilteredTicketList(() => {
-            if (e.target.value === '전체') return setFilteredTicketList(tickets);
-            return setFilteredTicketList(tickets.filter((item) => item.category === e.target.value));
+            if (e.target.value === '전체') return setFilteredTicketList(data);
+            return setFilteredTicketList(data.filter((item) => item.category === e.target.value));
         });
     };
 
     useEffect(() => {
         setCategory('전체');
-        setFilteredTicketList(tickets);
+        setFilteredTicketList(data);
     }, []);
 
     return (
