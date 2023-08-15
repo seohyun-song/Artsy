@@ -4,7 +4,7 @@ const colors = {
     sub1: '#D373FA',
     sub2: '#FFC348',
     sub3: '#FFA888',
-    black: '1B1D21',
+    black: '#1B1D21',
 };
 
 const theme = {
