@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const TitleWrap = styled.div`
     display: flex;
@@ -15,6 +15,20 @@ const FilterWrap = styled.div`
 
     padding: 1rem 0;
     background-color: #fff;
+`;
+
+const Filter = styled.select`
+    /* 초기화 */
+    outline: none;
+    border: none;
+    background-color: transparent;
+
+    /* 스타일 */
+    padding: 4px 10px;
+    font-size: 0.8125rem;
+    ${({ $color }) => css`
+        border-bottom: 1px solid ${$color};
+    `}
 `;
 
 const FilterInner = styled.div`
@@ -60,4 +74,4 @@ const NoTicket = styled.div`
     }
 `;
 
-export { TitleWrap, FilterWrap, TicketList, NoTicket, FilterInner };
+export { TitleWrap, FilterWrap, TicketList, NoTicket, FilterInner, Filter };

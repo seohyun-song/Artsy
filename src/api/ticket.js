@@ -15,7 +15,7 @@ const ticketApi = {
     //     ticketApi.getTickets,
     //   );
     getTickets: async ({ queryKey }) => {
-        // const [_, categoryId] = queryKey;
+        const [_, categoryId] = queryKey;
         // const response = await axiosInstance.get(`${ticketApi.endpoint.schedules()}?categoryId=${categoryId}`, {
         //     headers: { ...ticketApi.headers },
         // });
@@ -23,7 +23,7 @@ const ticketApi = {
         // return response;
 
         // api 대신 dummy data 사용
-        const data = [
+        let data = [
             {
                 category: '영화',
                 title: '영화제목입니다',
@@ -61,6 +61,10 @@ const ticketApi = {
                 rating: '4',
             },
         ];
+
+        if (categoryId) {
+            data = data.filter((item) => item.category === categoryId);
+        }
 
         return data;
     },
