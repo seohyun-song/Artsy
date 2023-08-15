@@ -2,7 +2,9 @@ import { useTheme } from 'styled-components';
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
+import * as L from './List.styles';
 
+// dummy data
 const tickets = [
     {
         category: '영화',
@@ -41,14 +43,14 @@ const List = () => {
     const theme = useTheme();
     return (
         <Container>
-            <div>
-                <h2>총 {tickets.length} 개</h2>
-            </div>
-            <div>
+            <L.TitleWrap>
+                <h4>총 {tickets.length} 개</h4>
+            </L.TitleWrap>
+            <L.FilterWrap>
                 <Button size="small" color={theme.colors.point1}>
                     티켓추가
                 </Button>
-            </div>
+            </L.FilterWrap>
             {tickets.map((ticket, idx) => (
                 <Ticket
                     key={idx}

@@ -2,7 +2,7 @@ import * as T from './Ticket.styles';
 
 const Ticket = ({ title, showDate, rating, category }) => {
     return (
-        <T.Wrap category={category}>
+        <T.Wrap $category={category}>
             <T.ImageBox>
                 {/* {data.img ? <img src={data.img} alt={data.title} /> : <img src={} alt="기본이미지" />} */}
             </T.ImageBox>

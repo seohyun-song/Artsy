@@ -9,8 +9,8 @@ const bg = {
 };
 
 const bgStyles = css`
-    ${({ category }) => css`
-        background-color: ${bg[category]};
+    ${({ $category }) => css`
+        background-color: ${bg[$category]};
     `}
 `;
 const Wrap = styled.div`
