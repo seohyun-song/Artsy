@@ -1,4 +1,5 @@
 import { useTheme } from 'styled-components';
+import { Link } from 'react-router-dom';
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
@@ -30,7 +31,6 @@ const tickets = [
         showDate: '2023-08-14',
         rating: '4',
     },
-    ,
     {
         category: '전시',
         title: '전시제목',
@@ -41,6 +41,7 @@ const tickets = [
 
 const List = () => {
     const theme = useTheme();
+
     return (
         <Container>
             <L.TitleWrap>
@@ -51,15 +52,19 @@ const List = () => {
                     티켓추가
                 </Button>
             </L.FilterWrap>
-            {tickets.map((ticket, idx) => (
-                <Ticket
-                    key={idx}
-                    category={ticket.category}
-                    title={ticket.title}
-                    showDate={ticket.showDate}
-                    rating={ticket.rating}
-                />
-            ))}
+            <L.TicketList>
+                {tickets.map((ticket, idx) => (
+                    <Link to="/detail" key={idx}>
+                        <Ticket
+                            category={ticket.category}
+                            title={ticket.title}
+                            showDate={ticket.showDate}
+                            rating={ticket.rating}
+                            image={ticket.image}
+                        />
+                    </Link>
+                ))}
+            </L.TicketList>
         </Container>
     );
 };

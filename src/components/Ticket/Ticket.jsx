@@ -1,10 +1,18 @@
 import * as T from './Ticket.styles';
+import starIconUrl from '@assets/icons/icon-star.png';
 
-const Ticket = ({ title, showDate, rating, category }) => {
+const Ticket = ({ title, showDate, rating, category, image }) => {
     return (
         <T.Wrap $category={category}>
             <T.ImageBox>
-                {/* {data.img ? <img src={data.img} alt={data.title} /> : <img src={} alt="기본이미지" />} */}
+                {image ? (
+                    <img src={image} alt={title} />
+                ) : (
+                    <img
+                        src="https://i.namu.wiki/i/CM9WgqYNFXtGFZCtBU1r2Exs1y-zKyjmIW55gBudgExj9Q6NIfUavAeq7Tn55FB-GxyJ8hWK9PShcQVBdxJPwQ.webp"
+                        alt="기본이미지"
+                    />
+                )}
             </T.ImageBox>
             <T.DivideLine>
                 <span></span>
@@ -14,6 +22,7 @@ const Ticket = ({ title, showDate, rating, category }) => {
                 <T.Title>{title}</T.Title>
                 <T.Date>{showDate}</T.Date>
                 <T.Rating>
+                    <img src={starIconUrl} />
                     <span>{rating}</span>
                 </T.Rating>
             </T.InfoBox>

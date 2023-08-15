@@ -17,7 +17,7 @@ const Wrap = styled.div`
     overflow: hidden;
     position: relative;
     display: flex;
-    min-height: 140px;
+    height: 140px;
     border-radius: 8px;
     padding-left: 20px;
     box-sizing: border-box;
@@ -34,20 +34,35 @@ const Wrap = styled.div`
         width: 20px;
         ${bgStyles}
     }
-    + div {
-        margin-top: 20px;
-    }
 `;
 
 const ImageBox = styled.div`
     flex: 1 auto;
+    overflow: hidden;
+    position: relative;
     background-color: #eee;
+
+    &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `;
 
 const InfoBox = styled.div`
     display: flex;
     flex-direction: column;
-    flex: 0 0 130px;
+    flex: none;
+    width: 130px;
     padding: 20px 20px 20px 10px;
     box-sizing: border-box;
     background-color: #fff;
@@ -55,6 +70,9 @@ const InfoBox = styled.div`
 `;
 
 const Title = styled.div`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 0.875rem;
 `;
 
@@ -65,17 +83,17 @@ const Date = styled.div`
 `;
 
 const Rating = styled.div`
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: auto;
     text-align: right;
     font-size: 0.875rem;
-
     span {
-        position: relative;
-
-        &:before {
-            content: '';
-            width: 20px;
-        }
+        margin-left: 4px;
+    }
+    img {
+        width: 0.875rem;
     }
 `;
 
