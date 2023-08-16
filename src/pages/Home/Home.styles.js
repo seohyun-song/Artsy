@@ -71,7 +71,16 @@ const CategoryContainer = styled.div`
     width: 100%;
 
     scroll-snap-type: x mandatory;
-    overflow: auto;
+
+    /* hide scrollbar but allow scrolling */
+
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+    }
     @media all and (min-width: 768px) {
         scroll-snap-type: none;
     }
