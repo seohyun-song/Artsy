@@ -7,8 +7,33 @@ const colors = {
     black: '#1B1D21',
 };
 
+const fontSizes = {
+    h2: '6rem',
+    h3: '4.8rem',
+    h4: '3.4rem',
+    h5: '2.4rem',
+    h6: '2rem',
+    body: '1.6rem',
+    text: '1.4rem',
+    subText: '1.2rem',
+};
+
+const devicesSize = {
+    mobile: '390px',
+    tablet: '768px',
+    pc: '1280px',
+};
+
+const media = {
+    tablet: `@media all and (min-width: 768px)`,
+    labtop: `@media all and (min-width: 1280px)`,
+};
+
 const theme = {
     colors,
+    fontSizes,
+    devicesSize,
+    media,
 };
 
 export default theme;
