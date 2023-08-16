@@ -13,6 +13,30 @@ const bgStyles = css`
         background-color: ${bg[$category]};
     `}
 `;
+
+const ImageBox = styled.div`
+    flex: 1 auto;
+    overflow: hidden;
+    position: relative;
+    background-color: #eee;
+
+    &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.2s;
+    }
+`;
+
 const Wrap = styled.div`
     overflow: hidden;
     position: relative;
@@ -34,27 +58,11 @@ const Wrap = styled.div`
         width: 20px;
         ${bgStyles}
     }
-`;
 
-const ImageBox = styled.div`
-    flex: 1 auto;
-    overflow: hidden;
-    position: relative;
-    background-color: #eee;
-
-    &:before {
-        content: '';
-        display: block;
-        padding-top: 100%;
-    }
-
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    &:hover ${ImageBox} {
+        img {
+            transform: scale(1.04);
+        }
     }
 `;
 
