@@ -6,7 +6,15 @@ const Ticket = ({ title, showDate, rating, category, image }) => {
     return (
         <T.Wrap $category={category}>
             <T.ImageBox>
-                {image ? <img src={image} alt={title} /> : <img src={ticketUrl} alt="기본이미지" />}
+                {/* 티켓의 files의 배열길이 체크로 default 이미지 추가 */}
+                {image ? (
+                    <img src={image} alt={title} />
+                ) : (
+                    <img
+                        src="https://i.namu.wiki/i/CM9WgqYNFXtGFZCtBU1r2Exs1y-zKyjmIW55gBudgExj9Q6NIfUavAeq7Tn55FB-GxyJ8hWK9PShcQVBdxJPwQ.webp"
+                        alt="기본이미지"
+                    />
+                )}
             </T.ImageBox>
             <T.DivideLine>
                 <span></span>

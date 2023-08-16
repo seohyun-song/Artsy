@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import ticketApi from '@api/ticket';
 import categoryApi from '@api/category';
 import Ticket from '@components/Ticket/Ticket';
