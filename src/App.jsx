@@ -12,10 +12,6 @@ const App = () => {
             <Layout>
                 <Header />
                 <Main>
-                    <p>normal</p>
-                    <p style={{ fontWeight: '500' }}>medium</p>
-
-                    <p style={{ fontWeight: 'bold' }}>bold</p>
                     <Outlet />
                 </Main>
                 <Footer />
