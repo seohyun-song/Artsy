@@ -12,7 +12,7 @@ const Badge = () => {
     return (
         <B.Badge theme={theme}>
             <B.ImageWrapper>
-                <img src={`/src/assets/images/badge_${data.currentBadge.name}.png`} alt="badge image" />
+                <img src={`/src/assets/icons/badge_${data.currentBadge.name}.png`} alt="badge image" />
             </B.ImageWrapper>
             <B.Description>
                 다음 뱃지까지 <br />

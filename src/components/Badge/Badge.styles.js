@@ -35,7 +35,7 @@ const ImageWrapper = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 50%;
+        width: 60%;
         height: auto;
     }
 `;

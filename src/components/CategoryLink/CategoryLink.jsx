@@ -20,7 +20,7 @@ const CATEGORY_NAME = (name) => {
 };
 
 const getCategoryImageURL = (categoryName) => {
-    return `/src/assets/images/category_${CATEGORY_NAME(categoryName)}.png`;
+    return `/src/assets/icons/category_${CATEGORY_NAME(categoryName)}.png`;
 };
 
 const CategoryLink = ({ name }) => {
