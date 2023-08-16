@@ -4,7 +4,7 @@ const TitleWrap = styled.div`
     display: flex;
 
     h4 {
-        font-size: 1.5rem;
+        font-size: ${({ theme }) => theme.fontSizes.h5};
     }
 `;
 
@@ -12,7 +12,6 @@ const FilterWrap = styled.div`
     z-index: 1000;
     position: sticky;
     top: 50px;
-
     padding: 1rem 0;
     background-color: #fff;
 `;
@@ -25,10 +24,8 @@ const Filter = styled.select`
 
     /* 스타일 */
     padding: 4px 10px;
-    font-size: 0.8125rem;
-    ${({ $color }) => css`
-        border-bottom: 1px solid ${$color};
-    `}
+    font-size: ${({ theme }) => theme.fontSizes.text};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
 `;
 
 const FilterInner = styled.div`
@@ -43,12 +40,11 @@ const FilterInner = styled.div`
 const TicketList = styled.div`
     display: grid;
     grid-row-gap: 16px;
-
-    @media all and (min-width: 768px) {
+    ${({ theme }) => theme.media.tablet} {
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 16px;
     }
-    @media all and (min-width: 1280px) {
+    ${({ theme }) => theme.media.labtop} {
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 20px;
         grid-row-gap: 20px;
@@ -63,11 +59,9 @@ const NoTicket = styled.div`
     border-radius: 8px;
     box-sizing: border-box;
     background-color: #eee;
-    font-size: 0.875rem;
+    font-size: ${({ theme }) => theme.fontSizes.body};
 
-    @media all and (min-width: 768px) {
-    }
-    @media all and (min-width: 1280px) {
+    ${({ theme }) => theme.media.labtop} {
         max-width: 600px;
         margin: 80px auto 0;
         min-height: 200px;

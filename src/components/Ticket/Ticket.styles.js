@@ -81,12 +81,12 @@ const Title = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.875rem;
+    font-size: ${({ theme }) => theme.fontSizes.text};
 `;
 
 const Date = styled.div`
     margin-top: 8px;
-    font-size: 0.75rem;
+    font-size: ${({ theme }) => theme.fontSizes.subText};
     color: #909090;
 `;
 
@@ -96,12 +96,12 @@ const Rating = styled.div`
     align-items: center;
     margin-top: auto;
     text-align: right;
-    font-size: 0.875rem;
+    font-size: ${({ theme }) => theme.fontSizes.text};
     span {
         margin-left: 4px;
     }
     img {
-        width: 0.875rem;
+        width: ${({ theme }) => theme.fontSizes.text};
     }
 `;
 

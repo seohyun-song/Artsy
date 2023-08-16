@@ -16,13 +16,15 @@ const ticketApi = {
     //   );
     getTickets: async ({ queryKey }) => {
         const [_, categoryId] = queryKey;
-        // const response = await axiosInstance.get(`${ticketApi.endpoint.schedules()}?categoryId=${categoryId}`, {
+        // const response = await axiosInstance.get(`${ticketApi.endpoint.tickets()}?categoryId=${categoryId}`, {
         //     headers: { ...ticketApi.headers },
         // });
 
+        // console.log(response);
+
         // return response;
 
-        // api 대신 dummy data 사용
+        //api 대신 dummy data 사용
         let data = [
             {
                 category: '영화',

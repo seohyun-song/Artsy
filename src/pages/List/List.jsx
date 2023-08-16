@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from 'react-query';
 import ticketApi from '@api/ticket';
 import categoryApi from '@api/category';
 import Ticket from '@components/Ticket/Ticket';
-import Container from '@components/Container/Container.jsx';
+import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import * as L from './List.styles';
 
@@ -25,8 +25,7 @@ const List = () => {
     }, []);
 
     const ticketQuery = useQuery(['ticket', sortKey], ticketApi.getTickets);
-    const categoryQuery = useQuery('category', categoryApi.getCategories);
-
+    const categoryQuery = useQuery(['category'], categoryApi.getCategories);
     const handleFilter = (e) => {
         setSortParams(e.target.value);
         setCategory(e.target.value);
@@ -41,7 +40,7 @@ const List = () => {
             </Container>
             <L.FilterWrap>
                 <L.FilterInner>
-                    <L.Filter onChange={handleFilter} value={category || ''} $color={theme.colors.black}>
+                    <L.Filter onChange={handleFilter} value={category || ''}>
                         <option>전체</option>
                         {categoryQuery?.data?.map((category, idx) => (
                             <option key={`${category.name}-${idx}`}>{category.name}</option>
