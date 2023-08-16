@@ -1,33 +1,54 @@
 import React, { useState } from 'react';
 import * as T from './TicketDetail.styles';
-import DetailText from '../../components/TicketDetail/DetailText';
+import RatingStar from '../../components/TicketDetail/RatingStar';
 
 const TicketDetail = () => {
     const imgUrl =
         'https://i.namu.wiki/i/CM9WgqYNFXtGFZCtBU1r2Exs1y-zKyjmIW55gBudgExj9Q6NIfUavAeq7Tn55FB-GxyJ8hWK9PShcQVBdxJPwQ.webp';
 
     const ticketData = {
-        category: '영화',
-        title: '영화 제목',
-        showDate: '2023년 08월 11일',
+        categoryName: '영화',
+        title: '엘리멘탈',
+        showDate: '2023-08-14',
         rating: '4',
-        location: '서울특별시 강남구 강남대로 438',
+        place: '성수 메가박스',
         price: 12000,
+        review: '오늘 영화봄',
+        categoryColor: '#A888FF',
     };
 
     return (
         <T.Container>
-            <T.MainText>티켓 상세</T.MainText>
-            <T.TypeColorBox />
-            <T.TicketDetailContainer>
-                <T.TicketImage src={imgUrl} />
+            <T.TypeColorBox color={ticketData.categoryColor} />
+            <T.TicketDetailWrap>
+                <T.MainText>티켓 상세</T.MainText>
+                <T.TicketImageWrap>
+                    <img src={imgUrl} alt="티켓이미지" />
+                </T.TicketImageWrap>
                 <T.TicketDetailBox>
-                    <DetailText label="카테고리" content={ticketData.category} />
-                    <DetailText label="관람일" content={ticketData.showDate} />
-                    <DetailText label="장소" content={ticketData.location} />
-                    <DetailText label="금액" content={`${ticketData.price.toLocaleString()}원`} />
+                    <T.DetailContainer>
+                        <T.TitleText title="true">{ticketData.title}</T.TitleText>
+                        <T.UnderLine />
+                        <T.TitleText>카테고리</T.TitleText>
+                        <T.DetailText>{ticketData.categoryName}</T.DetailText>
+                        <T.TitleText>별점</T.TitleText>
+                        <RatingStar rating={ticketData.rating} />
+                        <T.TitleText>장소</T.TitleText>
+                        <T.DetailText>{ticketData.place}</T.DetailText>
+                        <T.TitleText>금액</T.TitleText>
+                        <T.DetailText>{ticketData.price.toLocaleString()}원</T.DetailText>
+                        <T.TitleText>일시</T.TitleText>
+                        <T.DetailText>{ticketData.showDate}</T.DetailText>
+                        <T.TitleText>리뷰</T.TitleText>
+                        <T.DetailText>{ticketData.review}</T.DetailText>
+                        <T.EditWrap>
+                            <T.EditText>수정하기</T.EditText>
+                            <T.EditText>|</T.EditText>
+                            <T.EditText>삭제하기</T.EditText>
+                        </T.EditWrap>
+                    </T.DetailContainer>
                 </T.TicketDetailBox>
-            </T.TicketDetailContainer>
+            </T.TicketDetailWrap>
         </T.Container>
     );
 };
