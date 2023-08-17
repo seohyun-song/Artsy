@@ -62,7 +62,7 @@ const List = () => {
                                 title={ticket.title}
                                 showDate={ticket.showDate}
                                 rating={ticket.rating}
-                                image={ticket.files}
+                                imUrl={ticket.fileImageUrl}
                             />
                         </Link>
                     ))}
