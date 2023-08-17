@@ -31,7 +31,7 @@ const Filter = styled.select`
 const FilterInner = styled.div`
     display: flex;
     justify-content: space-between;
-    max-width: 1280px;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
     padding: 0 2rem;
     box-sizing: border-box;
