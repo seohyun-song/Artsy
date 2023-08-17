@@ -1,16 +1,21 @@
+import { useEffect, useState } from 'react';
+import categoryApi from '../../api/category';
 import Badge from '../../components/Badge/Badge';
 import CategoryLink from '../../components/CategoryLink/CategoryLink';
 import * as H from './Home.styles';
-// {
-//     "artsyData": [
-//       {
-//         "name": "뮤지컬",
-//         "color": "#ff0000"
-//       }
-//     ]
-//   }
-const categories = [{ name: '뮤지컬' }, { name: '영화' }, { name: '전시' }, { name: '콘서트' }, { name: '연극' }];
+
+// const categories = [{ name: '뮤지컬' }, { name: '영화' }, { name: '전시' }, { name: '콘서트' }, { name: '연극' }];
+
 const Home = () => {
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        const getcategories = categoryApi
+            .getCategories()
+            .then((res) => {
+                return res.data;
+            })
+            .then((data) => setCategories(data.artsyData));
+    }, []);
     return (
         <H.Home>
             <H.UserInfo>
@@ -31,9 +36,7 @@ const Home = () => {
                 </H.Record>
                 <H.CategoryContainer>
                     <H.CategoryWrapper>
-                        {categories.map((cat, index) => (
-                            <CategoryLink name={cat.name} key={index} />
-                        ))}
+                        {categories && categories.map((cat, index) => <CategoryLink name={cat.name} key={index} />)}
                     </H.CategoryWrapper>
                 </H.CategoryContainer>
             </H.RecordCollection>
