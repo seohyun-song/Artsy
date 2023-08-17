@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import throttle from '@utils/throttle';
 
+/* 스크롤 내렸을 때 요소 show/hide Hook */
 const useScrollToggle = (initialState = false) => {
     const [isScroll, setIsScroll] = useState(initialState);
 
@@ -9,9 +11,9 @@ const useScrollToggle = (initialState = false) => {
     };
 
     useEffect(() => {
-        window.addEventListener('scroll', checkIsScroll);
+        window.addEventListener('scroll', throttle(checkIsScroll, 100));
         return () => {
-            window.removeEventListener('scroll', checkIsScroll);
+            window.removeEventListener('scroll', throttle(checkIsScroll, 100));
         };
     }, []);
 
