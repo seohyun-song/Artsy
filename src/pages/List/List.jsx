@@ -24,8 +24,9 @@ const List = () => {
         setSearchParams(searchParams);
     }, []);
 
-    const ticketQuery = useQuery(['ticket', sortKey], ticketApi.getTickets);
     const categoryQuery = useQuery(['category'], categoryApi.getCategories);
+    const ticketQuery = useQuery(['ticket', sortKey], ticketApi.getTickets);
+
     const handleFilter = (e) => {
         setSortParams(e.target.value);
         setCategory(e.target.value);
@@ -42,7 +43,7 @@ const List = () => {
                 <L.FilterInner>
                     <L.Filter onChange={handleFilter} value={category || ''}>
                         <option>전체</option>
-                        {categoryQuery?.data?.map((category, idx) => (
+                        {categoryQuery?.data?.data?.artsyData.map((category, idx) => (
                             <option key={`${category.name}-${idx}`}>{category.name}</option>
                         ))}
                     </L.Filter>

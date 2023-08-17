@@ -18,9 +18,7 @@ const categoryApi = {
         const response = await axiosInstance.get(categoryApi.endpoint.category(), {
             headers: { ...categoryApi.headers },
         });
-        const data = await response.data;
-        const categoryData = await data.artsyData;
-        return categoryData;
+        return response;
     },
 };
 
