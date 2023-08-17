@@ -2,36 +2,36 @@ import { useState, useCallback } from 'react';
 import { useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useQuery, useQueryClient } from 'react-query';
-import ticketApi from '@api/ticket';
-import categoryApi from '@api/category';
+import { useSearchParams } from 'react-router-dom';
+
+import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
+import useTicketQuery from '@hooks/@queries/useTicketQuery';
+
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import * as L from './List.styles';
 
-//test
-import { useSearchParams } from 'react-router-dom';
-
 const List = () => {
     const theme = useTheme();
     const queryClient = useQueryClient();
     const [searchParams, setSearchParams] = useSearchParams();
-    const sortKey = searchParams.get('category');
-    const [category, setCategory] = useState(sortKey);
+    const sortKey = searchParams.get('categoryId');
+    const [categoryId, setCategoryId] = useState(sortKey);
 
-    const setSortParams = useCallback((category) => {
-        category === '전체' ? searchParams.delete('category') : searchParams.set('category', category);
+    const setSortParams = useCallback((categoryId) => {
+        categoryId === 0 ? searchParams.delete('categoryId') : searchParams.set('categoryId', categoryId);
         setSearchParams(searchParams);
     }, []);
 
-    const categoryQuery = useQuery(['category'], categoryApi.getCategories);
-    const ticketQuery = useQuery(['ticket', sortKey], ticketApi.getTickets);
+    const categoryQuery = useCategoryQuery();
+    const ticketQuery = useTicketQuery(categoryId);
 
     const handleFilter = (e) => {
-        setSortParams(e.target.value);
-        setCategory(e.target.value);
+        setSortParams(e.target.selectedIndex);
+        setCategoryId(e.target.selectedIndex);
     };
-
+    console.log(categoryId);
     return (
         <>
             <Container>
@@ -41,10 +41,12 @@ const List = () => {
             </Container>
             <L.FilterWrap>
                 <L.FilterInner>
-                    <L.Filter onChange={handleFilter} value={category || ''}>
-                        <option>전체</option>
-                        {categoryQuery?.data?.data?.artsyData.map((category, idx) => (
-                            <option key={`${category.name}-${idx}`}>{category.name}</option>
+                    <L.Filter onChange={handleFilter} value={categoryId ?? '전체'}>
+                        <option value="0">전체</option>
+                        {categoryQuery?.data?.map((category, idx) => (
+                            <option key={`${category.name}-${idx}`} value={category.id}>
+                                {category.name}
+                            </option>
                         ))}
                     </L.Filter>
                     <Button size="small" color={theme.colors.point1}>
@@ -56,13 +58,13 @@ const List = () => {
                 {ticketQuery.data?.length === 0 && <L.NoTicket>아직 추가하신 기록이 없습니다</L.NoTicket>}
                 <L.TicketList>
                     {ticketQuery.data?.map((ticket, idx) => (
-                        <Link to="/detail" key={idx}>
+                        <Link to={`/detail/${ticket.id}`} key={idx}>
                             <Ticket
-                                category={ticket.category}
+                                category={ticket.categoryName}
                                 title={ticket.title}
                                 showDate={ticket.showDate}
                                 rating={ticket.rating}
-                                image={ticket.image}
+                                image={ticket.files}
                             />
                         </Link>
                     ))}

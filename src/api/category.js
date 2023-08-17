@@ -15,10 +15,14 @@ const categoryApi = {
     //     categoryApi.getCategories,
     //   );
     getCategories: async ({ queryKey }) => {
-        const response = await axiosInstance.get(categoryApi.endpoint.category(), {
-            headers: { ...categoryApi.headers },
-        });
-        return response;
+        try {
+            const response = await axiosInstance.get(categoryApi.endpoint.category(), {
+                headers: { ...categoryApi.headers },
+            });
+            return response.data.artsyData;
+        } catch (err) {
+            // err 핸들링
+        }
     },
 };
 

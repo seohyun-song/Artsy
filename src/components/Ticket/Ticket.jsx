@@ -7,7 +7,11 @@ const Ticket = ({ title, showDate, rating, category, image }) => {
         <T.Wrap $category={category}>
             <T.ImageBox>
                 {/* 티켓의 files의 배열길이 체크로 default 이미지 추가 */}
-                {image ? <img src={image} alt={title} /> : <img src={ticketUrl} alt="기본이미지" />}
+                {image.length !== 0 ? (
+                    <img src={image[0].imageUrl} alt={title} />
+                ) : (
+                    <img src={ticketUrl} alt="기본이미지" />
+                )}
             </T.ImageBox>
             <T.DivideLine>
                 <span></span>
