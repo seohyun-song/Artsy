@@ -1,6 +1,13 @@
 import StyledTopButton from './TopButton.styles';
+import useScrollToggle from '@hooks/useScrollToggle';
 
 const TopButton = () => {
-    return <StyledTopButton></StyledTopButton>;
+    const isScroll = useScrollToggle(false);
+
+    const handleScrollTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    return isScroll && <StyledTopButton onClick={handleScrollTop}></StyledTopButton>;
 };
 export default TopButton;
