@@ -43,7 +43,7 @@ const TicketDetail = () => {
                         <T.DetailText>{ticketData.review}</T.DetailText>
                         <T.EditWrap>
                             <T.EditText>수정하기</T.EditText>
-                            <T.EditText>|</T.EditText>
+                            <T.EditText $bar>|</T.EditText>
                             <T.EditText>삭제하기</T.EditText>
                         </T.EditWrap>
                     </T.DetailContainer>

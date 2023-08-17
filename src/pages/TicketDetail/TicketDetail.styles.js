@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
-    min-height: 120vh;
-`;
+const Container = styled.div``;
 
 const TypeColorBox = styled.div`
-    display: block;
     width: 100%;
     height: 45rem;
     position: absolute;
@@ -18,7 +15,6 @@ const MainText = styled.h2`
     font-weight: 700;
     font-size: 2.4rem;
     margin: 20px 0 40px 0;
-    color: white;
 
     ${({ theme }) => theme.media.tablet} {
         color: white;
@@ -48,7 +44,7 @@ const TicketImageWrap = styled.div`
         border-radius: 12px;
     }
 
-    ${({ theme }) => theme.media.labtop} {
+    @media all and (min-width: 1280px) {
         width: 290px;
         height: 400px;
         max-width: 100%;
@@ -63,11 +59,11 @@ const TicketImageWrap = styled.div`
 `;
 
 const TicketDetailBox = styled.div`
-    position: absolute;
     display: flex;
     justify-content: center;
     text-align: center;
     overflow: auto;
+    margin-top: -8rem;
 
     width: 90%;
     top: 38rem;
@@ -104,8 +100,8 @@ const DetailText = styled.span`
     font-size: 1.25rem;
     margin: 10px 0 20px 0;
 
-    max-width: 100%; /* 부모 요소의 최대 너비까지만 확장 */
-    word-wrap: break-word; /* 긴 단어를 강제로 줄바꿈 */
+    max-width: 100%;
+    word-wrap: break-word;
 `;
 
 const EditWrap = styled.div`
@@ -120,7 +116,11 @@ const EditWrap = styled.div`
 const EditText = styled.span`
     font-size: 1.25rem;
     color: #777;
-    cursur: pointer;
+
+    &:nth-child(1),
+    &:nth-child(3) {
+        cursor: pointer;
+    }
 
     &:not(:last-child) {
         margin-right: 4px;
