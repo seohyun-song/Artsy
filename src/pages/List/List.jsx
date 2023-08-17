@@ -56,7 +56,7 @@ const List = () => {
                 {ticketQuery.data?.length === 0 && <L.NoTicket>아직 추가하신 기록이 없습니다</L.NoTicket>}
                 <L.TicketList>
                     {ticketQuery.data?.map((ticket, idx) => (
-                        <Link to={`/detail/${ticket.id}`} key={idx}>
+                        <Link to={`/detail/${ticket.id}`} key={ticket.id}>
                             <Ticket
                                 categoryColor={ticket.categoryColor}
                                 title={ticket.title}
