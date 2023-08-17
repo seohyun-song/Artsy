@@ -1,34 +1,64 @@
 import styled from 'styled-components';
 
-const Container = styled.div``;
+const Container = styled.div`
+    padding-bottom: 4rem;
+
+    ${({ theme }) => theme.media.labtop} {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 4rem;
+        padding-bottom: 4rem;
+        box-sizing: border-box;
+    }
+`;
 
 const TypeColorBox = styled.div`
     width: 100%;
     height: 45rem;
     position: absolute;
     z-index: -999;
-
     background-color: ${({ color }) => color};
+
+    ${({ theme }) => theme.media.labtop} {
+        width: 100%;
+        color: ${({ theme }) => theme.colors.black};
+
+        top: 27rem;
+    }
 `;
 
-const MainText = styled.h2`
-    font-weight: 700;
-    font-size: 2.4rem;
-    margin: 20px 0 40px 0;
+const MainWrap = styled.div`
+    display: flex;
+    justify-content: center;
 
-    ${({ theme }) => theme.media.tablet} {
+    h2 {
+        font-weight: 700;
+        font-size: ${({ theme }) => theme.fontSizes.h4};
+        margin: 2rem 0 4rem 0;
         color: white;
     }
 
     ${({ theme }) => theme.media.labtop} {
-        color: ${({ theme }) => theme.colors.black};
+        justify-content: flex-start;
+
+        h2 {
+            color: ${({ theme }) => theme.colors.black};
+            margin: 1rem 0 7rem 0;
+        }
     }
 `;
 
 const TicketDetailWrap = styled.div`
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
+
+    ${({ theme }) => theme.media.labtop} {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: -3rem;
+        height: 50rem;
+    }
 `;
 
 const TicketImageWrap = styled.div`
@@ -44,17 +74,9 @@ const TicketImageWrap = styled.div`
         border-radius: 12px;
     }
 
-    @media all and (min-width: 1280px) {
-        width: 290px;
-        height: 400px;
-        max-width: 100%;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-        }
+    ${({ theme }) => theme.media.labtop} {
+        width: 100%;
+        height: inherit;
     }
 `;
 
@@ -73,11 +95,18 @@ const TicketDetailBox = styled.div`
 
     background-color: white;
     z-index: -999;
+
+    ${({ theme }) => theme.media.labtop} {
+        width: 220rem;
+        height: 50rem;
+        margin: 0 0 0 4rem;
+        z-index: 0;
+    }
 `;
 
 const DetailContainer = styled.div`
     width: 90%;
-    padding: 20px 0;
+    padding: 2rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,22 +115,33 @@ const DetailContainer = styled.div`
 const UnderLine = styled.div`
     width: 70%;
     border-bottom: 0.5px solid #c4c4c4;
-    margin: 30px 0 20px 0;
+    margin: 2.5rem 0 2rem 0;
+
+    ${({ theme }) => theme.media.labtop} {
+        width: inherit;
+    }
 `;
 
-const TitleText = styled.span`
-    font-size: ${({ title }) => (title ? '2rem' : '1.5rem')};
-    font-weight: 600;
+const TitleWrap = styled.div`
+    h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-top: 10rem;
+    }
 
-    margin-top: ${({ title }) => (title ? '10rem' : '0')};
+    ${({ theme }) => theme.media.labtop} {
+        display: flex;
+        width: inherit;
+        margin-top: -7rem;
+    }
 `;
 
-const DetailText = styled.span`
-    font-size: 1.25rem;
-    margin: 10px 0 20px 0;
-
-    max-width: 100%;
-    word-wrap: break-word;
+const DetailWrap = styled.div`
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 `;
 
 const EditWrap = styled.div`
@@ -111,33 +151,31 @@ const EditWrap = styled.div`
 
     width: 100%;
     margin: 1rem 0;
-`;
 
-const EditText = styled.span`
-    font-size: 1.25rem;
-    color: #777;
+    span {
+        font-size: ${({ theme }) => theme.fontSizes.subText};
+        color: #777;
 
-    &:nth-child(1),
-    &:nth-child(3) {
-        cursor: pointer;
-    }
+        &:nth-child(2n + 1) {
+            cursor: pointer;
+        }
 
-    &:not(:last-child) {
-        margin-right: 4px;
+        &:not(:last-child) {
+            margin-right: 4px;
+        }
     }
 `;
 
 export {
     Container,
-    MainText,
+    MainWrap,
     TicketImageWrap,
     TypeColorBox,
     TicketDetailWrap,
     TicketDetailBox,
     DetailContainer,
-    TitleText,
-    DetailText,
+    TitleWrap,
     UnderLine,
-    EditText,
     EditWrap,
+    DetailWrap,
 };

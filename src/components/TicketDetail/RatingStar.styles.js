@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 const IconWrap = styled.div`
-    display: flex;
-    flex-direction: row;
-
+    display: inline;
     margin: 10px 0 20px 0;
+
+    ${({ theme }) => theme.media.labtop} {
+        margin: 0;
+    }
 `;
 
 const StarImg = styled.img`
