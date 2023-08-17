@@ -1,27 +1,17 @@
 import { useTheme } from 'styled-components';
 import * as S from './Signin.styles';
-import Input from '../../components/@common/Input/Input';
+import Input from '@components/@common/Input/Input';
 import { useState } from 'react';
-import loginApi from '../../api/login';
-import { useMutation, useQueryClient } from 'react-query';
+import useLoginQuery from '@hooks/@queries/useLoginQuery';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
+    const navigate = useNavigate();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: '',
     });
-    const [user, setUser] = useState({});
-
-    const queryClient = useQueryClient();
-    const fetcher = loginApi.signInWithEmail;
-    const { mutate } = useMutation(() => fetcher(loginInfo), {
-        retry: 0,
-        onSuccess: (userInfo) => {
-            queryClient.invalidateQueries(['user']);
-            setUser(userInfo);
-            console.log(userInfo);
-        },
-    });
+    const { mutate, isSuccess } = useLoginQuery();
 
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
@@ -32,7 +22,10 @@ const Signin = () => {
         mutate(loginInfo);
         setLoginInfo({ email: '', password: '' });
     };
-    const handleRegister = () => {};
+    if (isSuccess) navigate('../');
+    const handleRegister = () => {
+        navigate('../register');
+    };
     const theme = useTheme();
     return (
         <S.Background>
