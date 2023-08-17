@@ -6,30 +6,27 @@ const CategoryLink = styled.div`
     box-sizing: border-box;
     width: 35vw;
     height: 35vw;
-    padding: 5vw;
+    padding: 1.8rem;
     border-radius: 10px;
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
-    & + div {
-        margin-left: 5vw;
-    }
     @media all and (min-width: 768px) {
-        width: 18%;
-        height: 18%;
-        padding: 3%;
+        width: auto;
+        height: auto;
+        padding: 2rem;
         border-radius: 20px;
-        & + div {
-            margin-left: 2%;
-        }
     }
 `;
 const CategoryImage = styled.img`
     width: 25%;
     height: auto;
-    margin-bottom: 8%;
+    margin-bottom: 0.8rem;
 `;
 const CategoryTitle = styled.h3`
-    font-size: 1rem;
+    font-size: 1.4rem;
     margin-bottom: 40%;
+    @media all and (min-width: 768px) {
+        margin-bottom: 50%;
+    }
 `;
 
 const MakeTicketLink = styled.div`

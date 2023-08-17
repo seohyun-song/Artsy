@@ -9,32 +9,32 @@ const Home = styled.div`
 
 const UserInfo = styled.div`
     padding: 20px;
-    margin-bottom: 4%;
+    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
     @media all and (min-width: 768px) {
         flex-direction: row;
-        margin-bottom: 2%;
         padding: 0 20px;
     }
 `;
 const MainGreeting = styled.div`
-    margin-bottom: 6%;
+    margin-bottom: 16px;
     h2 {
-        font-size: 1.3rem;
-        margin-bottom: 4%;
+        font-size: 2.4rem;
         font-weight: 500;
-        line-height: 1.8rem;
+        line-height: 3rem;
+        margin-bottom: 8px;
     }
     p {
         display: none;
+        font-size: 1.4rem;
     }
     @media all and (min-width: 768px) {
         flex: 1 auto;
         h2 {
-            font-size: 1.5rem;
+            font-size: 2.8rem;
             font-weight: bold;
-            line-height: 2rem;
+            line-height: 3rem;
         }
         p {
             display: block;
@@ -48,22 +48,22 @@ const Record = styled.div`
     padding: 0 20px;
 
     h2 {
-        font-size: 1.3rem;
+        font-size: 2rem;
         font-weight: 600;
-        margin-bottom: 3%;
+        margin-bottom: 8px;
     }
     p {
         position: absolute;
-        font-size: 0.7rem;
+        font-size: 1rem;
     }
     @media all and (min-width: 768px) {
         h2 {
-            font-size: 1.5rem;
+            font-size: 2.4rem;
             font-weight: bold;
-            margin-bottom: 1%;
+            margin-bottom: 8px;
         }
         p {
-            font-size: 0.9rem;
+            font-size: 1.2rem;
         }
     }
 `;
@@ -87,19 +87,20 @@ const CategoryContainer = styled.div`
 `;
 
 const CategoryWrapper = styled.div`
-    display: flex;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5vw;
     width: 200vw;
-    padding: 8% 0 12%;
-    margin-left: 20px;
+    padding: 3.5rem 25px 7rem;
     div {
         scroll-snap-align: center;
         scroll-snap-stop: normal;
     }
     @media all and (min-width: 768px) {
+        grid-gap: 20px;
         width: 100%;
-        box-sizing: border-box;
-        margin-left: 0;
-        padding: 4% 0 12% 3%;
     }
 `;
 export { Home, CategoryContainer, CategoryWrapper, RecordCollection, UserInfo, Record, MainGreeting };

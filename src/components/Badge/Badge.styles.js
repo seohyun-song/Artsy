@@ -29,7 +29,7 @@ const ImageWrapper = styled.div`
     background-color: white;
     border-radius: 100%;
     box-shadow: 10px 10px 10px rgba(96, 87, 186, 0.3);
-    margin-bottom: 10%;
+    margin-bottom: 3.8rem;
     img {
         position: absolute;
         top: 50%;
@@ -40,18 +40,18 @@ const ImageWrapper = styled.div`
     }
 `;
 const Description = styled.p`
-    font-size: 1.3rem;
-    line-height: 1.6rem;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
     font-weight: bold;
     color: white;
-    margin-bottom: 1%;
+    margin-bottom: 0.4rem;
 `;
 const BadgeValue = styled.p`
     align-self: flex-end;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    margin-bottom: 4%;
+    margin-bottom: 1.6rem;
     span {
         font-size: 0.9rem;
         font-weight: normal;
@@ -62,7 +62,7 @@ const BadgeValue = styled.p`
 const Bar = styled.div`
     width: 100%;
     height: 6px;
-    margin-bottom: 5%;
+    margin-bottom: 1.8rem;
     border-radius: 6px;
     background-color: white;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25) inset;
