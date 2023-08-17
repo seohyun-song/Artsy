@@ -3,6 +3,7 @@ import * as S from './Signin.styles';
 import Input from '../../components/@common/Input/Input';
 import { useState } from 'react';
 import loginApi from '../../api/login';
+import { useMutation, useQueryClient } from 'react-query';
 
 const Signin = () => {
     const [loginInfo, setLoginInfo] = useState({
@@ -11,14 +12,24 @@ const Signin = () => {
     });
     const [user, setUser] = useState({});
 
+    const queryClient = useQueryClient();
+    const fetcher = loginApi.signInWithEmail;
+    const { mutate } = useMutation(() => fetcher(loginInfo), {
+        retry: 0,
+        onSuccess: (userInfo) => {
+            queryClient.invalidateQueries(['user']);
+            setUser(userInfo);
+            console.log(userInfo);
+        },
+    });
+
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(loginInfo);
-        const result = await loginApi.signInWithEmail(loginInfo);
-        setUser(result);
+        mutate(loginInfo);
         setLoginInfo({ email: '', password: '' });
     };
     const handleRegister = () => {};
