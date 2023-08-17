@@ -2,18 +2,24 @@ import { useTheme } from 'styled-components';
 import * as S from './Signin.styles';
 import Input from '../../components/@common/Input/Input';
 import { useState } from 'react';
+import loginApi from '../../api/login';
 
 const Signin = () => {
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: '',
     });
+    const [user, setUser] = useState({});
+
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(loginInfo);
+        const result = await loginApi.signInWithEmail(loginInfo);
+        setUser(result);
+        setLoginInfo({ email: '', password: '' });
     };
     const handleRegister = () => {};
     const theme = useTheme();
