@@ -14,8 +14,9 @@ const Container = styled.div`
 
 const TypeColorBox = styled.div`
     width: 100%;
-    height: 45rem;
+    height: 55rem;
     position: absolute;
+    top: 0;
     z-index: -999;
     background-color: ${({ color }) => color};
 
@@ -65,7 +66,6 @@ const TicketImageWrap = styled.div`
     max-width: 100%;
     width: 200px;
     height: 290px;
-    transition: all 0.2s;
 
     img {
         width: 100%;
@@ -166,6 +166,13 @@ const EditWrap = styled.div`
     }
 `;
 
+const ReviewWrap = styled.div`
+    display: flex;
+    align-items: center;
+    ${({ theme }) => theme.media.labtop} {
+    }
+`;
+
 export {
     Container,
     MainWrap,
@@ -178,4 +185,5 @@ export {
     UnderLine,
     EditWrap,
     DetailWrap,
+    ReviewWrap,
 };
