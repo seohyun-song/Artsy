@@ -1,23 +1,20 @@
 const categoryKeys = {
-    get: () => ['category'],
-    getOne: (categoryId) => ['category', categoryId],
+    get: () => ['/api/categories'],
+    getOne: (categoryId) => ['/api/categories/{categoryId}', categoryId],
 };
 
 const ticketKeys = {
-    get: (categoryId) => ['ticket', categoryId],
-    getOne: (ticketId) => ['ticket', ticketId],
-    post: () => ['ticket'],
-    getTotalCount: () => ['ticketCount'],
-    getTotalPrice: () => ['ticketPrice'],
+    get: (categoryId) => ['/api/user/tickets', categoryId],
+    getOne: (ticketId) => ['/api/user/ticket/{ticketId}', ticketId],
+    post: () => ['/api/user/ticket'],
+    getTotalCount: () => ['/api/user/ticket-total-count'],
+    getTotalPrice: () => ['/api/user/ticket-total-price'],
 };
 
 const userKeys = {
-    get: () => ['user'],
-    post: () => ['user'],
+    register: () => ['/api/user/sign-up-with-email'],
+    emailCheck: () => ['use/api/user/check-duplicated-email'],
+    signin: () => ['/api/user/login-with-email'],
 };
 
-const validateKey = {
-    email: () => ['email'],
-};
-
-export { categoryKeys, ticketKeys, userKeys, validateKey };
+export { categoryKeys, ticketKeys, userKeys };
