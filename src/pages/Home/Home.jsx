@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import axiosInstance from '../../api';
-import useLoginQuery from '../../hooks/@queries/useLoginQuery';
+import Badge from '@components/Badge/Badge';
+import * as H from './Home.styles';
+import Record from '@components/Record/Record';
+import Greeting from '../../components/Greeting/Greeting';
+import { useTheme } from 'styled-components';
 
 const Home = () => {
-    const [tickets, setTickets] = useState({});
-    useEffect(() => {
-        axiosInstance
-            .get('/api/user/ticket-total-count', {
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            })
-            .then((res) => res.data.message)
-            .then(setTickets)
-            .then(() => console.log(tickets));
-    }, []);
-
-    return <h1>Home</h1>;
+    const theme = useTheme();
+    return (
+        <H.Home $theme={theme}>
+            <H.TopContainer $theme={theme}>
+                <Greeting />
+                <Badge />
+            </H.TopContainer>
+            <Record />
+        </H.Home>
+    );
 };
 export default Home;
