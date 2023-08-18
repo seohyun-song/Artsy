@@ -12,17 +12,42 @@ const router = createBrowserRouter([
         path: '/',
         element: <App />,
         children: [
+            // intro, home path 나중에 수정 필요
+            {
+                path: 'intro',
+                element: <Intro />,
+            },
             {
                 path: '',
                 element: <Home />,
             },
             {
-                path: 'list',
+                path: 'register',
+                element: <Register />,
+            },
+            {
+                path: 'signin',
+                element: <Signin />,
+            },
+            {
+                path: 'mypage',
+                element: <MyPage />,
+            },
+            {
+                path: 'ticket/list',
                 element: <List />,
             },
             {
-                path: 'detail/:ticketId',
+                path: 'ticket/create',
+                element: <TicketCreate />,
+            },
+            {
+                path: 'ticket/detail/:ticketId',
                 element: <TicketDetail />,
+            },
+            {
+                path: 'ticket/edit/:ticketId',
+                element: <TicketEdit />,
             },
             {
                 path: '*',
