@@ -1,4 +1,4 @@
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 const Badge = styled.div`
     box-sizing: border-box;
@@ -12,11 +12,11 @@ const Badge = styled.div`
     border-radius: 10px;
     background: ${({ theme }) => `linear-gradient(146deg, ${theme.colors.point1} 0%, #7a85e0 100%)`};
 
-    @media all and (min-width: 768px) {
+    ${({ $theme }) => $theme.media.tablet} {
         max-width: 480px;
         width: 55%;
     }
-    @media all and (min-width: 1280px) {
+    ${({ $theme }) => $theme.media.labtop} {
     }
 `;
 const ImageWrapper = styled.div`
