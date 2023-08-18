@@ -1,6 +1,7 @@
 import React from 'react';
 import * as C from './CategoryLink.styles';
 import { Link } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 
 const CATEGORY_NAME = (name) => {
     switch (name) {
@@ -15,7 +16,7 @@ const CATEGORY_NAME = (name) => {
         case '콘서트':
             return 'concert';
         default:
-            return 'any';
+            return 'noImage';
     }
 };
 
@@ -25,10 +26,11 @@ const getCategoryImageURL = (categoryName) => {
 
 const CategoryLink = ({ name }) => {
     const categoryImageURL = getCategoryImageURL(name);
+    const theme = useTheme();
     return (
-        <C.CategoryLink>
-            <C.CategoryImage src={categoryImageURL} alt="category image" />
-            <C.CategoryTitle>{name}</C.CategoryTitle>
+        <C.CategoryLink $theme={theme}>
+            <C.CategoryImage src={categoryImageURL} alt={name} />
+            <C.CategoryTitle $theme={theme}>{name}</C.CategoryTitle>
             <C.MakeTicketLink>
                 <Link to={'/list'}>
                     기록남기기<span>&#62;</span>

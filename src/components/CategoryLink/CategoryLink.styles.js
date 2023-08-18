@@ -9,7 +9,7 @@ const CategoryLink = styled.div`
     padding: 1.8rem;
     border-radius: 10px;
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
-    @media all and (min-width: 768px) {
+    ${({ $theme }) => $theme.media.tablet} {
         width: auto;
         height: auto;
         padding: 2rem;
@@ -24,7 +24,7 @@ const CategoryImage = styled.img`
 const CategoryTitle = styled.h3`
     font-size: 1.4rem;
     margin-bottom: 40%;
-    @media all and (min-width: 768px) {
+    ${({ $theme }) => $theme.media.tablet} {
         margin-bottom: 50%;
     }
 `;
