@@ -1,7 +1,7 @@
 import { useTheme } from 'styled-components';
 import * as S from './Signin.styles';
 import Input from '@components/@common/Input/Input';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
 import SplitLayout from '../../components/SplitLayout/SplitLayout';
@@ -13,7 +13,9 @@ const Signin = () => {
         password: '',
     });
     const { mutate, isSuccess } = useLoginQuery();
-
+    useEffect(() => {
+        if (isSuccess) navigate('../');
+    }, [isSuccess]);
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
     };
@@ -23,7 +25,7 @@ const Signin = () => {
         mutate(loginInfo);
         setLoginInfo({ email: '', password: '' });
     };
-    if (isSuccess) navigate('../');
+
     const handleRegister = () => {
         navigate('../register');
     };
