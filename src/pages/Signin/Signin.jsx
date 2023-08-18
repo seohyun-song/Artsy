@@ -1,9 +1,10 @@
 import { useTheme } from 'styled-components';
 import * as S from './Signin.styles';
 import Input from '@components/@common/Input/Input';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
+import SplitLayout from '../../components/SplitLayout/SplitLayout';
 
 const Signin = () => {
     const navigate = useNavigate();
@@ -27,9 +28,12 @@ const Signin = () => {
         navigate('../register');
     };
     const theme = useTheme();
+    const leftBgColor = useMemo(
+        () => 'background: linear-gradient(180deg, rgba(105, 96, 204, 0.8) 0%, #554dab 100%)',
+        []
+    );
     return (
-        <S.Background>
-            <S.Left></S.Left>
+        <SplitLayout leftCss={leftBgColor}>
             <S.SignInContainer>
                 <S.Introduction $theme={theme}>
                     <h2>Artsy</h2>
@@ -37,7 +41,7 @@ const Signin = () => {
                 </S.Introduction>
                 <S.SignInContent $theme={theme}>
                     <S.loginTitle>Welcome!</S.loginTitle>
-                    <S.loginForm onSubmit={handleSubmit}>
+                    <S.loginForm onSubmit={handleSubmit} $theme={theme}>
                         <Input
                             placeholder="이메일 주소를 입력하세요."
                             id="email"
@@ -70,8 +74,7 @@ const Signin = () => {
                     </S.RegisterButton>
                 </S.SignInContent>
             </S.SignInContainer>
-            <S.Right></S.Right>
-        </S.Background>
+        </SplitLayout>
     );
 };
 export default Signin;
