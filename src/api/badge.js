@@ -2,15 +2,15 @@ import axiosInstance from './';
 
 const badgeApi = {
     endpoint: {
-        userBadge: '/api/user/badge',
+        ticketCount: '/api/user/ticket-total-count',
     },
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
     },
 
-    getUserBadge: async () => {
-        const response = await axiosInstance.get(badgeApi.endpoint.userBadge, {
+    getUserTicketCount: async () => {
+        const response = await axiosInstance.get(badgeApi.endpoint.ticketCount, {
             headers: { ...badgeApi.headers },
         });
         return response;
