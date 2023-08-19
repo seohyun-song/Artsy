@@ -4,8 +4,6 @@ import CategoryLink from '@components/CategoryLink/CategoryLink';
 import useCategoryQuery from '../../hooks/@queries/useCategoryQuery';
 import { useTheme } from 'styled-components';
 
-// const categories = [{ name: '뮤지컬' }, { name: '영화' }, { name: '전시' }, { name: '콘서트' }, { name: '연극' }];
-
 const Record = () => {
     const { data: categories } = useCategoryQuery();
     const theme = useTheme();
@@ -18,7 +16,11 @@ const Record = () => {
             </R.RecordHeader>
             <R.CategoryContainer $theme={theme}>
                 <R.CategoryWrapper $theme={theme}>
-                    {hasCategories && categories.map((cat, index) => <CategoryLink name={cat.name} key={index} />)}
+                    {hasCategories &&
+                        categories.map((category, index) => {
+                            const { name, id } = category;
+                            return <CategoryLink name={name} key={index} categoryId={id} />;
+                        })}
                 </R.CategoryWrapper>
             </R.CategoryContainer>
         </R.Record>
