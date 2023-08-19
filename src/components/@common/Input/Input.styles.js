@@ -24,6 +24,12 @@ const StyledInput = styled.input`
     border: ${(props) => (props.$rounded ? '2px solid #c5c5c5' : 'none')};
     border-bottom: 2px solid #c5c5c5;
     border-color: ${(props) => (props.$valid ? '#c5c5c5' : '#FF1F00')};
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 `;
 
 const StyledErrorMessage = styled.span`
