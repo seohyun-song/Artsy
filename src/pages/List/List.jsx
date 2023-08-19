@@ -22,7 +22,7 @@ const List = () => {
     }, []);
 
     const categoryQuery = useCategoryQuery();
-    const ticketQuery = useTicketQuery(100);
+    const ticketQuery = useTicketQuery();
 
     const handleFilter = (e) => {
         const selectedIdx = e.target.selectedIndex;
