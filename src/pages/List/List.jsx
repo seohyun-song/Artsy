@@ -7,6 +7,7 @@ import useTicketQuery from '@hooks/@queries/useTicketQuery';
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
+import Loading from '@components/@common/Loading/Loading.jsx';
 import formatDate from '@utils/formatDate';
 import * as L from './List.styles';
 
@@ -30,7 +31,7 @@ const List = () => {
         setCategoryId(selectedIdx);
     };
 
-    if (ticketQuery.isLoading) return <div>기록을 불러오는 중입니다.</div>;
+    if (ticketQuery.isLoading) return <Loading></Loading>;
 
     return (
         <>
