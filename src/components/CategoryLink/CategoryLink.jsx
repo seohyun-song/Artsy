@@ -15,7 +15,7 @@ const CategoryLink = ({ name, categoryId }) => {
             <C.CategoryImage src={categoryImageURL} alt={name} />
             <C.CategoryTitle $theme={theme}>{name}</C.CategoryTitle>
             <C.MakeTicketLink>
-                <Link to={'/list'}>
+                <Link to={`/ticket/create?categoryId=${categoryId}`}>
                     기록남기기<span>&#62;</span>
                 </Link>
             </C.MakeTicketLink>
