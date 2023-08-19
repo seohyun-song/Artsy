@@ -39,9 +39,9 @@ const ImageWrapper = styled.div`
         height: auto;
     }
 `;
-const Description = styled.p`
+const Comment = styled.p`
     font-size: 1.8rem;
-    line-height: 2.2rem;
+    line-height: 2.4rem;
     font-weight: bold;
     color: white;
     margin-bottom: 0.4rem;
@@ -74,4 +74,4 @@ const Value = styled.div`
     background-color: ${({ theme }) => theme.colors.sub2};
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
-export { Badge, Description, ImageWrapper, Bar, Value, BadgeValue };
+export { Badge, Comment, ImageWrapper, Bar, Value, BadgeValue };
