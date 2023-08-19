@@ -6,7 +6,7 @@ export const QUERY_KEY = '/api/categories';
 
 const useCategoryQuery = () => {
     const fetcher = () => api.get(QUERY_KEY);
-    const query = useQuery(QUERY_KEY, fetcher);
+    const query = useQuery([QUERY_KEY], fetcher);
 
     useEffect(() => {
         if (query.isError) {
