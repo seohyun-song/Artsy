@@ -71,11 +71,15 @@ const MyPage = () => {
                                     />
                                 </span>
                                 <h4>{gradeInfo?.name}</h4>
-                                <p>
-                                    {gradeNextInfo?.nextGrade?.name}까지{' '}
-                                    {gradeInfo?.targetValue - userInfoQuery?.data?.totalTicket}
-                                    개의 티켓이 필요해요!
-                                </p>
+                                {gradeNextInfo?.isNext ? (
+                                    <p>
+                                        {gradeNextInfo?.nextGrade?.name}까지{' '}
+                                        {gradeInfo?.targetValue - userInfoQuery?.data?.totalTicket}
+                                        개의 티켓이 필요해요!
+                                    </p>
+                                ) : (
+                                    <p>{userInfoQuery?.data?.displayName}은 문화를 사랑하는 아티 마스터!</p>
+                                )}
                             </M.GradeBoxTop>
                             <GradeBar total={userInfoQuery?.data?.totalTicket} height={0.8} />
                         </M.GradeBox>
