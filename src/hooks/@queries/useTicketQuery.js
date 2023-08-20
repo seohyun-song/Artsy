@@ -2,21 +2,18 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 
 import api from '@utils/api';
-import { ERROR_TYPE } from '@constants/serverErrorType';
 
 export const QUERY_KEY = '/api/user/tickets';
 
 const useTicketQuery = (categoryId) => {
-    const fetcher = api.get(`${QUERY_KEY}/${categoryId}`);
-    const query = useQuery([QUERY_KEY, categoryId], fetcher);
+    const apiUrl = categoryId !== '0' && categoryId ? `${QUERY_KEY}?categoryId=${categoryId}` : QUERY_KEY;
+    const fetcher = () => api.get(apiUrl);
+    const options = {
+        retry: false,
+    };
+    const query = useQuery([QUERY_KEY, categoryId], fetcher, options);
 
-    useEffect(() => {
-        if (query.isError) {
-            // error handling
-        }
-    }, [query.isError]);
-
-    return useQuery(QUERY_KEY, fetcher);
+    return query;
 };
 
 export default useTicketQuery;
