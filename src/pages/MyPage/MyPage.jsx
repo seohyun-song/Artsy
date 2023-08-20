@@ -1,13 +1,16 @@
+import { useMemo } from 'react';
+
 import Container from '@components/@common/Container/Container.jsx';
 import GradeBar from '@components/@common/GradeBar/GradeBar.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
-
 import MyGreeting from '@components/MyPage/MyGreeting/MyGreeting.jsx';
 import MyIconButton from '@components/MyPage/MyIconButton/MyIconButton.jsx';
 import MyExpense from '@components/MyPage/MyExpense/MyExpense.jsx';
 
 import useUserInfoQuery from '@hooks/@queries/useUserInfoQuery';
 import useTotalPriceQuery from '@hooks/@queries/useTotalPriceQuery';
+
+import calculateNextGrade from '@utils/calculateNextGrade';
 
 import myIconUrl from '@assets/icons/icon-my.png';
 import bookIconUrl from '@assets/icons/icon-book.png';
@@ -32,6 +35,13 @@ const calculateGrade = (ticketCount) => {
 const MyPage = () => {
     const userInfoQuery = useUserInfoQuery();
     const totalPriceQuery = useTotalPriceQuery();
+    const gradeInfo = useMemo(() => {
+        if (userInfoQuery.isSuccess) return calculateGrade(userInfoQuery?.data?.totalTicket);
+    }, [userInfoQuery]);
+
+    const gradeNextInfo = useMemo(() => {
+        if (userInfoQuery.isSuccess) return calculateNextGrade(gradeInfo.name);
+    }, [userInfoQuery]);
 
     if (userInfoQuery.isLoading || totalPriceQuery.isLoading) return <Loading></Loading>;
 
@@ -54,11 +64,16 @@ const MyPage = () => {
                         </M.IconMenuList>
                         <M.GradeBox>
                             <M.GradeBoxTop>
-                                <h4>{calculateGrade(userInfoQuery?.data?.totalTicket).name}</h4>
+                                <span>
+                                    <img
+                                        src={`/src/assets/icons/badge_${gradeInfo?.imageName}.png`}
+                                        alt={gradeInfo?.name}
+                                    />
+                                </span>
+                                <h4>{gradeInfo?.name}</h4>
                                 <p>
-                                    문화 마스터까지{' '}
-                                    {calculateGrade(userInfoQuery?.data?.totalTicket).targetValue -
-                                        userInfoQuery?.data?.totalTicket}
+                                    {gradeNextInfo?.nextGrade?.name}까지{' '}
+                                    {gradeInfo?.targetValue - userInfoQuery?.data?.totalTicket}
                                     개의 티켓이 필요해요!
                                 </p>
                             </M.GradeBoxTop>
@@ -66,7 +81,6 @@ const MyPage = () => {
                         </M.GradeBox>
                     </M.ViewWrap>
                     <M.DataWrap>
-                        {/* api 호출 정보 */}
                         <MyExpense totalPrice={totalPriceQuery?.data?.totalPrice.toLocaleString()} />
                     </M.DataWrap>
                 </M.MyPage>
