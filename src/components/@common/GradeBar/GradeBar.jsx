@@ -1,6 +1,8 @@
 import { StyledBarWrap, StyledBar, StyledLegend } from './GradeBar.styles';
 import { BADGE_GRADE } from '@constants/badgeGrade';
 
+import { useTheme } from 'styled-components';
+
 const calculateGrade = (ticketCount) => {
     const selectedGrade = BADGE_GRADE.find(({ targetValue }) => ticketCount < targetValue);
     return selectedGrade;
@@ -11,11 +13,15 @@ const calculateGrade = (ticketCount) => {
 /**
  *
  * @param {Number} total
- * @param {Number} height rem 단위로 계산한 숫자(default: 100%)
- * @param {Number} height rem 단위로 계산한 숫자(default: 1rem)
+ * @param {Number} width rem 단위로 계산한 숫자만(default: 100%)
+ * @param {Number} height rem 단위로 계산한 숫자만(default: 1rem)
+ * @param {String} fontColor (ex: '#fff')
+ * @param {String} fontSize (ex: '1.4rem')
+ *
  * @returns
  */
-const GradeBar = ({ total, width, height }) => {
+const GradeBar = ({ total, width, height, fontColor, fontSize }) => {
+    const theme = useTheme();
     const { targetValue, imageName } = calculateGrade(total);
     let percent = 0;
     if (total !== 0) {
@@ -24,7 +30,11 @@ const GradeBar = ({ total, width, height }) => {
 
     return (
         <StyledBarWrap $width={width}>
-            <StyledLegend $grade={imageName}>
+            <StyledLegend
+                $grade={imageName}
+                $fontSize={fontSize ?? theme.fontSizes.subText}
+                $fontColor={fontColor ?? theme.colors.black}
+            >
                 <span>{total}</span>
                 <span> / {targetValue}</span>
             </StyledLegend>
