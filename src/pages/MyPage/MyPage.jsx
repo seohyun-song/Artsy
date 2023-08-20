@@ -42,6 +42,7 @@ const MyPage = () => {
     const gradeNextInfo = useMemo(() => {
         if (userInfoQuery.isSuccess) return calculateNextGrade(gradeInfo.name);
     }, [userInfoQuery]);
+    console.log(gradeNextInfo?.isNext);
 
     if (userInfoQuery.isLoading || totalPriceQuery.isLoading) return <Loading></Loading>;
 
@@ -71,7 +72,7 @@ const MyPage = () => {
                                     />
                                 </span>
                                 <h4>{gradeInfo?.name}</h4>
-                                {gradeNextInfo?.isNext ? (
+                                {gradeNextInfo?.isNext === false ? (
                                     <p>
                                         {gradeNextInfo?.nextGrade?.name}까지{' '}
                                         {gradeInfo?.targetValue - userInfoQuery?.data?.totalTicket}
