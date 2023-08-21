@@ -8,13 +8,14 @@ import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
+
 import formatDate from '@utils/formatDate';
 import * as L from './List.styles';
 
 const List = () => {
     const theme = useTheme();
     const navigate = useNavigate();
-    const observerEl = useRef(null); //test
+    const observerEl = useRef(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const [categoryId, setCategoryId] = useState(searchParams.get('categoryId'));
 
@@ -35,9 +36,7 @@ const List = () => {
     const handleObserver = useCallback(
         (entries) => {
             const [target] = entries;
-            // 관찰대상이 교차되고 다음 페이지가 있는 경우
             if (target.isIntersecting && ticketQuery.hasNextPage) {
-                // 다음 페이지의 데이터 요청
                 ticketQuery.fetchNextPage();
             }
         },
@@ -50,12 +49,9 @@ const List = () => {
         const options = {
             threshold: 0,
         };
-        // new IntersectionObserver(callback, oprions): 관찰자 인스턴스 생성
         const observer = new IntersectionObserver(handleObserver, options);
-        // 관찰시작
         observer.observe(element);
 
-        // unmount시 클린업
         return () => observer.unobserve(element);
     }, [ticketQuery.fetchNextPage, ticketQuery.hasNextPage, handleObserver]);
 
@@ -104,9 +100,9 @@ const List = () => {
                         })
                     )}
                 </L.TicketList>
-                <div ref={observerEl}>
-                    {ticketQuery.isFetchingNextPage && ticketQuery.hasNextPage ? 'Loading...' : ''}
-                </div>
+                <L.LoadingText ref={observerEl}>
+                    {ticketQuery.isFetchingNextPage && ticketQuery.hasNextPage ? <span></span> : ''}
+                </L.LoadingText>
             </Container>
         </>
     );

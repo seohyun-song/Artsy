@@ -1,5 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
-import { useQuery, useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 
 import api from '@utils/api';
 
@@ -26,7 +25,6 @@ const useTicketInfiniteQuery = (categoryId) => {
             }
         }
 
-        console.log(apiUrl);
         return api.get(apiUrl);
     };
     const options = {
