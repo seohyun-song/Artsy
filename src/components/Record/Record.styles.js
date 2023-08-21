@@ -16,20 +16,20 @@ const RecordHeader = styled.div`
         font-size: 1.2rem;
         color: #505050;
     }
-    ${({ $theme }) => $theme.media.tablet} {
+    ${({ theme }) => theme.media.tablet} {
         h2 {
             font-size: 2.4rem;
             font-weight: bold;
             margin-bottom: 8px;
+            line-height: 3.6rem;
         }
         p {
             font-size: 1.4rem;
         }
     }
-    ${({ $theme }) => $theme.media.labtop} {
+    ${({ theme }) => theme.media.labtop} {
         h2 {
             font-size: 2.8rem;
-            margin-bottom: 8px;
         }
         p {
             font-size: 1.6rem;
@@ -50,7 +50,7 @@ const CategoryContainer = styled.div`
     &::-webkit-scrollbar {
         display: none; /* for Chrome, Safari, and Opera */
     }
-    ${({ $theme }) => $theme.media.tablet} {
+    ${({ theme }) => theme.media.tablet} {
         scroll-snap-type: none;
     }
 `;
@@ -67,9 +67,10 @@ const CategoryWrapper = styled.div`
         scroll-snap-align: center;
         scroll-snap-stop: normal;
     }
-    ${({ $theme }) => $theme.media.tablet} {
+    ${({ theme }) => theme.media.tablet} {
         grid-gap: 20px;
         width: 100%;
+        padding-top: 4.8rem;
     }
 `;
 export { Record, RecordHeader, CategoryContainer, CategoryWrapper };
