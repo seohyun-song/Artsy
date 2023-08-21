@@ -2,9 +2,8 @@ import React from 'react';
 import * as B from './Badge.styles';
 import { useTheme } from 'styled-components';
 import calculateGrade from '@utils/calculateGrade';
-
 const data = {
-    total: 10,
+    total: 155,
 };
 
 const Badge = () => {
@@ -19,28 +18,18 @@ const Badge = () => {
             <B.ImageWrapper>
                 <img src={`/src/assets/icons/badge_${imageName}.png`} alt={userGrade} />
             </B.ImageWrapper>
-            {/* <B.Comment>{selectComment(userGrade)}</B.Comment> */}
             {isMasterGrade(userGrade) ? (
                 <B.Comment>
-                    당신은 아티 마스터!
+                    당신은
                     <br />
-                    최고 기록에 도전하세요!
+                    문화를 사랑하는 아티 마스터!
                 </B.Comment>
             ) : (
                 <B.Comment>
                     다음 뱃지까지 <br /> {targetValue - data.total}개의 기록이 남았습니다!
                 </B.Comment>
             )}
-            <B.BadgeValue theme={theme}>
-                {data.total} <span>/ {isMasterGrade(userGrade) ? 'Full' : targetValue}</span>
-            </B.BadgeValue>
-            <B.Bar>
-                <B.Value
-                    $all={isMasterGrade(userGrade) ? data.total : targetValue}
-                    $value={data.total}
-                    theme={theme}
-                ></B.Value>
-            </B.Bar>
+            <B.ExtendGradeBar total={data.total} height={0.6} fontColor={'#fff'} fontSize={'1.6rem'} />
         </B.Badge>
     );
 };
