@@ -1,15 +1,13 @@
 import { useTheme } from 'styled-components';
 import * as S from './Signin.styles';
 import Input from '@components/@common/Input/Input';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
 import SplitLayout from '@components/SplitLayout/SplitLayout';
 import { ERROR_MESSAGE } from '@constants/message';
 import { VALIDATE } from '@constants/regexp';
 import GlobalStyle from '@styles/GlobalStyles';
-import useWindowWidth from '../../hooks/useWindowWidth';
-import IntroBox from '../../components/introBox/IntroBox';
 
 function checkValidEmail(email) {
     var pattern = VALIDATE.email;
@@ -21,15 +19,13 @@ function checkValidEmail(email) {
 }
 
 const Signin = () => {
+    const navigate = useNavigate();
     const [loginInfo, setLoginInfo] = useState({
         email: '',
         password: '',
     });
-    const navigate = useNavigate();
     const { mutate, isSuccess } = useLoginQuery();
-    const windowWidth = useWindowWidth();
-    const theme = useTheme();
-
+    const emailInputRef = useRef();
     useEffect(() => {
         if (isSuccess) navigate('../');
     }, [isSuccess]);
@@ -42,16 +38,18 @@ const Signin = () => {
         const isCorrectFormat = checkValidEmail(loginInfo.email);
         if (!isCorrectFormat) {
             setLoginInfo({ email: '', password: '' });
+            emailInputRef.current.focus();
             return;
         }
         mutate(loginInfo);
         setLoginInfo({ email: '', password: '' });
+        emailInputRef.current.focus();
     };
 
     const handleRegister = () => {
         navigate('../register');
     };
-
+    const theme = useTheme();
     const leftBgColor = useMemo(
         () => 'background: linear-gradient(180deg, rgba(105, 96, 204, 0.8) 0%, #554dab 100%)',
         []
@@ -61,14 +59,18 @@ const Signin = () => {
             <GlobalStyle />
             <SplitLayout leftCss={leftBgColor}>
                 <S.SignInContainer>
-                    <IntroBox />
+                    <S.Introduction $theme={theme}>
+                        <h2>Artsy</h2>
+                        <p>나만의 티켓북을 만들고 관리하는 서비스를 경험해보세요!</p>
+                    </S.Introduction>
                     <S.SignInContent $theme={theme}>
-                        <S.loginTitle $theme={theme}>{windowWidth > 1280 ? 'Welcome!' : 'Artsy'}</S.loginTitle>
+                        <S.loginTitle>Welcome!</S.loginTitle>
                         <S.loginForm onSubmit={handleSubmit} $theme={theme}>
                             <Input
                                 placeholder="이메일 주소를 입력하세요."
                                 id="email"
                                 name="email"
+                                inputRef={emailInputRef}
                                 onChange={handleChange}
                                 value={loginInfo.email}
                                 rounded
