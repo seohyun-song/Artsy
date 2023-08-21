@@ -32,12 +32,6 @@ const DataWrap = styled.section`
     }
 `;
 
-const IconMenuList = styled.div`
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-`;
-
 const GradeBox = styled(Link)`
     display: block;
     margin-top: 2rem;
@@ -86,4 +80,4 @@ const GradeBoxTop = styled.div`
     }
 `;
 
-export { MyPage, ViewWrap, IconMenuList, DataWrap, GradeBox, GradeBoxTop };
+export { MyPage, ViewWrap, DataWrap, GradeBox, GradeBoxTop };

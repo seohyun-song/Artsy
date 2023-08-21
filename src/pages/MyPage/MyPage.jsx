@@ -4,7 +4,7 @@ import Container from '@components/@common/Container/Container.jsx';
 import GradeBar from '@components/@common/GradeBar/GradeBar.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
 import MyGreeting from '@components/MyPage/MyGreeting/MyGreeting.jsx';
-import MyIconButton from '@components/MyPage/MyIconButton/MyIconButton.jsx';
+import MyIconMenu from '@components/MyPage/MyIconMenu/MyIconMenu.jsx';
 import MyExpense from '@components/MyPage/MyExpense/MyExpense.jsx';
 
 import useUserInfoQuery from '@hooks/@queries/useUserInfoQuery';
@@ -12,10 +12,6 @@ import useTotalPriceQuery from '@hooks/@queries/useTotalPriceQuery';
 
 import calculateGrade from '@utils/calculateGrade';
 import calculateNextGrade from '@utils/calculateNextGrade';
-
-import myIconUrl from '@assets/icons/icon-my.png';
-import bookIconUrl from '@assets/icons/icon-book.png';
-import chartIconUrl from '@assets/icons/icon-chart.png';
 
 import { getIconUrl } from '@utils/getImageUrl';
 
@@ -40,17 +36,7 @@ const MyPage = () => {
                 <M.MyPage>
                     <M.ViewWrap>
                         <MyGreeting username={userInfoQuery?.data?.displayName} />
-                        <M.IconMenuList>
-                            <MyIconButton to="" imgUrl={myIconUrl}>
-                                계정정보
-                            </MyIconButton>
-                            <MyIconButton to="/ticket/list" imgUrl={bookIconUrl}>
-                                기록함
-                            </MyIconButton>
-                            <MyIconButton to="" imgUrl={chartIconUrl}>
-                                통계
-                            </MyIconButton>
-                        </M.IconMenuList>
+                        <MyIconMenu />
                         <M.GradeBox>
                             <M.GradeBoxTop to="">
                                 <span>
