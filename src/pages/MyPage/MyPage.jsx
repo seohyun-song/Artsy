@@ -10,27 +10,16 @@ import MyExpense from '@components/MyPage/MyExpense/MyExpense.jsx';
 import useUserInfoQuery from '@hooks/@queries/useUserInfoQuery';
 import useTotalPriceQuery from '@hooks/@queries/useTotalPriceQuery';
 
+import calculateGrade from '@utils/calculateGrade';
 import calculateNextGrade from '@utils/calculateNextGrade';
 
 import myIconUrl from '@assets/icons/icon-my.png';
 import bookIconUrl from '@assets/icons/icon-book.png';
 import chartIconUrl from '@assets/icons/icon-chart.png';
 
+import { getIconUrl } from '@utils/getImageUrl';
+
 import * as M from './MyPage.styles';
-
-/* 지영님 코드 병합시 impor 구문으로 변경 */
-const BADGE_GRADE = [
-    { name: '아티 비기너', targetValue: 10, imageName: 'darkSilver' },
-    { name: '아티 프렌즈', targetValue: 30, imageName: 'bronze' },
-    { name: '아티 패밀리', targetValue: 70, imageName: 'silver' },
-    { name: '아티 마스터', targetValue: Number.POSITIVE_INFINITY, imageName: 'gold' },
-];
-const calculateGrade = (ticketCount) => {
-    const selectedGrade = BADGE_GRADE.find(({ targetValue }) => ticketCount < targetValue);
-    return selectedGrade;
-};
-
-/* // 지영님 코드 병합시 impor 구문으로 변경 */
 
 const MyPage = () => {
     const userInfoQuery = useUserInfoQuery();
@@ -42,9 +31,8 @@ const MyPage = () => {
     const gradeNextInfo = useMemo(() => {
         if (userInfoQuery.isSuccess) return calculateNextGrade(gradeInfo.name);
     }, [userInfoQuery]);
-    console.log(gradeNextInfo?.isNext);
 
-    if (userInfoQuery.isLoading || totalPriceQuery.isLoading) return <Loading></Loading>;
+    if (userInfoQuery.isLoading || totalPriceQuery.isLoading) return <Loading />;
 
     return (
         <>
@@ -64,12 +52,9 @@ const MyPage = () => {
                             </MyIconButton>
                         </M.IconMenuList>
                         <M.GradeBox>
-                            <M.GradeBoxTop>
+                            <M.GradeBoxTop to="">
                                 <span>
-                                    <img
-                                        src={`/src/assets/icons/badge_${gradeInfo?.imageName}.png`}
-                                        alt={gradeInfo?.name}
-                                    />
+                                    <img src={getIconUrl(`badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
                                 </span>
                                 <h4>{gradeInfo?.name}</h4>
                                 {gradeNextInfo?.isNext === false ? (
