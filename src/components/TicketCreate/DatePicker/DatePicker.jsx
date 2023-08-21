@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
+import * as D from './DatePicker.styles';
 
 const Datepicker = ({ selected, onChange, customInput, minDate, maxDate, minTime, maxTime, filterTime }) => {
     return (
-        <div>
+        <D.DatePickerWrap>
             <ReactDatePicker
                 selected={selected}
                 onChange={onChange}
@@ -21,8 +22,9 @@ const Datepicker = ({ selected, onChange, customInput, minDate, maxDate, minTime
                 minTime={minTime}
                 maxTime={maxTime}
                 filterTime={filterTime}
+                containerStyle={{ width: '100%' }}
             />
-        </div>
+        </D.DatePickerWrap>
     );
 };
 
