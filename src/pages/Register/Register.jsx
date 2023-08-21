@@ -39,9 +39,9 @@ const Register = () => {
     return (
         <>
             <GlobalStyle />
-            <R.RegisterContainer $theme={theme}>
+            <R.RegisterContainer>
                 <R.Title>회원가입</R.Title>
-                <R.RegisterForm onSubmit={handleSubmit} $theme={theme}>
+                <R.RegisterForm onSubmit={handleSubmit}>
                     <Input
                         placeholder="이메일 주소를 입력하세요."
                         id="email"

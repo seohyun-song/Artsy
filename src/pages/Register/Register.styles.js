@@ -14,7 +14,7 @@ const RegisterContainer = styled.div`
     input {
         font-size: 1.4rem;
     }
-    ${({ $theme }) => $theme.media.labtop} {
+    ${({ theme }) => theme.media.labtop} {
         flex-basis: 40%;
     }
 `;
