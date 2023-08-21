@@ -5,18 +5,11 @@ import { useEffect, useMemo, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
 import SplitLayout from '@components/SplitLayout/SplitLayout';
-import { ERROR_MESSAGE } from '@constants/message';
-import { VALIDATE } from '@constants/regexp';
-import GlobalStyle from '@styles/GlobalStyles';
 
-function checkValidEmail(email) {
-    var pattern = VALIDATE.email;
-    if (email.match(pattern) === null) {
-        alert(ERROR_MESSAGE.incorrectEmailFormat);
-        return false;
-    }
-    return true;
-}
+import GlobalStyle from '@styles/GlobalStyles';
+import checkValidEmail from '../../utils/checkValidEmail';
+
+
 
 const Signin = () => {
     const navigate = useNavigate();
