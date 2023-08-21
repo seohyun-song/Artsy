@@ -15,6 +15,7 @@ const TopContainer = styled.div`
     ${({ $theme }) => $theme.media.tablet} {
         flex-direction: row;
         padding: 0 20px;
+        margin-bottom: 24px;
     }
 `;
 
