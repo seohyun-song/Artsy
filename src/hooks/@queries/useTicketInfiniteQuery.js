@@ -31,7 +31,6 @@ const useTicketInfiniteQuery = (categoryId) => {
         getNextPageParam: (lastPage, allPages) => {
             const latPageTickets = lastPage.ticketList;
             const lastPageTicketsCount = latPageTickets?.length;
-
             if (allPages[0].ticketList.length === 0) return undefined; // 기록 없을 때
             return lastPageTicketsCount >= limit ? latPageTickets[lastPageTicketsCount - 1].id : undefined;
         },

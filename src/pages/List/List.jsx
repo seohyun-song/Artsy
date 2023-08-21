@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
-import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import useTicketInfiniteQuery from '@hooks/@queries/useTicketInfiniteQuery';
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
@@ -26,7 +26,7 @@ const List = () => {
     }, []);
 
     const categoryQuery = useCategoryQuery();
-    const ticketQuery = useTicketQuery(categoryId);
+    const ticketQuery = useTicketInfiniteQuery(categoryId);
 
     const handleFilter = (e) => {
         const selectedIdx = e.target.selectedIndex;
@@ -56,7 +56,7 @@ const List = () => {
         return () => observer.unobserve(element);
     }, [ticketQuery.fetchNextPage, ticketQuery.hasNextPage, handleObserver]);
 
-    if (ticketQuery.isLoading) return <Loading></Loading>;
+    if (ticketQuery.isLoading) return <Loading />;
 
     return (
         <>
