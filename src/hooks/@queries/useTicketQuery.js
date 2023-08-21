@@ -29,8 +29,11 @@ const useTicketInfiniteQuery = (categoryId) => {
     };
     const options = {
         getNextPageParam: (lastPage, allPages) => {
+            const latPageTickets = lastPage.ticketList;
+            const lastPageTicketsCount = latPageTickets?.length;
+
             if (allPages[0].ticketList.length === 0) return undefined; // 기록 없을 때
-            return lastPage.ticketList?.length >= limit ? lastPage?.ticketList.at(-1).id : undefined;
+            return lastPageTicketsCount >= limit ? latPageTickets[lastPageTicketsCount - 1].id : undefined;
         },
     };
     const query = useInfiniteQuery([QUERY_KEY, categoryId], fetcher, options);
