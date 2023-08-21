@@ -42,7 +42,7 @@ const ImageWrapper = styled.div`
 `;
 const Comment = styled.p`
     font-size: 1.8rem;
-    line-height: 2.4rem;
+    line-height: 2.6rem;
     font-weight: bold;
     color: white;
     margin-bottom: 0.4rem;
