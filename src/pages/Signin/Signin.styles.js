@@ -19,14 +19,14 @@ const SignInContent = styled.div`
     input {
         font-size: 1.4rem;
     }
-    ${({ $theme }) => $theme.media.labtop} {
+    ${({ theme }) => theme.media.labtop} {
         flex-basis: 40%;
     }
 `;
 const loginTitle = styled.h2`
     font-size: 4.6rem;
     margin-bottom: 3.6rem;
-    ${({ $theme }) => $theme.media.labtop} {
+    ${({ theme }) => theme.media.labtop} {
         font-size: 3.4rem;
     }
 `;
@@ -51,10 +51,10 @@ const RegisterButton = styled(Button)`
     max-width: 290px;
     font-size: 1.4rem;
 
-    color: ${({ $theme }) => $theme.colors.point1};
+    color: ${({ theme }) => theme.colors.point1};
     background: #fff;
     margin-bottom: 3.6rem;
 
-    border: 2px solid ${({ $theme }) => $theme.colors.point1};
+    border: 2px solid ${({ theme }) => theme.colors.point1};
 `;
 export { SignInContainer, SignInContent, loginTitle, loginForm, SignInButton, RegisterButton };

@@ -16,15 +16,7 @@ const Introduction = styled.div`
         font-size: 1.6rem;
         margin-bottom: 4.8rem;
     }
-    ${({ $theme }) => $theme.media.labtop} {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        flex-basis: 60%;
-        > p {
-            z-index: 3;
-        }
-    }
+
     &:before {
         content: '';
         position: absolute;
@@ -34,6 +26,15 @@ const Introduction = styled.div`
         width: 360px;
         height: 360px;
         background: url(${introBgUrl}) no-repeat center/cover;
+    }
+    ${({ theme }) => theme.media.labtop} {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-basis: 60%;
+        > p {
+            z-index: 3;
+        }
     }
 `;
 

@@ -29,9 +29,7 @@ const Signin = () => {
     const { mutate, isSuccess } = useLoginQuery();
     const windowWidth = useWindowWidth();
     const emailInputRef = useRef();
-
     const theme = useTheme();
-
     useEffect(() => {
         if (isSuccess) navigate('../');
     }, [isSuccess]);
@@ -67,9 +65,9 @@ const Signin = () => {
             <SplitLayout leftCss={leftBgColor}>
                 <S.SignInContainer>
                     <IntroBox />
-                    <S.SignInContent $theme={theme}>
-                        <S.loginTitle $theme={theme}>{windowWidth > 1280 ? 'Welcome!' : 'Artsy'}</S.loginTitle>
-                        <S.loginForm onSubmit={handleSubmit} $theme={theme}>
+                    <S.SignInContent>
+                        <S.loginTitle>{windowWidth > 1280 ? 'Welcome!' : 'Artsy'}</S.loginTitle>
+                        <S.loginForm onSubmit={handleSubmit}>
                             <Input
                                 placeholder="이메일 주소를 입력하세요."
                                 id="email"
@@ -98,7 +96,7 @@ const Signin = () => {
                                 로그인
                             </S.SignInButton>
                         </S.loginForm>
-                        <S.RegisterButton $theme={theme} size={'large'} onClick={handleRegister}>
+                        <S.RegisterButton size={'large'} onClick={handleRegister}>
                             회원가입
                         </S.RegisterButton>
                     </S.SignInContent>
