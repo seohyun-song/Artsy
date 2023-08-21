@@ -36,8 +36,8 @@ const List = () => {
 
     const handleObserver = useCallback(
         (entries) => {
-            const [target] = entries;
-            if (target.isIntersecting && ticketQuery.hasNextPage) {
+            const [targetInfo] = entries;
+            if (targetInfo.isIntersecting && ticketQuery.hasNextPage) {
                 ticketQuery.fetchNextPage();
             }
         },
