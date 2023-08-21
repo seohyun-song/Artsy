@@ -50,7 +50,7 @@ const MyPage = () => {
                                         개의 티켓이 필요해요!
                                     </p>
                                 ) : (
-                                    <p>{userInfoQuery?.data?.displayName}은 문화를 사랑하는 아티 마스터!</p>
+                                    <p>{userInfoQuery?.data?.displayName}님은 문화를 사랑하는 아티 마스터!</p>
                                 )}
                             </M.GradeBoxTop>
                             <GradeBar total={userInfoQuery?.data?.totalTicket} height={0.8} />
