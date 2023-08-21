@@ -8,6 +8,7 @@ const ERROR_MESSAGE = {
     incorrectPassword: '잘못된 비밀번호입니다. 다시 확인해주세요.',
     notFoundEmail: '가입되지 않은 이메일 주소입니다. 다시 확인해주세요.',
     incorrectEmailFormat: '이메일 형식이 올바르지 않습니다.',
+    duplicatedEmail: '이미 사용 중인 이메일 주소입니다.',
 };
 
 const SUCCESS_MESSAGE = {

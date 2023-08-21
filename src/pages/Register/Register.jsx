@@ -1,23 +1,41 @@
 import * as R from './Register.styles';
 import Input from '@components/@common/Input/Input';
 import GlobalStyle from '@styles/GlobalStyles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
+import useCheckEmailQuery from '../../hooks/@queries/useCheckEmailQuery';
+import { ERROR_MESSAGE } from '@constants/message';
+
 const Register = () => {
     const [loginInfo, setLoginInfo] = useState({
         displayName: '',
         email: '',
         password: '',
     });
+
+    const { data, mutate: checkEmail, isSuccess } = useCheckEmailQuery();
+
+    useEffect(() => {
+        if (isSuccess) {
+            data.isExists ? alert(ERROR_MESSAGE.duplicatedEmail) : alert('사용가능한 이메일 주소입니다.');
+        }
+    }, [isSuccess]);
+
     const theme = useTheme();
+
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(loginInfo);
         setLoginInfo({ displayName: '', email: '', password: '' });
     };
+    const handleCheckEmail = (e) => {
+        e.preventDefault();
+        const email = loginInfo.email;
+        checkEmail({ email });
+    };
+
     return (
         <>
             <GlobalStyle />
@@ -35,7 +53,7 @@ const Register = () => {
                         isValid={true}
                         inputWidth="100%"
                     />
-                    <R.RegisterButton color={theme.colors.point1} size={'large'}>
+                    <R.RegisterButton color={theme.colors.point1} size={'large'} onClick={handleCheckEmail}>
                         이메일 중복 확인하기
                     </R.RegisterButton>
                     <Input
