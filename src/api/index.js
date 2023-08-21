@@ -22,7 +22,7 @@ axiosInstance.interceptors.response.use(
         const appError = error.response.data.error;
         const { type } = appError;
 
-        if (!type) {
+        if (!type || axios.isAxiosError(error)) {
             alert(ERROR_MESSAGE.unexpected);
         } else {
             switch (type) {
