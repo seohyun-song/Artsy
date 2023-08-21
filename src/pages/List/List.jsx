@@ -8,6 +8,7 @@ import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
+import TopButton from '@components/@common/TopButton/TopButton.jsx';
 
 import formatDate from '@utils/formatDate';
 import * as L from './List.styles';
@@ -59,6 +60,8 @@ const List = () => {
 
     return (
         <>
+            {' '}
+            <TopButton></TopButton>
             <Container>
                 <L.TitleWrap>
                     <h4>총 {ticketQuery?.data?.pages[0]?.totalCount ?? 0} 개</h4>
