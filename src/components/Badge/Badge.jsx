@@ -3,13 +3,9 @@ import * as B from './Badge.styles';
 import { useTheme } from 'styled-components';
 import calculateGrade from '../../utils/calculateGrade';
 
-const data = {
-    total: 4,
-};
-
-const Badge = () => {
+const Badge = ({ totalTicket }) => {
     const theme = useTheme();
-    const { name: userGrade, targetValue } = calculateGrade(data.total);
+    const { name: userGrade, targetValue } = calculateGrade(totalTicket);
     return (
         <B.Badge $theme={theme}>
             <B.ImageWrapper>
@@ -17,13 +13,13 @@ const Badge = () => {
             </B.ImageWrapper>
             <B.Description>
                 다음 뱃지까지 <br />
-                {targetValue - data.total}개의 기록이 남았습니다!
+                {targetValue - totalTicket}개의 기록이 남았습니다!
             </B.Description>
             <B.BadgeValue theme={theme}>
-                {data.total} <span>/ {targetValue}</span>
+                {totalTicket} <span>/ {targetValue}</span>
             </B.BadgeValue>
             <B.Bar>
-                <B.Value $all={targetValue} $value={data.total} theme={theme}></B.Value>
+                <B.Value $all={targetValue} $value={totalTicket} theme={theme}></B.Value>
             </B.Bar>
         </B.Badge>
     );
