@@ -31,11 +31,13 @@ const useTicketInfiniteQuery = (categoryId) => {
     };
     const options = {
         getNextPageParam: (lastPage, allPages) => {
+            console.log(lastPage, allPages);
             if (allPages[0].ticketList.length === 0) return undefined; // 기록 없을 때
             return lastPage.ticketList?.length >= limit ? lastPage?.ticketList.at(-1).id : undefined;
         },
     };
     const query = useInfiniteQuery([QUERY_KEY, categoryId], fetcher, options);
+    // console.dir(query.data?.pages);
     return query;
 };
 

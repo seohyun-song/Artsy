@@ -3,18 +3,20 @@ import { useTheme } from 'styled-components';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
-import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import useTicketInfiniteQuery from '@hooks/@queries/useTicketInfiniteQuery';
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
 import formatDate from '@utils/formatDate';
-import * as L from './List.styles';
+import * as L from './InfinityTest.styles';
 
 const List = () => {
+    //test
+    const observerEl = useRef(null);
+
     const theme = useTheme();
     const navigate = useNavigate();
-    const observerEl = useRef(null); //test
     const [searchParams, setSearchParams] = useSearchParams();
     const [categoryId, setCategoryId] = useState(searchParams.get('categoryId'));
 
@@ -24,7 +26,7 @@ const List = () => {
     }, []);
 
     const categoryQuery = useCategoryQuery();
-    const ticketQuery = useTicketQuery(categoryId);
+    const ticketQuery = useTicketInfiniteQuery(categoryId);
 
     const handleFilter = (e) => {
         const selectedIdx = e.target.selectedIndex;
@@ -61,11 +63,22 @@ const List = () => {
 
     if (ticketQuery.isLoading) return <Loading></Loading>;
 
+    if (ticketQuery.isSuccess) {
+        console.log(ticketQuery.isFetchingNextPage, ticketQuery.hasNextPage);
+    }
+
     return (
         <>
+            <button
+                onClick={() => {
+                    ticketQuery.fetchNextPage();
+                }}
+            >
+                다음
+            </button>
             <Container>
                 <L.TitleWrap>
-                    <h4>총 {ticketQuery?.data?.pages[0]?.totalCount ?? 0} 개</h4>
+                    <h4>총 {ticketQuery?.data?.length} 개</h4>
                 </L.TitleWrap>
             </Container>
             <L.FilterWrap>
@@ -104,6 +117,7 @@ const List = () => {
                         })
                     )}
                 </L.TicketList>
+
                 <div ref={observerEl}>
                     {ticketQuery.isFetchingNextPage && ticketQuery.hasNextPage ? 'Loading...' : ''}
                 </div>

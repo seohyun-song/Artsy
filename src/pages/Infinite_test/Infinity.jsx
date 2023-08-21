@@ -22,6 +22,7 @@ const Infinity = () => {
             getNextPageParam: (lastPage, allPages) => {
                 // 마지막 페이지와 가져온 모든 페이지의 배열을 받음
                 const nextPage = allPages.length + 1;
+                console.log(lastPage, allPages);
                 return lastPage.items?.length !== 0 ? nextPage : undefined;
             },
         }
@@ -52,6 +53,10 @@ const Infinity = () => {
         // unmount시 클린업
         return () => observer.unobserve(element);
     }, [fetchNextPage, hasNextPage, handleObserver]);
+
+    if (isSuccess) {
+        console.log(isFetchingNextPage, hasNextPage);
+    }
 
     return (
         <div className="app">
