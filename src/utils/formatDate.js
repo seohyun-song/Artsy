@@ -1,5 +1,5 @@
 const formatDate = (date) => {
-    date = new Date();
+    date = new Date(date);
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDay();
