@@ -25,7 +25,7 @@ const TitleContainer = styled.div`
     }
 `;
 
-const CreateForm = styled.form`
+const CreateForm = styled.div`
     ${({ theme }) => theme.media.tablet} {
         width: 40%;
     }
@@ -87,6 +87,7 @@ const ButtonContaienr = styled.div`
 
 const CreateButton = styled(Button)`
     font-size: 1.5rem;
+    height: 4.5rem;
     /* width: 12em;
     height: 4rem; */
 `;

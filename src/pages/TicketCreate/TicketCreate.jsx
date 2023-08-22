@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import * as T from './TicketCreate.styles';
 import PhotoUploader from '@components/TicketCreate/PhotoUploader/PhotoUploader';
 import Datepicker from '@components/TicketCreate/DatePicker/DatePicker';
@@ -10,12 +11,17 @@ import Loading from '@components/@common/Loading/Loading';
 import * as I from '@components/@common/Input/Input.styles';
 import deleteIconUrl from '@assets/icons/icon-delete.png';
 
-import useTicketCreateQuery from '@hooks/@queries/useTicketCreateQuery';
+import formatTicketDate from '@utils/formatTicketDate';
+import formatKstDate from '@utils/foramtKstDate';
+import { useTicketCreateQuery } from '@hooks/@queries/useTicketQuery';
+import { ERROR_TYPE } from '@constants/serverErrorType';
+import { ERROR_MESSAGE } from '@constants/message';
 
 const TicketCreate = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
     const categoryQuery = useCategoryQuery();
-    const { mutate } = useTicketCreateQuery();
+    const { mutate, isSuccess, data, isError } = useTicketCreateQuery();
 
     const [inputValue, setInputValue] = useState({
         title: '',
@@ -34,6 +40,33 @@ const TicketCreate = () => {
 
     const titleRef = useRef();
     const [titleError, setTitleError] = useState('');
+    const [titleValid, setTitleValid] = useState(true);
+
+    useEffect(() => {
+        if (isSuccess) navigate(`/ticket/detail/${data.id}`);
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            const errorType = query.error.response.data.error.type;
+
+            switch (errorType) {
+                case ERROR_TYPE.LIMIT_FILE_SIZE:
+                    alert(ERROR_MESSAGE.limitFileSize);
+                    break;
+                case ERROR_TYPE.LIMIT_FILE_COUNT:
+                    alert(ERROR_MESSAGE.limitFileCount);
+                    break;
+
+                case ERROR_TYPE.DISALLOW_FILE_TYPE:
+                    alert(ERROR_MESSAGE.disallowFileType);
+                    break;
+
+                default:
+                    alert('관리자에게 문의하세요');
+            }
+        }
+    }, [isError]);
 
     const onChange = (e) => {
         setInputValue((input) => ({ ...input, [e.target.id]: e.target.value }));
@@ -41,14 +74,6 @@ const TicketCreate = () => {
 
     const onCategoryChange = (e) => {
         setCategory(e.target.value);
-    };
-
-    const createFormatDate = (date) => {
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDay();
-
-        return `${year}-${month}-${day}`;
     };
 
     const onResetImage = () => {
@@ -60,6 +85,7 @@ const TicketCreate = () => {
 
         if (inputValue.title === '') {
             setTitleError('제목을 입력해주세요');
+            setTitleValid(false);
             titleRef.current.focus();
             return;
         }
@@ -70,7 +96,7 @@ const TicketCreate = () => {
         // 필수
         formData.append('categoryId', parseInt(category));
         formData.append('title', inputValue.title);
-        formData.append('showDate', createFormatDate(showDate));
+        formData.append('showDate', formatTicketDate(formatKstDate(showDate)));
 
         // 선택사항
         formData.append('place', inputValue.place);
@@ -115,7 +141,10 @@ const TicketCreate = () => {
                     onChange={onChange}
                     value={inputValue.title}
                     isRequired
-                    isValid={titleError === '' ? true : false}
+                    isValid={titleValid}
+                    onBlur={() => {
+                        if (inputValue.title !== '') setTitleValid(true);
+                    }}
                     placeholder="제목을 입력하세요"
                     inputWidth="100%"
                     errorMessage={titleError}
@@ -173,7 +202,7 @@ const TicketCreate = () => {
                     />
                 </T.ReviewContainer>
                 <T.ButtonContaienr>
-                    <T.CreateButton full="true" color={theme.colors.point1}>
+                    <T.CreateButton full="true" color={theme.colors.point1} onClick={onSubmit}>
                         등록하기
                     </T.CreateButton>
                 </T.ButtonContaienr>
