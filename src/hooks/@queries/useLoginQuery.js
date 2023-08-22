@@ -19,11 +19,11 @@ const useLoginQuery = () => {
             const errorType = query.error.response.data.error.type;
             switch (errorType) {
                 case ERROR_TYPE.INCORRECT_PASSWORD: {
-                    alert(ERROR_MESSAGE.incorrectPassword);
+                    alert(ERROR_MESSAGE.incorrectEmailOrPassword);
                     break;
                 }
                 case ERROR_TYPE.NOT_FOUND_EMAIL: {
-                    alert(ERROR_MESSAGE.notFoundEmail);
+                    alert(ERROR_MESSAGE.incorrectEmailOrPassword);
                     break;
                 }
                 default: {
