@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as T from './TicketCreate.styles';
 import PhotoUploader from '@components/TicketCreate/PhotoUploader/PhotoUploader';
 import Datepicker from '@components/TicketCreate/DatePicker/DatePicker';
@@ -21,6 +21,10 @@ const TicketCreate = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const categoryQuery = useCategoryQuery();
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const categoryId = searchParams.get('categoryId');
+
     const { mutate, isSuccess, data, isError } = useTicketCreateQuery();
 
     const [inputValue, setInputValue] = useState({
@@ -32,7 +36,7 @@ const TicketCreate = () => {
 
     const [showDate, setShowDate] = useState(new Date());
     const [rating, setRating] = useState(3);
-    const [category, setCategory] = useState(1);
+    const [category, setCategory] = useState(parseInt(categoryId) ?? 1);
 
     const [imgfile, setImgfile] = useState(''); // 이미지 파일
     const [imgSrc, setImgSrc] = useState(''); // 이미지 미리보기
@@ -41,6 +45,8 @@ const TicketCreate = () => {
     const titleRef = useRef();
     const [titleError, setTitleError] = useState('');
     const [titleValid, setTitleValid] = useState(true);
+
+    useEffect(() => {});
 
     useEffect(() => {
         if (isSuccess) navigate(`/ticket/detail/${data.id}`);
@@ -202,7 +208,7 @@ const TicketCreate = () => {
                     />
                 </T.ReviewContainer>
                 <T.ButtonContaienr>
-                    <T.CreateButton full="true" color={theme.colors.point1} onClick={onSubmit}>
+                    <T.CreateButton full="true" size="large" color={theme.colors.point1} onClick={onSubmit}>
                         등록하기
                     </T.CreateButton>
                 </T.ButtonContaienr>
