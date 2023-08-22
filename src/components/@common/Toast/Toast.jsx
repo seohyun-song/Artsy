@@ -10,11 +10,11 @@ const Toast = ({ message, id }) => {
     useEffect(() => {
         timerId.current = setTimeout(() => {
             toast.hide(id);
-
-            return () => {
-                clearTimeout(timerId.current);
-            };
         }, 2000);
+
+        return () => {
+            clearTimeout(timerId.current);
+        };
     }, []);
     return <StyledToast>{message}</StyledToast>;
 };
