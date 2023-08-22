@@ -4,7 +4,6 @@ import ToastContainer from '@components/@common/ToastContainer/ToastContainer.js
 
 export const ToastContext = createContext();
 
-// reducer
 const toastReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TOAST':
@@ -20,7 +19,6 @@ const initialState = [];
 
 export const ToastContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(toastReducer, initialState);
-
     const show = (message) => {
         const id = Date.now();
         dispatch({ type: 'ADD_TOAST', payload: { id, message } });
@@ -29,7 +27,6 @@ export const ToastContextProvider = ({ children }) => {
     const hide = (id) => {
         dispatch({ type: 'DELETE_TOAST', payload: id });
     };
-
     return (
         <ToastContext.Provider value={{ show, hide }}>
             <ToastContainer toasts={state} />

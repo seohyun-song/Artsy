@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import router from './router';
 import theme from '@styles/theme';
 
-import { ToastContextProvider } from './contexts/ToastContext.jsx';
+import { ToastContextProvider } from '@contexts/ToastContext.jsx';
 
 const queryClient = new QueryClient();
 

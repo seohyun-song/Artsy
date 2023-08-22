@@ -14,7 +14,7 @@ const Toast = ({ message, id }) => {
             return () => {
                 clearTimeout(timerId.current);
             };
-        }, 3000);
+        }, 2000);
     }, []);
     return <StyledToast>{message}</StyledToast>;
 };
