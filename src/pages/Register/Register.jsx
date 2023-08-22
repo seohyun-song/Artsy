@@ -61,7 +61,6 @@ const Register = () => {
     };
     const handleRegister = async (e) => {
         e.preventDefault();
-        // checkStr = checkStr.replace(/\s/g, "");
         const { displayName, password } = userInfo;
 
         const isCorrectFormat = checkValidation({ displayName }) && checkValidation({ password });

@@ -49,8 +49,6 @@ const RegisterForm = styled.form`
     margin-bottom: 16px;
 `;
 const RegisterButton = styled(Button)`
-    border-radius: 100px;
-    height: 53px;
     font-size: 1.4rem;
 `;
 const BackButton = styled.span`
