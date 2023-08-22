@@ -16,6 +16,7 @@ const SliderWrap = styled.div`
     }
 
     input {
+        cursor: pointer;
         width: 100%;
         accent-color: ${({ theme }) => theme.colors.point2};
     }
