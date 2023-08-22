@@ -16,7 +16,7 @@ const useLoginQuery = () => {
 
     useEffect(() => {
         if (query.isError) {
-            const errorType = query.error.response.data.error.type;
+            const errorType = query.error.response?.data?.error.type;
             switch (errorType) {
                 case ERROR_TYPE.INCORRECT_PASSWORD: {
                     alert(ERROR_MESSAGE.incorrectEmailOrPassword);

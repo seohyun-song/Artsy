@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from 'react-query';
 import api from '@utils/api';
 import { useEffect } from 'react';
-import { ERROR_TYPE } from '@constants/serverErrorType';
-import { ERROR_MESSAGE } from '@constants/message';
 export const QUERY_KEY = '/api/user/sign-up';
 
 const useRegisterQuery = () => {
@@ -16,7 +14,8 @@ const useRegisterQuery = () => {
 
     useEffect(() => {
         if (mutation.isError) {
-            const errorType = mutation.error.response.data.error.type;
+            const errorType = mutation.error.response?.data?.error.type;
+            console.log(errorType);
         }
     }, [mutation.isError]);
 
