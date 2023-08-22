@@ -94,6 +94,10 @@ const CreateButton = styled(Button)`
 
 const StyledInput = styled(Input)``;
 
+const MarginContainer = styled.div`
+    margin-bottom: 3.5rem;
+`;
+
 export {
     Container,
     TitleContainer,
@@ -106,4 +110,5 @@ export {
     ButtonContaienr,
     CreateButton,
     StyledInput,
+    MarginContainer,
 };

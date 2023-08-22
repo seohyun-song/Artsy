@@ -141,63 +141,71 @@ const TicketCreate = () => {
                         </div>
                     </T.ImgContainer>
                 )}
-                <T.StyledInput
-                    id="title"
-                    labelText="제목"
-                    onChange={onChange}
-                    value={inputValue.title}
-                    isRequired
-                    isValid={titleValid}
-                    onBlur={() => {
-                        if (inputValue.title !== '') setTitleValid(true);
-                    }}
-                    placeholder="제목을 입력하세요"
-                    inputWidth="100%"
-                    errorMessage={titleError}
-                    inputRef={titleRef}
-                />
-                <div>
+                <T.MarginContainer>
+                    <T.StyledInput
+                        id="title"
+                        labelText="제목"
+                        onChange={onChange}
+                        value={inputValue.title}
+                        isRequired
+                        isValid={titleValid}
+                        onBlur={() => {
+                            if (inputValue.title !== '') setTitleValid(true);
+                        }}
+                        placeholder="제목을 입력하세요"
+                        inputWidth="100%"
+                        errorMessage={titleError}
+                        inputRef={titleRef}
+                    />
+                </T.MarginContainer>
+                <T.MarginContainer>
                     <T.Label>카테고리</T.Label>
                     <I.StyledRequired>&#42;</I.StyledRequired>
                     <CategoryButton datas={categoryQuery?.data} checkedvalue={category} onChange={onCategoryChange} />
-                </div>
-                <Datepicker
-                    selected={showDate}
-                    onChange={(date) => setShowDate(date)}
-                    customInput={
-                        <T.StyledInput
-                            id="title"
-                            labelText="관람일"
-                            isRequired
-                            isValid={true}
-                            inputWidth="100%"
-                            style={{ cursor: 'pointer' }}
-                        />
-                    }
-                />
-                <T.StyledInput
-                    id="place"
-                    labelText="장소"
-                    onChange={onChange}
-                    value={inputValue.place}
-                    isValid={true}
-                    placeholder="장소를 입력하세요"
-                    inputWidth="100%"
-                />
-                <T.StyledInput
-                    id="price"
-                    labelText="금액"
-                    onChange={onChange}
-                    value={inputValue.price}
-                    inputType="number"
-                    isValid={true}
-                    placeholder="금액을 입력하세요"
-                    inputWidth="100%"
-                />
-                <div>
+                </T.MarginContainer>
+                <T.MarginContainer>
+                    <Datepicker
+                        selected={showDate}
+                        onChange={(date) => setShowDate(date)}
+                        customInput={
+                            <T.StyledInput
+                                id="title"
+                                labelText="관람일"
+                                isRequired
+                                isValid={true}
+                                inputWidth="100%"
+                                style={{ cursor: 'pointer' }}
+                            />
+                        }
+                    />
+                </T.MarginContainer>
+                <T.MarginContainer>
+                    <T.StyledInput
+                        id="place"
+                        labelText="장소"
+                        onChange={onChange}
+                        value={inputValue.place}
+                        isValid={true}
+                        placeholder="장소를 입력하세요"
+                        inputWidth="100%"
+                    />
+                </T.MarginContainer>
+                <T.MarginContainer>
+                    <T.StyledInput
+                        id="price"
+                        labelText="금액"
+                        onChange={onChange}
+                        value={inputValue.price}
+                        inputType="number"
+                        isValid={true}
+                        placeholder="금액을 입력하세요"
+                        inputWidth="100%"
+                    />
+                </T.MarginContainer>
+                <T.MarginContainer>
                     <T.Label>별점</T.Label>
                     <RatingSliderBar value={rating} onChange={(e) => setRating(e.target.value)} />
-                </div>
+                </T.MarginContainer>
                 <T.ReviewContainer>
                     <T.Label>리뷰</T.Label>
                     <T.ReviewInput
