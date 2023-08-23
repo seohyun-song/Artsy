@@ -1,9 +1,13 @@
 import { StyledHeader, StyledHeaderInner } from './Header.styles';
+import HeaderIcon from '@assets/icons/icon-header.png';
 
 const Header = () => {
     return (
         <StyledHeader>
-            <StyledHeaderInner>Header</StyledHeaderInner>
+            <StyledHeaderInner>
+                <h1>Artsy</h1>
+                <img src={HeaderIcon} />
+            </StyledHeaderInner>
         </StyledHeader>
     );
 };
