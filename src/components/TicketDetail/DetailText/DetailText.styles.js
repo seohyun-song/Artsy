@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const RowContainer = styled.div`
     width: 100%;
@@ -9,10 +9,19 @@ const RowContainer = styled.div`
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
     }
+
+    ${({ $review }) =>
+        $review === 'medium' &&
+        css`
+            height: 4.6rem;
+            padding: 0 1.6rem;
+            font-size: ${({ theme }) => theme.fontSizes.text};
+            border-radius: ${({ theme }) => theme.borderRadius.medium};
+        `}
 `;
 
 const TitleText = styled.span`
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
 
     ${({ theme }) => theme.media.labtop} {
@@ -22,7 +31,7 @@ const TitleText = styled.span`
 `;
 
 const DetailText = styled.span`
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     margin: 10px 0;
     word-wrap: break-word;
 
