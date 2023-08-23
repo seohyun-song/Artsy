@@ -11,7 +11,7 @@ import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
 import GlobalStyle from '@styles/GlobalStyles';
 import checkValidation from '@utils/checkValidation';
-import useToastContext from '../../hooks/useToastContext';
+import useToastContext from '@hooks/useToastContext';
 
 const Signin = () => {
     const [loginInfo, setLoginInfo] = useState({
@@ -30,7 +30,6 @@ const Signin = () => {
     useEffect(() => {
         if (isError) {
             const errorType = error.response?.data?.error.type;
-            console.log(error);
             switch (errorType) {
                 case ERROR_TYPE.INCORRECT_PASSWORD: {
                     toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);

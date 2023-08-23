@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './SideBar.styles';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useLogoutQuery from '../../hooks/@queries/useLogoutQuery';
+import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
     const navigate = useNavigate();

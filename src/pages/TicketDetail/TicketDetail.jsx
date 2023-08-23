@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as T from './TicketDetail.styles';
-import DetailText from '../../components/TicketDetail/DetailText';
+import DetailText from '@components/TicketDetail/DetailText';
 import { useParams } from 'react-router-dom';
 
 const TicketDetail = () => {
