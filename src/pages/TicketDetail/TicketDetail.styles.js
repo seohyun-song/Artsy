@@ -23,8 +23,9 @@ const TypeColorBox = styled.div`
     ${({ theme }) => theme.media.labtop} {
         width: 100%;
         color: ${({ theme }) => theme.colors.black};
+        height: 50rem;
 
-        top: 27rem;
+        top: 24rem;
     }
 `;
 
@@ -93,7 +94,7 @@ const TicketDetailBox = styled.div`
     border-radius: 12px;
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
 
-    background-color: white;
+    background-color: #fff;
     z-index: -999;
 
     ${({ theme }) => theme.media.labtop} {
@@ -115,7 +116,7 @@ const DetailContainer = styled.div`
 const UnderLine = styled.div`
     width: 70%;
     border-bottom: 0.5px solid #c4c4c4;
-    margin: 2.5rem 0 2rem 0;
+    margin: 2.5rem 0 1.5rem 0;
 
     ${({ theme }) => theme.media.labtop} {
         width: inherit;

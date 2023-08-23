@@ -9,6 +9,7 @@ import formatKstDate from '@utils/foramtKstDate';
 import formatTicketDate from '@utils/formatTicketDate';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
+import Review from '../../components/TicketDetail/Review/Review';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -75,7 +76,7 @@ const TicketDetail = () => {
                                     label="일시"
                                     content={formatTicketDate(formatKstDate(ticketData.showDate))}
                                 />
-                                <DetailText label="리뷰" content={getBlank(ticketData.review)} />
+                                <DetailText label="리뷰" review={true} content={getBlank(ticketData.review)} />
                             </T.DetailWrap>
                             <T.EditWrap>
                                 <span>수정하기</span>
@@ -85,6 +86,7 @@ const TicketDetail = () => {
                         </T.DetailContainer>
                     </T.TicketDetailBox>
                 </T.TicketDetailWrap>
+                <Review content={ticketData.review} />
             </T.Container>
         </>
     );
