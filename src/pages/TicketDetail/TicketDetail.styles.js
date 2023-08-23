@@ -66,11 +66,11 @@ const TicketImageWrap = styled.div`
     max-width: 100%;
     width: 200px;
     height: 290px;
+    overflow: hidden;
 
     img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
         border-radius: 12px;
     }
 
