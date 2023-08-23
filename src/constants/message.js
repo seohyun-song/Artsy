@@ -13,11 +13,13 @@ const ERROR_MESSAGE = {
     dataNotFoundTicket: '해당되는 티켓이 없습니다. 다시 확인해주세요',
     duplicatedEmail: '이미 사용 중인 이메일 주소입니다.',
     incorrectRegister: '닉네임 또는 비밀번호를 다시 확인해주세요',
+    failLogout: '로그아웃에 실패했습니다.',
 };
 
 const SUCCESS_MESSAGE = {
     validEmail: '사용가능한 이메일 주소입니다.',
     successRegister: '성공적으로 가입되었습니다!',
+    successLogout: '로그아웃 했습니다.',
 };
 
 export { CONFIRM_MESSAGE, ERROR_MESSAGE, SUCCESS_MESSAGE };
