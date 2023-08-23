@@ -6,9 +6,9 @@ import useUserInfoQuery from '@hooks/@queries/useUserInfoQuery';
 import Loading from '@components/@common/Loading/Loading';
 
 const Home = () => {
-    const { data: userInfo, isLoading } = useUserInfoQuery();
+    const { data: userInfo, isLoading, isSuccess } = useUserInfoQuery();
     if (isLoading) return <Loading />;
-    const { displayName, totalTicket } = userInfo;
+    const { displayName, totalTicket } = isSuccess && userInfo;
     return (
         <H.Home>
             <H.TopContainer>
