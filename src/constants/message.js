@@ -8,11 +8,12 @@ const ERROR_MESSAGE = {
     incorrectEmailOrPassword: `이메일 주소 또는 비밀번호를 잘못입력했습니다. 다시 확인해주세요.`,
     incorrectEmailFormat: '이메일 형식이 올바르지 않습니다.',
     duplicatedEmail: '이미 사용 중인 이메일 주소입니다.',
-    incorrectRegister:'닉네임 또는 비밀번호를 다시 확인해주세요'
+    incorrectRegister: '닉네임 또는 비밀번호를 다시 확인해주세요',
 };
 
 const SUCCESS_MESSAGE = {
-    // 성공 메시지
+    validEmail: '사용가능한 이메일 주소입니다.',
+    successRegister: '성공적으로 가입되었습니다!',
 };
 
 export { CONFIRM_MESSAGE, ERROR_MESSAGE, SUCCESS_MESSAGE };

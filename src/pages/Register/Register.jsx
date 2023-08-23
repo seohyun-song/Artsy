@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import checkValidation from '@utils/checkValidation';
 import useToastContext from '@hooks/useToastContext';
 import { ERROR_TYPE } from '@constants/serverErrorType';
-import { ERROR_MESSAGE } from '@constants/message';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 const leftBgColor = 'background: linear-gradient(180deg, rgba(105, 96, 204, 0.8) 0%, #554dab 100%)';
 
 const Register = () => {
@@ -38,7 +38,7 @@ const Register = () => {
             if (data.isExists) {
                 toast.show(ERROR_MESSAGE.duplicatedEmail);
             } else {
-                toast.show('사용가능한 이메일 주소입니다.');
+                toast.show(SUCCESS_MESSAGE.validEmail);
                 setIsCheckEmail(true);
             }
         }
@@ -58,7 +58,7 @@ const Register = () => {
             }
         }
         if (isSuccessRegister) {
-            toast.show('성공적으로 가입되었습니다!');
+            toast.show(SUCCESS_MESSAGE.successRegister);
             navigate('/signin');
         }
     }, [isSuccessRegister, isErrorRegister]);
@@ -87,7 +87,7 @@ const Register = () => {
 
         const isCorrectFormat = checkValidation({ displayName }) && checkValidation({ password });
         if (!isCorrectFormat) {
-            alert('닉네임 또는 비밀번호를 조건에 맞게 입력했는지 확인하세요');
+            toast.show(ERROR_MESSAGE.incorrectRegister);
             return;
         }
         signUp(userInfo);
