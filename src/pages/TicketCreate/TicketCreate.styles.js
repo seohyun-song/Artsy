@@ -55,6 +55,19 @@ const ImgWrap = styled.div`
     }
 `;
 
+const IconWrap = styled.div`
+    cursor: pointer;
+
+    width: 3rem;
+    height: 3rem;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+`;
+
 const ReviewContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -99,6 +112,7 @@ export {
     TitleContainer,
     CreateForm,
     ImgContainer,
+    IconWrap,
     ImgWrap,
     ReviewContainer,
     Label,

@@ -136,9 +136,9 @@ const TicketCreate = () => {
                         <T.ImgWrap>
                             <img alt="티켓 이미지" src={imgSrc} />
                         </T.ImgWrap>
-                        <div>
-                            <img alt="삭제" style={{ cursor: 'pointer' }} src={deleteIconUrl} onClick={onResetImage} />
-                        </div>
+                        <T.IconWrap>
+                            <img alt="삭제" src={deleteIconUrl} onClick={onResetImage} />
+                        </T.IconWrap>
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
