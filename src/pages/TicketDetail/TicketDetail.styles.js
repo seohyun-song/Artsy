@@ -53,11 +53,11 @@ const TicketDetailWrap = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 5rem;
 
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
         justify-content: center;
-        margin-top: -3rem;
         height: 50rem;
     }
 `;

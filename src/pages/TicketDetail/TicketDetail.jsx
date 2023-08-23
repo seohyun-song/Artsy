@@ -47,9 +47,6 @@ const TicketDetail = () => {
         <>
             <T.TypeColorBox color={ticketData.categoryColor} />
             <T.Container>
-                <T.MainWrap>
-                    <h2>티켓 상세</h2>
-                </T.MainWrap>
                 <T.TicketDetailWrap>
                     <T.TicketImageWrap>
                         <img src={imgSrc} alt="티켓이미지" />
