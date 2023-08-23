@@ -5,7 +5,7 @@ const CategoryButton = ({ datas, checkedvalue, onChange }) => {
     return (
         <C.Container>
             {datas?.map(({ id, color, name }) => (
-                <label key={id} style={{ marginRight: '1%' }} htmlFor={name}>
+                <label key={id} htmlFor={name}>
                     <C.RadioButton
                         id={name}
                         color={color}
