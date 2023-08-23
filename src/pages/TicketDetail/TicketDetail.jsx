@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as T from './TicketDetail.styles';
-import DetailText from '@components/TicketDetail/DetailText';
+import DetailText from '@components/TicketDetail/DetailText/DetailText';
 import { useParams } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
 import { useTicketGetQuery } from '@hooks/@queries/useTicketQuery';

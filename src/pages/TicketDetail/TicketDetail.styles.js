@@ -91,7 +91,7 @@ const TicketDetailBox = styled.div`
     top: 38rem;
 
     border-radius: 12px;
-    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
 
     background-color: white;
     z-index: -999;
