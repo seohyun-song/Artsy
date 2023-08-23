@@ -4,6 +4,11 @@ const StyledForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    > input:focus {
+        outline: none;
+        border-color: ${({ theme }) => theme.colors.point1};
+        caret-color: ${({ theme }) => theme.colors.point1};
+    }
 `;
 const StyledLabel = styled.label`
     font-size: 18px;
@@ -18,12 +23,12 @@ const StyledInput = styled.input`
     width: ${(props) => props.$inputWidth};
     height: 54px;
     font-size: 16px;
+    color: ${({ theme }) => theme.colors.black};
     padding: 8px 22px;
     margin-bottom: 4px;
     border-radius: ${({ theme, $rounded }) => ($rounded ? theme.borderRadius.large : '0')};
-    border: ${(props) => (props.$rounded ? '2px solid #c5c5c5' : 'none')};
-    border-bottom: 2px solid #c5c5c5;
-    border-color: ${(props) => (props.$valid ? '#c5c5c5' : '#FF1F00')};
+    border: ${({ $rounded }) => ($rounded ? '2px solid #c5c5c5' : 'none')};
+    ${({ $rounded }) => !$rounded && 'border-bottom: 2px solid #c5c5c5'};
 
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
