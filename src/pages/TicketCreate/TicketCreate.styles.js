@@ -6,12 +6,6 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 0 3rem 0 2rem;
 
-    h3 {
-        font-weight: 500;
-        font-size: ${({ theme }) => theme.fontSizes.h5};
-        margin-bottom: 3rem;
-    }
-
     ${({ theme }) => theme.media.tablet} {
         display: flex;
         flex-direction: column;
@@ -20,6 +14,11 @@ const Container = styled.div`
 `;
 
 const TitleContainer = styled.div`
+    h3 {
+        font-weight: 700;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
     ${({ theme }) => theme.media.tablet} {
         width: 40%;
     }
@@ -63,7 +62,7 @@ const ReviewContainer = styled.div`
 `;
 const Label = styled.label`
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 16px;
 `;
 
@@ -87,9 +86,6 @@ const ButtonContaienr = styled.div`
 
 const CreateButton = styled(Button)`
     font-size: 1.5rem;
-    /* height: 4.5rem; */
-    /* width: 12em;
-    height: 4rem; */
 `;
 
 const StyledInput = styled(Input)``;
