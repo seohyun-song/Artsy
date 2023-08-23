@@ -153,11 +153,17 @@ const EditWrap = styled.div`
     margin: 1rem 0;
 
     span {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
         font-size: ${({ theme }) => theme.fontSizes.subText};
         color: #777;
+        height: fit-content;
+        padding: 15px 0;
 
         &:nth-child(2n + 1) {
             cursor: pointer;
+            padding: 15px 10px;
         }
 
         &:not(:last-child) {
