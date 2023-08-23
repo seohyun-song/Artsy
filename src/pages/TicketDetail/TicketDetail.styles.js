@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
     padding-bottom: 4rem;
@@ -66,12 +66,12 @@ const TicketImageWrap = styled.div`
     max-width: 100%;
     width: 200px;
     height: 290px;
-    overflow: hidden;
 
     img {
         width: 100%;
         height: 100%;
         border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.02) 1px 1px 10px 10px;
     }
 
     ${({ theme }) => theme.media.labtop} {
