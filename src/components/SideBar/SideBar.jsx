@@ -28,7 +28,7 @@ const SideBar = () => {
     return (
         <>
             <S.ExtendToggleButton>
-                <ToggleButton isActive={true} onClick={handleToggleBtn} />
+                <ToggleButton isActive={isToggle} onClick={handleToggleBtn} />
             </S.ExtendToggleButton>
             <S.NavBarContainer $open={isToggle}>
                 <S.NavBarContent $open={isToggle}>
