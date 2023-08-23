@@ -33,7 +33,7 @@ const CreateForm = styled.div`
 const ImgContainer = styled.div`
     display: flex;
     align-items: flex-end;
-    margin-bottom: 4rem;
+    margin: 2rem 0;
 `;
 
 const ImgWrap = styled.div`
@@ -42,6 +42,7 @@ const ImgWrap = styled.div`
     position: relative;
 
     border: 1px solid #c5c5c5;
+    border-radius: 10px;
 
     width: 30rem;
     height: 20rem;
@@ -50,8 +51,7 @@ const ImgWrap = styled.div`
     img {
         width: 100%;
         height: 100%;
-        object-fit: fill; // 크기에 맞춰서 채움
-        //object-fit: cover; // 비율 유지하면서 자름
+        object-fit: contain;
     }
 `;
 
