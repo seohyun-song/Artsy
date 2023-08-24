@@ -16,11 +16,11 @@ const Intro = () => {
     const [isLogin, setIsLogin] = useState(false);
     useEffect(() => {
         if (isSuccess) {
-            loginStatus.data?.success === true && setIsLogin(true);
+            loginStatus.data === true && setIsLogin(true);
         }
     }, [isSuccess]);
     const handleStartClick = () => {
-        navigate(`${isLogin ? '/' : '/signin'}`);
+        navigate(`${isLogin ? '/home' : '/signin'}`);
     };
     return (
         <>

@@ -24,7 +24,7 @@ const Signin = () => {
     const theme = useTheme();
     const toast = useToastContext();
     useEffect(() => {
-        if (isSuccess) navigate('../');
+        if (isSuccess) navigate('/home');
     }, [isSuccess]);
     useEffect(() => {
         if (isError) {
@@ -64,7 +64,7 @@ const Signin = () => {
     };
 
     const handleRegister = () => {
-        navigate('../register');
+        navigate('/register');
     };
 
     return (

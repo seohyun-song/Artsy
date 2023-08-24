@@ -6,30 +6,35 @@ import useToastContext from '@hooks/useToastContext';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
 import useAuthQuery from '@hooks/@queries/useAuthQuery';
+import useAuthContext from '@hooks/useAuthContext';
 
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
+    // const { isLogin } = useAuthContext();
     const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
     const toast = useToastContext();
-    const { mutate: logout, isLogoutSuccess, isLogoutError } = useLogoutQuery();
+    const { mutate: logout, isSuccess: isLogoutSuccess, isError: isLogoutError } = useLogoutQuery();
     const { data: loginStatus, isSuccess: isAuthSuccess } = useAuthQuery();
     useEffect(() => {
         if (isLogoutSuccess) {
             toast.show(SUCCESS_MESSAGE.successLogout);
+            navigate('/');
+        }
+    }, [isLogoutSuccess]);
+
+    useEffect(() => {
+        if (isAuthSuccess || loginStatus) {
+            loginStatus.data.success ? setIsLogin(true) : setIsLogin(false);
+        }
+    }, [isAuthSuccess, isLogoutSuccess]);
+    const handleAuthBtn = () => {
+        setIstoggle((cur) => !cur);
+        if (isLogin) {
+            logout();
+        } else {
             navigate('/signin');
         }
-        if (isLogoutError) {
-            toast.show(ERROR_MESSAGE.failLogout);
-        }
-    }, [isLogoutSuccess, isLogoutError]);
-    useEffect(() => {
-        if (isAuthSuccess) {
-            loginStatus.data?.success ? setIsLogin(true) : setIsLogin(false);
-        }
-    }, [isAuthSuccess]);
-    const handleAuthBtn = () => {
-        isLogin ? logout() : navigate('/signin');
     };
     const handleToggleBtn = () => setIstoggle((cur) => !cur);
     return (
@@ -41,7 +46,7 @@ const SideBar = () => {
                 <S.NavBarContent $open={isToggle}>
                     <S.Navbar>
                         <S.NavbarItem onClick={handleToggleBtn}>
-                            <Link to="/">홈</Link>
+                            <Link to="/home">홈</Link>
                         </S.NavbarItem>
                         <S.NavbarItem onClick={handleToggleBtn}>
                             <Link to="/ticket/list">기록함</Link>
