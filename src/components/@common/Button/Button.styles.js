@@ -80,7 +80,7 @@ const StyledButton = styled.button`
         $style &&
         css`
             background-color: #fff;
-            border: 1px solid ${({ $color }) => $color};
+            border: 2px solid ${({ $color }) => $color};
             color: ${({ $color }) => $color};
         `}
 `;
