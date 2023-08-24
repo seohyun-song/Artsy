@@ -6,7 +6,6 @@ function checkValidation(value) {
     const checkedValue = Object.values(value)[0];
     const pattern = VALIDATE[checkType[0]];
     if (checkedValue.match(pattern) === null) {
-        value === 'email' && alert(ERROR_MESSAGE.incorrectEmailFormat);
         return false;
     }
     return true;
