@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as T from './TicketDetail.styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
 import { useTicketGetQuery, useTicketDeleteQuery } from '@hooks/@queries/useTicketQuery';
 import Loading from '@components/@common/Loading/Loading';
@@ -12,9 +12,11 @@ import useToastContext from '@hooks/useToastContext';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
+    const location = useLocation();
+    const [updateDate, setUpdateDate] = useState(location?.state);
     const navigate = useNavigate();
     const toast = useToastContext();
-    const ticketGetQuery = useTicketGetQuery(ticketId);
+    const ticketGetQuery = useTicketGetQuery(ticketId, updateDate);
     const ticketData = ticketGetQuery?.data;
     const {
         mutate,
@@ -75,16 +77,15 @@ const TicketDetail = () => {
 
     // 티켓 수정 이동
     const onUpdate = () => {
-        navigate(`/ticket/edit/${ticketId}`);
+        navigate(`/ticket/edit/${ticketId}`, { state: ticketData });
     };
-
-    if (ticketGetQuery.isLoading) return <Loading />;
-    if (isDeleteLoding) return <Loading />;
 
     return (
         <>
             {ticketData !== undefined && (
                 <div>
+                    {isDeleteLoding && <Loading />}
+                    {ticketGetQuery?.isLoading && <Loading />}
                     <T.TypeColorBox color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>
