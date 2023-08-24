@@ -75,6 +75,7 @@ const StyledButton = styled.button`
     /* 풀너비 */
     ${fullWidthStyle}
 
+    /* 라인스타일 */
     ${({ $style }) =>
         $style &&
         css`
