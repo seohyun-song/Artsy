@@ -12,11 +12,11 @@ import { useEffect, useState } from 'react';
 
 const Intro = () => {
     const navigate = useNavigate();
-    const { data, isSuccess } = useAuthQuery();
+    const { data: loginStatus, isSuccess } = useAuthQuery();
     const [isLogin, setIsLogin] = useState(false);
     useEffect(() => {
-        if (isSuccess && data.data.success === 'true') {
-            setIsLogin(true);
+        if (isSuccess) {
+            loginStatus.data?.success === true && setIsLogin(true);
         }
     }, [isSuccess]);
     const handleStartClick = () => {
