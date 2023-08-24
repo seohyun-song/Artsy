@@ -18,7 +18,7 @@ const RowContainer = styled.div`
 `;
 
 const TitleText = styled.span`
-    font-size: 1.6rem;
+    font-size: ${({ theme }) => theme.fontSizes.body};
     font-weight: 600;
 
     ${({ theme }) => theme.media.labtop} {
@@ -28,7 +28,7 @@ const TitleText = styled.span`
 `;
 
 const DetailText = styled.span`
-    font-size: 1.4rem;
+    font-size: ${({ theme }) => theme.fontSizes.text};
     margin: 10px 0;
     line-height: 2.5rem;
 

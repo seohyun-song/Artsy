@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const TitleText = styled.h2`
     ${({ theme }) => theme.media.labtop} {
-        font-size: 1.6rem;
+        font-size: ${({ theme }) => theme.fontSizes.body};
         font-weight: 600;
         text-align: left;
         margin: 2rem 0;
@@ -27,7 +27,7 @@ const TitleText = styled.h2`
 
 const DetailText = styled.span`
     ${({ theme }) => theme.media.labtop} {
-        font-size: 1.4rem;
+        font-size: ${({ theme }) => theme.fontSizes.text};
         margin: 10px 0;
         line-height: 2.5rem;
         margin: 0;
