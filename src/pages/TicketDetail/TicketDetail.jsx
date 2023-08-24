@@ -9,6 +9,7 @@ import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import Review from '@components/TicketDetail/Review/Review';
 import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
 import useToastContext from '@hooks/useToastContext';
+import useHeaderContext from '@hooks/useHeaderContext';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -16,6 +17,8 @@ const TicketDetail = () => {
     const toast = useToastContext();
     const ticketGetQuery = useTicketGetQuery(ticketId);
     const ticketData = ticketGetQuery?.data;
+    const { setColor, setTicketId } = useHeaderContext();
+
     const {
         mutate,
         isSuccess: isDeleteSuccess,
@@ -29,6 +32,8 @@ const TicketDetail = () => {
     // 티켓 불러오기
     useEffect(() => {
         if (ticketGetQuery.isSuccess) {
+            setColor(ticketData?.categoryColor);
+            setTicketId(ticketId);
             if (ticketData.files?.length === 0) {
                 setImgSrc(BasicTicketUrl);
             } else {

@@ -6,13 +6,15 @@ const StyledHeader = styled.header`
     top: 0;
     left: 0;
     right: 0;
-    // 임시
-    height: 50px;
+    height: 5.5rem;
     line-height: 50px;
     text-align: center;
-    background-color: #fff;
-    box-shadow: 0px 1px 10px 3px rgba(0, 0, 0, 0.02);
-    padding-top: 1rem;
+
+    background-color: ${({ color }) => color};
+
+    ${({ theme }) => theme.media.labtop} {
+        background-color: #fff;
+    }
 `;
 
 const StyledHeaderInner = styled.div`
@@ -25,7 +27,7 @@ const StyledHeaderInner = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    span {
+    h2 {
         font-size: 3rem;
     }
 
