@@ -1,44 +1,59 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './SideBar.styles';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useLogoutQuery from '../../hooks/@queries/useLogoutQuery';
+import { Link, useNavigate } from 'react-router-dom';
+import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
+import useToastContext from '@hooks/useToastContext';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
+import useAuthContext from '@hooks/useAuthContext';
+
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
+    const { isLogin } = useAuthContext();
     const navigate = useNavigate();
-    const location = useLocation();
-    const { mutate, isSuccess } = useLogoutQuery();
+    const toast = useToastContext();
+    const { mutate: logout, isSuccess: isLogoutSuccess, isError: isLogoutError } = useLogoutQuery();
     useEffect(() => {
+        if (isLogoutSuccess) {
+            toast.show(SUCCESS_MESSAGE.successLogout);
+            navigate('/');
+        }
+    }, [isLogoutSuccess]);
+
+    // useEffect(() => {
+    //     if (isAuthSuccess || loginStatus) {
+    //         loginStatus.data.success ? setIsLogin(true) : setIsLogin(false);
+    //     }
+    // }, [isAuthSuccess, isLogoutSuccess]);
+    const handleAuthBtn = () => {
         setIstoggle((cur) => !cur);
-    }, [isSuccess, location.pathname]);
-
-    const handleLogout = () => {
-        mutate();
-        alert('로그아웃 했습니다.');
-        navigate('/signin');
+        if (isLogin) {
+            logout();
+        } else {
+            navigate('/signin');
+        }
     };
-
+    const handleToggleBtn = () => setIstoggle((cur) => !cur);
     return (
         <>
-            <S.ToggleButton $active={isToggle} onClick={() => setIstoggle((cur) => !cur)}>
-                <S.ButtonBar></S.ButtonBar>
-                <S.ButtonBar></S.ButtonBar>
-                <S.ButtonBar></S.ButtonBar>
-            </S.ToggleButton>
+            <S.ExtendToggleButton>
+                <ToggleButton isActive={isToggle} onClick={handleToggleBtn} />
+            </S.ExtendToggleButton>
             <S.NavBarContainer $open={isToggle}>
                 <S.NavBarContent $open={isToggle}>
                     <S.Navbar>
-                        <S.NavbarItem>
-                            <Link to="/">홈</Link>
+                        <S.NavbarItem onClick={handleToggleBtn}>
+                            <Link to="/home">홈</Link>
                         </S.NavbarItem>
-                        <S.NavbarItem>
+                        <S.NavbarItem onClick={handleToggleBtn}>
                             <Link to="/ticket/list">기록함</Link>
                         </S.NavbarItem>
-                        <S.NavbarItem>
+                        <S.NavbarItem onClick={handleToggleBtn}>
                             <Link to="/mypage">마이페이지</Link>
                         </S.NavbarItem>
                     </S.Navbar>
-                    <S.LogoutButton color={'#fff'} size={'large'} onClick={handleLogout}>
-                        로그아웃
+                    <S.LogoutButton color={'#fff'} size={'large'} onClick={handleAuthBtn} $open={isToggle}>
+                        {isLogin ? '로그아웃' : '로그인'}
                     </S.LogoutButton>
                 </S.NavBarContent>
             </S.NavBarContainer>

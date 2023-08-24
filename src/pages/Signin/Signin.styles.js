@@ -4,6 +4,9 @@ const SignInContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 `;
 
 const SignInContent = styled.div`
@@ -40,14 +43,10 @@ const loginForm = styled.form`
     margin-bottom: 16px;
 `;
 const SignInButton = styled(Button)`
-    border-radius: 100px;
-    height: 53px;
     font-size: 1.4rem;
 `;
 const RegisterButton = styled(Button)`
-    border-radius: 100px;
     width: 100%;
-    height: 53px;
     max-width: 290px;
     font-size: 1.4rem;
 

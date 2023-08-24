@@ -11,12 +11,12 @@ const GradeBox = ({ userInfo, gradeInfo, gradeNextInfo }) => {
         <G.StyledGradeBox>
             <G.StyledGradeInfo to="">
                 <span>
-                    <img src={getIconUrl(`badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
+                    <img src={getIconUrl(`Badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
                 </span>
                 <h4>{gradeInfo?.name}</h4>
                 {gradeNextInfo?.isNext === false ? (
                     <p>
-                        {gradeNextInfo?.name}까지 {gradeInfo?.targetValue - userInfo?.totalTicket}
+                        {gradeNextInfo?.nextGrade?.name}까지 {gradeInfo?.targetValue - userInfo?.totalTicket}
                         개의 티켓이 필요해요!
                     </p>
                 ) : (
