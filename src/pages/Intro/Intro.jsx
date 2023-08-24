@@ -8,19 +8,15 @@ import onlineUrl from '@assets/icons/icon-online.png';
 
 import * as I from './Intro.styles';
 import useAuthQuery from '@hooks/@queries/useAuthQuery';
-import { useEffect, useState } from 'react';
+import useAuthContext from '@hooks/useAuthContext';
 
 const Intro = () => {
     const navigate = useNavigate();
-    const { data: loginStatus, isSuccess } = useAuthQuery();
-    const [isLogin, setIsLogin] = useState(false);
-    useEffect(() => {
-        if (isSuccess) {
-            loginStatus.data === true && setIsLogin(true);
-        }
-    }, [isSuccess]);
+    const { data } = useAuthQuery();
+    const { isLogin } = useAuthContext();
+
     const handleStartClick = () => {
-        navigate(`${isLogin ? '/home' : '/signin'}`);
+        navigate(`${data && isLogin ? '/home' : '/signin'}`);
     };
     return (
         <>

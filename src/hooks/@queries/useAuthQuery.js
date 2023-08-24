@@ -1,23 +1,24 @@
 import { useQuery } from 'react-query';
 
-import { QUERY_KEY } from '@hooks/@queries/useUserInfoQuery';
+import { QUERY_KEY as userInfoPath } from '@hooks/@queries/useUserInfoQuery';
 import authApi from '@api/auth';
+import useAuthContext from '@hooks/useAuthContext';
+export const QUERY_KEY_AUTH = 'auth';
 
-// const get = async (path) => {
-//     const api = authApi();
-//     const response = await api.get(path, options);
-//     return response.data;
-// };
-
-//TODO: 로그인, 로그아웃에 따라 유저의 로그인상태값을 바꾸기
 const useAuthQuery = () => {
-    const api = authApi();
-
-    const fetcher = () => api.get(QUERY_KEY);
-    const options = {
-        retry: false,
+    const { setIsLogin } = useAuthContext();
+    const AuthApi = authApi();
+    const fetchUser = async () => {
+        const response = await AuthApi.get(userInfoPath);
+        if (response.data?.success) {
+            setIsLogin(true);
+        } else {
+            setIsLogin(false);
+        }
+        return response.data.success;
     };
-    const query = useQuery([QUERY_KEY + '/auth'], fetcher, options);
+    const query = useQuery({ queryKey: [QUERY_KEY_AUTH], queryFn: fetchUser, retry: false });
+
     return query;
 };
 
