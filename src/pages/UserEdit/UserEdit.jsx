@@ -1,15 +1,118 @@
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useUserGetQuery, useUserEditQuery } from '@hooks/@queries/useUserInfoQuery';
+import useToastContext from '@hooks/useToastContext';
+
 import Container from '@components/@common/Container/Container';
+import Loading from '@components/@common/Loading/Loading';
 import Input from '@components/@common/Input/Input';
 import Button from '@components/@common/Button/Button';
 import ButtonWrap from '@components/@common/ButtonWrap/ButtonWrap';
-
 import PageTitle from '@components/UserEdit/PageTitle/PageTitle';
+
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+
+import checkValidation from '@utils/checkValidation';
 
 import * as U from './UserEdit.styles';
 
 const UserEdit = () => {
+    const navigate = useNavigate();
+    const { data, isSuccess, isLoading } = useUserGetQuery();
+    const { mutate, isSuccessMutate } = useUserEditQuery();
+    const toast = useToastContext();
+    const displayNameRef = useRef();
+    const newPasswordRef = useRef();
+    const confirmPasswordRef = useRef();
+    const [updatedUser, setUpdatedUser] = useState({
+        displayName: '',
+        newPassword: '',
+        confirmPassword: '',
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        displayName: '',
+        newPassword: '',
+        confirmPassword: '',
+    });
+
+    const [formValid, setFormValid] = useState({
+        displayName: true,
+        newPassword: true,
+        confirmPassword: true,
+    });
+
+    useEffect(() => {
+        if (isSuccess) setUpdatedUser({ ...updatedUser, displayName: data.displayName });
+    }, [isSuccess]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUpdatedUser({ ...updatedUser, [name]: value });
+        setFormValid({ ...formValid, [name]: true });
+        setFormErrors({ ...formErrors, [name]: '' });
+
+        switch (name) {
+            case 'displayName':
+                if (!value.trim()) {
+                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.required });
+                    setFormValid({ ...formValid, [name]: false });
+                } else if (!checkValidation({ displayName: value })) {
+                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectDisplayName });
+                    setFormValid({ ...formValid, [name]: false });
+                }
+                break;
+            case 'newPassword':
+                if (!value) {
+                    setFormErrors({ ...formErrors, [name]: '' });
+                    setFormValid({ ...formValid, [name]: true });
+                } else if (!checkValidation({ password: value })) {
+                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectPassword });
+                    setFormValid({ ...formValid, [name]: false });
+                }
+                break;
+            case 'confirmPassword':
+                if (newPasswordRef.current.value !== confirmPasswordRef.current.value) {
+                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectConfirmPassword });
+                    setFormValid({ ...formValid, [name]: false });
+                }
+                break;
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!confirmPasswordRef.current.value && newPasswordRef.current.value) {
+            setFormErrors({ ...formErrors, confirmPassword: ERROR_MESSAGE.incorrectConfirmPassword });
+            setFormValid({ ...formValid, confirmPassword: false });
+            confirmPasswordRef.current.focus();
+            return;
+        }
+
+        if (formValid.displayName && formValid.newPassword && formValid.confirmPassword) {
+            mutate({ displayName: updatedUser.displayName, password: updatedUser.newPassword });
+            if (isSuccessMutate) toast.show(SUCCESS_MESSAGE.successEditUser);
+            setUpdatedUser({ ...updatedUser, newPassword: '', confirmPassword: '' });
+        } else {
+            for (const [key, value] of Object.entries(formValid)) {
+                if (!value) {
+                    if (key === 'displayName') {
+                        displayNameRef.current.focus();
+                        break;
+                    } else if (key === 'newPassword') {
+                        newPasswordRef.current.focus();
+                        break;
+                    } else {
+                        confirmPasswordRef.current.focus();
+                        break;
+                    }
+                }
+            }
+        }
+    };
+    if (isLoading) return <Loading />;
+
     return (
         <Container>
             <U.Wrap>
@@ -17,50 +120,63 @@ const UserEdit = () => {
                 <form>
                     <U.InputBox>
                         <Input
+                            id="inputEmail"
                             inputType="text"
                             labelText="이메일"
                             readOnly="readonly"
                             isValid={true}
                             inputWidth="100%"
+                            value={data?.email || ''}
                         />
                     </U.InputBox>
                     <U.InputBox>
                         <Input
+                            id="displayName"
                             inputType="text"
                             labelText="이름(닉네임)"
-                            isValid={true}
+                            isValid={formValid.displayName}
                             isRequired
                             inputWidth="100%"
-                            errorMessage={''}
+                            value={updatedUser.displayName}
+                            errorMessage={formErrors.displayName}
+                            onChange={handleChange}
+                            inputRef={displayNameRef}
                         />
                     </U.InputBox>
                     <U.InputBox>
                         <div>
                             <Input
+                                id="newPassword"
                                 inputType="password"
                                 labelText="비밀번호"
                                 placeholder="새 비밀번호"
-                                isValid={true}
-                                errorMessage={''}
+                                isValid={formValid.newPassword}
+                                errorMessage={formErrors.newPassword}
                                 inputWidth="100%"
+                                value={updatedUser.newPassword}
+                                onChange={handleChange}
+                                inputRef={newPasswordRef}
                             />
                         </div>
                         <div>
                             <Input
+                                id="confirmPassword"
                                 inputType="password"
                                 placeholder="새 비밀번호 확인"
-                                isValid={true}
-                                isRequired
-                                errorMessage={''}
+                                isValid={formValid.confirmPassword}
+                                errorMessage={formErrors.confirmPassword}
                                 inputWidth="100%"
+                                value={updatedUser.confirmPassword}
+                                onChange={handleChange}
+                                inputRef={confirmPasswordRef}
                             />
                         </div>
                     </U.InputBox>
                     <ButtonWrap>
-                        <Button type="button" size="large" full="full" style="line">
+                        <Button type="button" size="large" full="full" style="line" onClick={() => navigate('/mypage')}>
                             취소
                         </Button>
-                        <Button type="submit" size="large" full="full">
+                        <Button type="button" size="large" full="full" onClick={handleSubmit}>
                             수정
                         </Button>
                     </ButtonWrap>
