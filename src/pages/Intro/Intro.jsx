@@ -1,17 +1,27 @@
 import { useNavigate } from 'react-router-dom';
 
 import Container from '@components/@common/Container/Container.jsx';
-import Button from '@components/@common/Button/Button.jsx';
 
 import bookUrl from '@assets/icons/icon-book.png';
 import chartUrl from '@assets/icons/icon-chart2.png';
 import onlineUrl from '@assets/icons/icon-online.png';
 
 import * as I from './Intro.styles';
+import useAuthQuery from '@hooks/@queries/useAuthQuery';
+import { useEffect, useState } from 'react';
 
 const Intro = () => {
     const navigate = useNavigate();
-
+    const { data, isSuccess } = useAuthQuery();
+    const [isLogin, setIsLogin] = useState(false);
+    useEffect(() => {
+        if (isSuccess && data.data.success === 'true') {
+            setIsLogin(true);
+        }
+    }, [isSuccess]);
+    const handleStartClick = () => {
+        navigate(`${isLogin ? '/' : '/signin'}`);
+    };
     return (
         <>
             <Container>
@@ -23,7 +33,7 @@ const Intro = () => {
                             <br /> 나만의 티켓북
                         </h2>
                         <p>이제 온라인으로 나만의 문화 티켓을 기록하세요.</p>
-                        <I.MainButton size="medium" color="#fff" onClick={() => navigate('/register')}>
+                        <I.MainButton size="medium" color="#fff" onClick={handleStartClick}>
                             바로 시작하기
                         </I.MainButton>
                     </I.MainText>
@@ -65,7 +75,7 @@ const Intro = () => {
                     간편하게 사용할 수 있는
                     <br /> 나만의 티켓북
                 </h3>
-                <I.BannerButton size="small" onClick={() => navigate('/register')}>
+                <I.BannerButton size="small" onClick={handleStartClick}>
                     바로 시작하기
                 </I.BannerButton>
             </I.MainBanner>

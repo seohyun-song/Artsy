@@ -5,24 +5,31 @@ import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
 import useToastContext from '@hooks/useToastContext';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
+import useAuthQuery from '@hooks/@queries/useAuthQuery';
 
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const navigate = useNavigate();
     const toast = useToastContext();
-    const { mutate, isSuccess, isError } = useLogoutQuery();
-
+    const { mutate: logout, isLogoutSuccess, isLogoutError } = useLogoutQuery();
+    const { data: loginStatus, isSuccess: isAuthSuccess } = useAuthQuery();
     useEffect(() => {
-        if (isSuccess) {
+        if (isLogoutSuccess) {
             toast.show(SUCCESS_MESSAGE.successLogout);
             navigate('/signin');
         }
-        if (isError) {
+        if (isLogoutError) {
             toast.show(ERROR_MESSAGE.failLogout);
         }
-    }, [isSuccess, isError]);
-    const handleLogout = () => {
-        mutate();
+    }, [isLogoutSuccess, isLogoutError]);
+    useEffect(() => {
+        if (isAuthSuccess) {
+            loginStatus.data?.success ? setIsLogin(true) : setIsLogin(false);
+        }
+    }, [isAuthSuccess]);
+    const handleAuthBtn = () => {
+        isLogin ? logout() : navigate('/signin');
     };
     const handleToggleBtn = () => setIstoggle((cur) => !cur);
     return (
@@ -43,8 +50,8 @@ const SideBar = () => {
                             <Link to="/mypage">마이페이지</Link>
                         </S.NavbarItem>
                     </S.Navbar>
-                    <S.LogoutButton color={'#fff'} size={'large'} onClick={handleLogout}>
-                        로그아웃
+                    <S.LogoutButton color={'#fff'} size={'large'} onClick={handleAuthBtn} $open={isToggle}>
+                        {isLogin ? '로그아웃' : '로그인'}
                     </S.LogoutButton>
                 </S.NavBarContent>
             </S.NavBarContainer>
