@@ -14,7 +14,7 @@ const TicketDetailBox = styled.div`
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
 
     background-color: #fff;
-    z-index: -999;
+    z-index: 0;
 
     ${({ theme }) => theme.media.labtop} {
         width: 220rem;

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import * as T from './TicketDetail.styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
-import { useTicketGetQuery } from '@hooks/@queries/useTicketQuery';
+import { useTicketGetQuery, useTicketDeleteQuery } from '@hooks/@queries/useTicketQuery';
 import Loading from '@components/@common/Loading/Loading';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import Review from '@components/TicketDetail/Review/Review';
 import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
 import useToastContext from '@hooks/useToastContext';
-import { useTicketDeleteQuery } from '../../hooks/@queries/useTicketQuery';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -62,7 +61,7 @@ const TicketDetail = () => {
     useEffect(() => {
         if (isDeleteSuccess) {
             toast.show(SUCCESS_MESSAGE.successTicketDelete);
-            navigate(-1);
+            navigate('/ticket/list');
         }
     }, [isDeleteSuccess]);
 
