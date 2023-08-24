@@ -45,6 +45,9 @@ const StyledInput = styled.input`
 
 const StyledErrorMessage = styled.span`
     color: #ff1f00;
+    margin-left: 22px;
+    margin-top: 4px;
+    font-size: 16px;
 `;
 
 export { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessage };
