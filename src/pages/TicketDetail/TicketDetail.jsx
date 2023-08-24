@@ -41,14 +41,12 @@ const TicketDetail = () => {
         if (ticketGetQuery.isError) {
             const errorType = ticketGetQuery.error.response.data.error.type;
             switch (errorType) {
-                case ERROR_TYPE.DATA_NOT_FOUND: {
+                case ERROR_TYPE.DATA_NOT_FOUND:
                     toast.show(ERROR_MESSAGE.dataNotFoundTicket);
                     navigate('/ticket/list');
                     break;
-                }
-                default: {
+                default:
                     toast.show('관리자에게 문의하세요');
-                }
             }
         }
     }, [ticketGetQuery.isError]);
@@ -69,9 +67,8 @@ const TicketDetail = () => {
         if (isDeleteError) {
             const errorType = deleteError.response.data.error.type;
             switch (errorType) {
-                default: {
+                default:
                     toast.show('관리자에게 문의하세요');
-                }
             }
         }
     }, [isDeleteError]);
