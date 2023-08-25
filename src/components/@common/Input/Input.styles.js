@@ -59,7 +59,6 @@ const StyledErrorMessage = styled.span`
     margin-top: 4px;
     color: #ff624d;
     font-size: ${({ theme }) => theme.fontSizes.text};
->>>>>>> e3ec6a1ff3a6dabc3fe0b29d29613c76f540e6ff
 `;
 
 export { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessage };

@@ -37,7 +37,7 @@ const useTicketUpdateQuery = (ticketId) => {
     const mutation = useMutation({
         mutationFn: (ticketInfo) => fetcher(ticketInfo),
         retry: false,
-        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId]),
+        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId, 'update']),
     });
 
     return mutation;
@@ -50,7 +50,7 @@ const useTicketDeleteQuery = (ticketId) => {
     const mutation = useMutation({
         mutationFn: () => fetcher(),
         retry: false,
-        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId]),
+        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId, 'delete']),
     });
 
     return mutation;
