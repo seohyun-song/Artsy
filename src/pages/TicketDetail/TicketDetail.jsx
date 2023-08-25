@@ -29,6 +29,23 @@ const TicketDetail = () => {
 
     const [imgSrc, setImgSrc] = useState('');
 
+    const [position, setPosition] = useState(0);
+    const onScroll = () => {
+        setPosition(window.scrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (position > 500) setColor('#fff');
+        else setColor(ticketData?.categoryColor);
+    }, [position]);
+
     // 티켓 불러오기
     useEffect(() => {
         if (ticketGetQuery.isSuccess) {
