@@ -5,9 +5,9 @@ import { useTheme } from 'styled-components';
 import useToastContext from '@hooks/useToastContext';
 import checkValidation from '@utils/checkValidation';
 import useCheckEmailQuery from '@hooks/@queries/useCheckEmailQuery';
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+import { ERROR_MESSAGE } from '@constants/message';
 
-const EmailForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEmail }) => {
+const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
     const [isValidEmail, setIsValidEmail] = useState(true);
     const emailInputRef = useRef(null);
     const theme = useTheme();

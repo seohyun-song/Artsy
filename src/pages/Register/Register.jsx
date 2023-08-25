@@ -4,7 +4,7 @@ import { useState } from 'react';
 import IntroBox from '@components/introBox/IntroBox';
 
 import EmailForm from '@components/Register/EmailForm/EmailForm';
-import RegisterForm from '../../components/Register/RegisterForm/RegisterForm';
+import RegisterForm from '@components/Register/RegisterForm/RegisterForm';
 
 const Register = () => {
     const [userInfo, setUserInfo] = useState({

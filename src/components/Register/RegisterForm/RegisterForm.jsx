@@ -25,7 +25,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
 
     const { mutate: signUp, isSuccess, isError, error } = useRegisterQuery();
 
-    const { displayName, password } = userInfo;
+    const { displayName, email, password } = userInfo;
 
     useEffect(() => {
         if (passwordCheck !== '') {
@@ -102,7 +102,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
     };
     return (
         <>
-            <div>이메일 주소: {}</div>
+            <R.Email>이메일 주소: {email}</R.Email>
             <R.RegisterForm onSubmit={handleRegister}>
                 <Input
                     placeholder="이름(닉네임)을 입력하세요."
@@ -147,7 +147,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                 <R.RegisterButton color={theme.colors.point1} size={'large'} disabled={isdisabledButton}>
                     가입하기
                 </R.RegisterButton>
-                <R.BackButton onClick={handlebackToEmail}>&lt; 뒤로가기</R.BackButton>
+                <R.BackButton onClick={handlebackToEmail}>뒤로가기</R.BackButton>
             </R.RegisterForm>
         </>
     );
