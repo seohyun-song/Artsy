@@ -18,7 +18,7 @@ const ERROR_MESSAGE = {
     incorrectDisplayName: '이름은 숫자, 영문 소문자, 영문 대문자, "-", "_" 를 포함하여 3~15자를 입력해주세요.',
     incorrectPassword: '비밀번호는 영문 소문자,대문자, 숫자, 특수문자를 포함하여 입력해주세요.',
     incorrectConfirmPassword: '비밀번호가 일치하지 않습니다.',
-    failEditUser: '회원 정보 수정에 실패했습니다.',
+    failUpdateUser: '회원 정보 수정에 실패했습니다.',
 };
 
 const SUCCESS_MESSAGE = {
@@ -26,7 +26,7 @@ const SUCCESS_MESSAGE = {
     successRegister: '성공적으로 가입되었습니다!',
     successLogout: '로그아웃 했습니다.',
     successTicketDelete: '티켓이 삭제되었습니다.',
-    successEditUser: '성공적으로 회원 정보를 수정했습니다.',
+    successUpdateUser: '성공적으로 회원 정보를 수정했습니다.',
 };
 
 export { CONFIRM_MESSAGE, ERROR_MESSAGE, SUCCESS_MESSAGE };
