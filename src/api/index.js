@@ -3,7 +3,6 @@ import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
 
 import useToastContext from '@hooks/useToastContext';
-const toast = useToastContext();
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -23,6 +22,7 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         const type = error?.response?.data?.error?.type;
+        const toast = useToastContext();
 
         if (!type) {
             toast.show(ERROR_MESSAGE.unexpected);
