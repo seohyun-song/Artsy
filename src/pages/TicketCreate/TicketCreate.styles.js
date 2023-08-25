@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@components/@common/Button/Button';
-import Input from '@components/@common/Input/Input';
 
 const Container = styled.div`
     margin: 0 auto;
@@ -41,7 +40,7 @@ const ImgWrap = styled.div`
     position: relative;
 
     border: 1px solid #c5c5c5;
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme.borderRadius.large};
 
     width: 30rem;
     height: 20rem;
@@ -73,7 +72,7 @@ const ReviewContainer = styled.div`
     align-items: flex-start;
 `;
 const Label = styled.label`
-    font-size: 1.6rem;
+    font-size: ${({ theme }) => theme.fontSizes.body};
     font-weight: 600;
     margin-bottom: 16px;
 `;
@@ -82,7 +81,7 @@ const ReviewInput = styled.textarea`
     box-sizing: border-box;
     width: 100%;
     height: 20rem;
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes.body};
     padding: 1.2rem 2.2rem;
     border-radius: ${(props) => (props.$rounded ? '100px' : '0')};
     border: 1px solid #c5c5c5;
@@ -103,7 +102,7 @@ const ButtonContaienr = styled.div`
 `;
 
 const CreateButton = styled(Button)`
-    font-size: 1.5rem;
+    font-size: ${({ theme }) => theme.fontSizes.body};
 `;
 
 const MarginContainer = styled.div`

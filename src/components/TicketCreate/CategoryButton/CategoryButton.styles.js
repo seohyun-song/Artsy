@@ -5,7 +5,7 @@ const RadioText = styled.span`
     width: 7rem;
     height: 3rem;
     background-color: #848484;
-    border-radius: 12px;
+    border-radius: ${({ theme }) => theme.borderRadius.large};
     border: none;
     display: flex;
     justify-content: center;
