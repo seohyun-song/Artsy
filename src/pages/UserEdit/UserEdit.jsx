@@ -19,8 +19,8 @@ import * as U from './UserEdit.styles';
 
 const UserEdit = () => {
     const navigate = useNavigate();
-    const { data, isSuccess, isLoading } = useUserGetQuery();
-    const { mutate, isSuccess: isSuccessMutate, isError: isErrorMutate } = useUserEditQuery();
+    const { data: userInfo, isSuccess: isSuccessGet, isLoading: isLoadingGet } = useUserGetQuery();
+    const { mutate: updateUser, isSuccess: isSuccessUpdate, isError: isErrorUpdate } = useUserEditQuery();
     const toast = useToastContext();
     const displayNameRef = useRef();
     const newPasswordRef = useRef();
@@ -44,22 +44,20 @@ const UserEdit = () => {
     });
 
     useEffect(() => {
-        if (isSuccess) setUpdatedUser({ ...updatedUser, displayName: data.displayName });
-    }, [isSuccess]);
+        if (isSuccessGet) setUpdatedUser({ ...updatedUser, displayName: userInfo.displayName });
+    }, [isSuccessGet]);
 
     useEffect(() => {
-        if (isSuccessMutate) toast.show(SUCCESS_MESSAGE.successEditUser);
-    }, [isSuccessMutate]);
+        if (isSuccessUpdate) toast.show(SUCCESS_MESSAGE.successUpdateUser);
+    }, [isSuccessUpdate]);
 
     useEffect(() => {
-        if (isErrorMutate) toast.show(ERROR_MESSAGE.failEditUser);
-    }, [isErrorMutate]);
+        if (isErrorUpdate) toast.show(ERROR_MESSAGE.failUpdateUser);
+    }, [isErrorUpdate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUpdatedUser({ ...updatedUser, [name]: value });
-        setFormValid({ ...formValid, [name]: true });
-        setFormErrors({ ...formErrors, [name]: '' });
 
         switch (name) {
             case 'displayName':
@@ -69,21 +67,30 @@ const UserEdit = () => {
                 } else if (!checkValidation({ displayName: value })) {
                     setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectDisplayName });
                     setFormValid({ ...formValid, [name]: false });
+                } else {
+                    setFormValid({ ...formValid, [name]: true });
+                    setFormErrors({ ...formErrors, [name]: '' });
                 }
                 break;
             case 'newPassword':
                 if (!value) {
-                    setFormErrors({ ...formErrors, [name]: '' });
-                    setFormValid({ ...formValid, [name]: true });
+                    setFormErrors({ ...formErrors, [name]: '', confirmPassword: '' });
+                    setFormValid({ ...formValid, [name]: true, confirmPassword: true });
                 } else if (!checkValidation({ password: value })) {
-                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectPassword });
+                    setFormErrors((prev) => ({ ...prev, [name]: ERROR_MESSAGE.incorrectPassword }));
                     setFormValid({ ...formValid, [name]: false });
+                } else {
+                    setFormValid({ ...formValid, [name]: true });
+                    setFormErrors({ ...formErrors, [name]: '' });
                 }
                 break;
             case 'confirmPassword':
                 if (newPasswordRef.current.value !== confirmPasswordRef.current.value) {
                     setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectConfirmPassword });
                     setFormValid({ ...formValid, [name]: false });
+                } else {
+                    setFormValid({ ...formValid, [name]: true });
+                    setFormErrors({ ...formErrors, [name]: '' });
                 }
                 break;
         }
@@ -91,24 +98,15 @@ const UserEdit = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (!confirmPasswordRef.current.value && newPasswordRef.current.value) {
-            setFormErrors({ ...formErrors, confirmPassword: ERROR_MESSAGE.incorrectConfirmPassword });
-            setFormValid({ ...formValid, confirmPassword: false });
-            if (!formValid.displayName) {
-                displayNameRef.current.focus();
-                return;
-            } else if (!formValid.newPassword) {
-                newPasswordRef.current.focus();
-                return;
-            }
-            confirmPasswordRef.current.focus();
-            return;
-        }
-
-        if (formValid.displayName && formValid.newPassword && formValid.confirmPassword) {
-            mutate({ displayName: updatedUser.displayName, password: updatedUser.newPassword });
+        if (
+            formValid.displayName &&
+            formValid.newPassword &&
+            formValid.confirmPassword &&
+            newPasswordRef.current.value === confirmPasswordRef.current.value
+        ) {
+            updateUser({ displayName: updatedUser.displayName, password: updatedUser.newPassword });
             setUpdatedUser({ ...updatedUser, newPassword: '', confirmPassword: '' });
+            return;
         } else {
             if (!formValid.displayName) {
                 displayNameRef.current.focus();
@@ -116,12 +114,14 @@ const UserEdit = () => {
             } else if (!formValid.newPassword) {
                 newPasswordRef.current.focus();
                 return;
-            } else if (!formValid.confirmPassword) {
+            } else {
                 confirmPasswordRef.current.focus();
+                setFormErrors({ ...formErrors, confirmPassword: ERROR_MESSAGE.incorrectConfirmPassword });
+                setFormValid({ ...formValid, confirmPassword: false });
             }
         }
     };
-    if (isLoading) return <Loading />;
+    if (isLoadingGet) return <Loading />;
 
     return (
         <Container>
@@ -136,7 +136,7 @@ const UserEdit = () => {
                             readOnly="readonly"
                             isValid={true}
                             inputWidth="100%"
-                            value={data?.email || ''}
+                            value={userInfo?.email || ''}
                         />
                     </U.InputBox>
                     <U.InputBox>
