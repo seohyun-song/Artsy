@@ -12,12 +12,11 @@ import * as I from '@components/@common/Input/Input.styles';
 import deleteIconUrl from '@assets/icons/icon-delete.png';
 import formatTicketDate from '@utils/formatTicketDate';
 import { ERROR_TYPE } from '@constants/serverErrorType';
-import { ERROR_MESSAGE } from '@constants/message';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import { useTicketUpdateQuery } from '@hooks/@queries/useTicketQuery';
 import formatKstDate from '@utils/foramtKstDate';
 import useToastContext from '@hooks/useToastContext';
 import useInput from '@hooks/useInput';
-import Input from '@components/@common/Input/Input';
 
 const TicketEdit = () => {
     const theme = useTheme();
@@ -48,10 +47,11 @@ const TicketEdit = () => {
     const [titleError, setTitleError] = useState('');
     const [titleValid, setTitleValid] = useState(true);
 
-    console.log(ticketData);
-
     useEffect(() => {
-        if (isSuccess) navigate(`/ticket/detail/${parseInt(ticketId)}`, { state: ticketData.updateDate ?? 'new' });
+        if (isSuccess) {
+            navigate(`/ticket/detail/${parseInt(ticketId)}`, { state: ticketData.updateDate ?? 'new' });
+            toast.show(SUCCESS_MESSAGE.successUpdateTicket);
+        }
     }, [isSuccess]);
 
     useEffect(() => {
@@ -124,14 +124,13 @@ const TicketEdit = () => {
         setTitleError('');
     };
 
-    if (categoryQuery.isLoading) return <Loading></Loading>;
-
     return (
         <T.Container>
+            {categoryQuery?.isLoading && <Loading></Loading>}
             <T.TitleContainer>
                 <h3>티켓 수정</h3>
             </T.TitleContainer>
-            <T.CreateForm onSubmit={(e) => onSubmit(e)}>
+            <T.TicketForm>
                 {imgSrc === '' && <PhotoUploader setImgfile={setImgfile} setImgSrc={setImgSrc} />}
                 {imgSrc !== '' && (
                     <T.ImgContainer>
@@ -144,7 +143,7 @@ const TicketEdit = () => {
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
-                    <Input
+                    <T.StyledInput
                         id="title"
                         labelText="제목"
                         onChange={onChangeInput}
@@ -187,7 +186,7 @@ const TicketEdit = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <Input
+                    <T.StyledInput
                         id="place"
                         labelText="장소"
                         onChange={onChangeInput}
@@ -199,7 +198,7 @@ const TicketEdit = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <Input
+                    <T.StyledInput
                         id="price"
                         labelText="금액"
                         onChange={onNumberChange}
@@ -230,7 +229,7 @@ const TicketEdit = () => {
                         수정하기
                     </T.CreateButton>
                 </T.ButtonContaienr>
-            </T.CreateForm>
+            </T.TicketForm>
         </T.Container>
     );
 };

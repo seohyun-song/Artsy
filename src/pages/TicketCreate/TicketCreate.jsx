@@ -24,7 +24,6 @@ const TicketCreate = () => {
     const categoryQuery = useCategoryQuery();
     const [searchParams, setSearchParams] = useSearchParams();
     const toast = useToastContext();
-    // const Input = forwardRef((props, ref) => <Input {...props} ref={ref} />);
 
     const categoryId = searchParams.get('categoryId');
 
@@ -49,7 +48,10 @@ const TicketCreate = () => {
     const [titleValid, setTitleValid] = useState(true);
 
     useEffect(() => {
-        if (isSuccess) navigate(`/ticket/detail/${data.id}`);
+        if (isSuccess) {
+            toast.show(SUCCESS_MESSAGE.successCreateTicket);
+            navigate(`/ticket/detail/${data.id}`);
+        }
     }, [isSuccess]);
 
     useEffect(() => {
@@ -117,10 +119,9 @@ const TicketCreate = () => {
         setTitleError('');
     };
 
-    if (categoryQuery.isLoading) return <Loading></Loading>;
-
     return (
         <T.Container>
+            {categoryQuery?.isLoading && <Loading></Loading>}
             <T.TitleContainer>
                 <h3>티켓 등록</h3>
             </T.TitleContainer>
