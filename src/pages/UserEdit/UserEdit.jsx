@@ -20,7 +20,7 @@ import * as U from './UserEdit.styles';
 const UserEdit = () => {
     const navigate = useNavigate();
     const { data, isSuccess, isLoading } = useUserGetQuery();
-    const { mutate, isSuccessMutate } = useUserEditQuery();
+    const { mutate, isSuccess: isSuccessMutate, isError: isErrorMutate } = useUserEditQuery();
     const toast = useToastContext();
     const displayNameRef = useRef();
     const newPasswordRef = useRef();
@@ -46,6 +46,14 @@ const UserEdit = () => {
     useEffect(() => {
         if (isSuccess) setUpdatedUser({ ...updatedUser, displayName: data.displayName });
     }, [isSuccess]);
+
+    useEffect(() => {
+        if (isSuccessMutate) toast.show(SUCCESS_MESSAGE.successEditUser);
+    }, [isSuccessMutate]);
+
+    useEffect(() => {
+        if (isErrorMutate) toast.show(ERROR_MESSAGE.failEditUser);
+    }, [isErrorMutate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -83,31 +91,33 @@ const UserEdit = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (!confirmPasswordRef.current.value && newPasswordRef.current.value) {
             setFormErrors({ ...formErrors, confirmPassword: ERROR_MESSAGE.incorrectConfirmPassword });
             setFormValid({ ...formValid, confirmPassword: false });
+            if (!formValid.displayName) {
+                displayNameRef.current.focus();
+                return;
+            } else if (!formValid.newPassword) {
+                newPasswordRef.current.focus();
+                return;
+            }
             confirmPasswordRef.current.focus();
             return;
         }
 
         if (formValid.displayName && formValid.newPassword && formValid.confirmPassword) {
             mutate({ displayName: updatedUser.displayName, password: updatedUser.newPassword });
-            if (isSuccessMutate) toast.show(SUCCESS_MESSAGE.successEditUser);
             setUpdatedUser({ ...updatedUser, newPassword: '', confirmPassword: '' });
         } else {
-            for (const [key, value] of Object.entries(formValid)) {
-                if (!value) {
-                    if (key === 'displayName') {
-                        displayNameRef.current.focus();
-                        break;
-                    } else if (key === 'newPassword') {
-                        newPasswordRef.current.focus();
-                        break;
-                    } else {
-                        confirmPasswordRef.current.focus();
-                        break;
-                    }
-                }
+            if (!formValid.displayName) {
+                displayNameRef.current.focus();
+                return;
+            } else if (!formValid.newPassword) {
+                newPasswordRef.current.focus();
+                return;
+            } else if (!formValid.confirmPassword) {
+                confirmPasswordRef.current.focus();
             }
         }
     };
