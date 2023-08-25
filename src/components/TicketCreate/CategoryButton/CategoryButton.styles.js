@@ -40,7 +40,7 @@ const Container = styled.div`
     label {
         margin-bottom: 1rem;
         &:not(:last-child) {
-            margin-right: 1.5rem;
+            margin-right: 1rem;
         }
     }
 `;
