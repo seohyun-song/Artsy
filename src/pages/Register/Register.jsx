@@ -16,7 +16,7 @@ const Register = () => {
     const [isCheckEmail, setIsCheckEmail] = useState(false);
 
     const handleChange = (e) => {
-        setUserInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
+        setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
     const initializeUserInfo = () => setUserInfo(() => ({ displayName: '', email: '', password: '' }));
 

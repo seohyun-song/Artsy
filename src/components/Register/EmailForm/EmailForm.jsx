@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as E from './EmailForm.styles';
 import Input from '@components/@common/Input/Input';
 import { useTheme } from 'styled-components';
@@ -8,28 +8,34 @@ import useCheckEmailQuery from '@hooks/@queries/useCheckEmailQuery';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 
 const EmailForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEmail }) => {
+    const [isValidEmail, setIsValidEmail] = useState(true);
+    const emailInputRef = useRef(null);
     const theme = useTheme();
     const toast = useToastContext();
-
-    const { data, mutate: checkDuplicatedEmail, isSuccess: isSuccessEmailCheck } = useCheckEmailQuery();
+    const { email } = userInfo;
+    const { data, mutate: checkDuplicatedEmail, isSuccess } = useCheckEmailQuery();
 
     useEffect(() => {
-        if (isSuccessEmailCheck) {
+        if (email !== '') {
+            checkValidation({ email }) ? setIsValidEmail(true) : setIsValidEmail(false);
+        } else {
+            setIsValidEmail(true);
+        }
+    }, [email]);
+    useEffect(() => {
+        if (isSuccess) {
             if (data.isExists) {
                 toast.show(ERROR_MESSAGE.duplicatedEmail);
             } else {
-                toast.show(SUCCESS_MESSAGE.validEmail);
                 setIsCheckEmail(true);
             }
         }
-    }, [isSuccessEmailCheck]);
+    }, [isSuccess]);
 
     const handleCheckEmail = (e) => {
         e.preventDefault();
-        const email = userInfo.email;
         const isCorrectFormat = checkValidation({ email });
         if (!isCorrectFormat) {
-            initializeUserInfo();
             return;
         }
         checkDuplicatedEmail({ email });
@@ -40,14 +46,17 @@ const EmailForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEmail
                 placeholder="이메일 주소를 입력하세요."
                 id="email"
                 name="email"
+                inputRef={emailInputRef}
                 onChange={handleChange}
-                value={userInfo.email}
+                value={email}
                 rounded
                 isRequired
-                isValid={true}
+                isValid={isValidEmail}
                 inputWidth="100%"
+                errorMessage={'이메일 양식에 맞게 입력해주세요'}
             />
-            <E.CheckButton color={theme.colors.point1} size={'large'}>
+
+            <E.CheckButton color={theme.colors.point1} size={'large'} disabled={email === '' || !isValidEmail}>
                 이메일 중복 확인하기
             </E.CheckButton>
         </E.EmailForm>
