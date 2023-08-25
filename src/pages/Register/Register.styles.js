@@ -26,7 +26,7 @@ const RegisterContent = styled.div`
 `;
 
 const Title = styled.h2`
-    flex-basis: 40%;
+    flex-basis: 30%;
     display: flex;
     align-items: flex-end;
     box-sizing: border-box;

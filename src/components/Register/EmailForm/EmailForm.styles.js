@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import Button from '@components/@common/Button/Button';
 
 const EmailForm = styled.form`
-    display: grid;
-    grid-gap: 12px;
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 3.2rem;
 `;
 const CheckButton = styled(Button)`
     font-size: 1.4rem;
+    margin-top: 1.2rem;
     &:disabled {
         background-color: #909090;
     }

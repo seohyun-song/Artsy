@@ -3,8 +3,8 @@ import Button from '@components/@common/Button/Button';
 
 const RegisterForm = styled.form`
     display: grid;
-    grid-gap: 12px;
-    margin-bottom: 16px;
+    grid-gap: 1.2rem;
+    margin-bottom: 1.6rem;
 `;
 const RegisterButton = styled(Button)`
     font-size: 1.4rem;
@@ -18,4 +18,10 @@ const BackButton = styled.span`
     cursor: pointer;
     color: #909090;
 `;
-export { RegisterForm, RegisterButton, BackButton };
+
+const Email = styled.div`
+    margin-left: 0.8rem;
+    margin-bottom: 1.8rem;
+`;
+
+export { RegisterForm, RegisterButton, BackButton, Email };
