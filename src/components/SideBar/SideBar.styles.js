@@ -98,7 +98,7 @@ const ExtendToggleButton = styled.div`
     right: 0;
     z-index: ${({ theme }) => theme.layer.layer6 + 1};
     width: 100%;
-    max-width: 1280px;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
     margin: 1rem 2rem;
 `;

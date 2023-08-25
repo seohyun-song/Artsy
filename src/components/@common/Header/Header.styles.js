@@ -7,7 +7,6 @@ const StyledHeader = styled.header`
     left: 0;
     right: 0;
     height: 5.5rem;
-    line-height: 50px;
 
     z-index: ${({ theme }) => theme.layer.layer5};
     background-color: ${({ color }) => color};
@@ -19,7 +18,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeaderInner = styled.div`
-    max-width: 1280px;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
     box-sizing: border-box;
 
