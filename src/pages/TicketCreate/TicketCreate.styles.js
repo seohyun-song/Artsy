@@ -15,18 +15,17 @@ const Container = styled.div`
 
 const TitleContainer = styled.div`
     h3 {
-        font-weight: 700;
-        font-size: 3rem;
+        font-size: ${({ theme }) => theme.fontSizes.h5};
         margin-bottom: 2rem;
     }
     ${({ theme }) => theme.media.tablet} {
-        width: 40%;
+        width: 50rem;
     }
 `;
 
 const TicketForm = styled.div`
     ${({ theme }) => theme.media.tablet} {
-        width: 40%;
+        width: 50rem;
     }
 `;
 
@@ -107,8 +106,6 @@ const CreateButton = styled(Button)`
     font-size: 1.5rem;
 `;
 
-const StyledInput = styled(Input)``;
-
 const MarginContainer = styled.div`
     margin-bottom: 3.5rem;
 `;
@@ -125,6 +122,5 @@ export {
     ReviewInput,
     ButtonContaienr,
     CreateButton,
-    StyledInput,
     MarginContainer,
 };

@@ -15,12 +15,16 @@ import { useTicketCreateQuery } from '@hooks/@queries/useTicketQuery';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
 import useInput from '@hooks/useInput';
+import useToastContext from '@hooks/useToastContext';
+import Input from '@components/@common/Input/Input';
 
 const TicketCreate = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const categoryQuery = useCategoryQuery();
     const [searchParams, setSearchParams] = useSearchParams();
+    const toast = useToastContext();
+    // const Input = forwardRef((props, ref) => <Input {...props} ref={ref} />);
 
     const categoryId = searchParams.get('categoryId');
 
@@ -54,18 +58,18 @@ const TicketCreate = () => {
 
             switch (errorType) {
                 case ERROR_TYPE.LIMIT_FILE_SIZE:
-                    alert(ERROR_MESSAGE.limitFileSize);
+                    toast.show(ERROR_MESSAGE.limitFileSize);
                     break;
                 case ERROR_TYPE.LIMIT_FILE_COUNT:
-                    alert(ERROR_MESSAGE.limitFileCount);
+                    toast.show(ERROR_MESSAGE.limitFileCount);
                     break;
 
                 case ERROR_TYPE.DISALLOW_FILE_TYPE:
-                    alert(ERROR_MESSAGE.disallowFileType);
+                    toast.show(ERROR_MESSAGE.disallowFileType);
                     break;
 
                 default:
-                    alert('관리자에게 문의하세요');
+                    toast.show('관리자에게 문의하세요');
             }
         }
     }, [isError]);
@@ -133,7 +137,7 @@ const TicketCreate = () => {
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="title"
                         labelText="제목"
                         onChange={onChangeInput}
@@ -164,7 +168,7 @@ const TicketCreate = () => {
                         selected={showDate}
                         onChange={(date) => setShowDate(date)}
                         customInput={
-                            <T.StyledInput
+                            <Input
                                 id="title"
                                 labelText="관람일"
                                 isRequired
@@ -176,7 +180,7 @@ const TicketCreate = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="place"
                         labelText="장소"
                         onChange={onChangeInput}
@@ -188,7 +192,7 @@ const TicketCreate = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="price"
                         labelText="금액"
                         onChange={onNumberChange}

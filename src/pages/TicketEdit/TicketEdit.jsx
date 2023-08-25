@@ -17,6 +17,7 @@ import { useTicketUpdateQuery } from '@hooks/@queries/useTicketQuery';
 import formatKstDate from '@utils/foramtKstDate';
 import useToastContext from '@hooks/useToastContext';
 import useInput from '@hooks/useInput';
+import Input from '@components/@common/Input/Input';
 
 const TicketEdit = () => {
     const theme = useTheme();
@@ -143,7 +144,7 @@ const TicketEdit = () => {
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="title"
                         labelText="제목"
                         onChange={onChangeInput}
@@ -186,7 +187,7 @@ const TicketEdit = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="place"
                         labelText="장소"
                         onChange={onChangeInput}
@@ -198,7 +199,7 @@ const TicketEdit = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="price"
                         labelText="금액"
                         onChange={onNumberChange}
