@@ -8,11 +8,12 @@ const StyledHeader = styled.header`
     right: 0;
     height: 5.5rem;
     line-height: 50px;
-    text-align: center;
 
+    z-index: ${({ theme }) => theme.layer.layer5};
     background-color: ${({ color }) => color};
 
     ${({ theme }) => theme.media.labtop} {
+        height: 7rem;
         background-color: #fff;
     }
 `;
@@ -20,7 +21,6 @@ const StyledHeader = styled.header`
 const StyledHeaderInner = styled.div`
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 1rem;
     box-sizing: border-box;
 
     display: flex;
@@ -29,12 +29,8 @@ const StyledHeaderInner = styled.div`
 
     h2 {
         font-size: 3rem;
-    }
-
-    img {
-        width: 3rem;
-        height: 3rem;
-        cursor: pointer;
+        width: 100%;
+        margin: 1rem 2rem;
     }
 `;
 

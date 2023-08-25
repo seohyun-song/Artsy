@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as T from './TicketDetail.styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
@@ -18,6 +18,8 @@ const TicketDetail = () => {
     const ticketGetQuery = useTicketGetQuery(ticketId);
     const ticketData = ticketGetQuery?.data;
     const { setColor, setTicketId } = useHeaderContext();
+
+    const colorBoxRef = useRef();
 
     const {
         mutate,
@@ -42,7 +44,7 @@ const TicketDetail = () => {
     }, []);
 
     useEffect(() => {
-        if (position > 500) setColor('#fff');
+        if (position > colorBoxRef.current?.offsetHeight) setColor('#fff');
         else setColor(ticketData?.categoryColor);
     }, [position]);
 
@@ -110,7 +112,7 @@ const TicketDetail = () => {
         <>
             {ticketData !== undefined && (
                 <div>
-                    <T.TypeColorBox color={ticketData?.categoryColor} />
+                    <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>
                             <T.TicketImageWrap>

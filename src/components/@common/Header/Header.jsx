@@ -18,8 +18,8 @@ const Header = () => {
         <StyledHeader color={color}>
             <StyledHeaderInner>
                 <h2>Artsy</h2>
+                <SideBar />
             </StyledHeaderInner>
-            <SideBar />
         </StyledHeader>
     );
 };
