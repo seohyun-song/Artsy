@@ -23,12 +23,13 @@ const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
         }
     }, [email]);
     useEffect(() => {
-        if (isSuccess) {
-            if (data.isExists) {
-                toast.show(ERROR_MESSAGE.duplicatedEmail);
-            } else {
-                setIsCheckEmail(true);
-            }
+        if (!isSuccess) {
+            return;
+        }
+        if (data.isExists) {
+            toast.show(ERROR_MESSAGE.duplicatedEmail);
+        } else {
+            setIsCheckEmail(true);
         }
     }, [isSuccess]);
 
