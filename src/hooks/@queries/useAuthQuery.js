@@ -7,16 +7,18 @@ export const QUERY_KEY_AUTH = 'auth';
 
 const useAuthQuery = () => {
     const { setIsLogin } = useAuthContext();
-    const AuthApi = authApi();
+    const api = authApi();
     const options = { retry: false };
     const fetchUser = async () => {
-        const response = await AuthApi.get(userInfoPath);
-        if (response.data?.success) {
+        const {
+            data: { success },
+        } = await api.get(userInfoPath);
+        if (success) {
             setIsLogin(true);
         } else {
             setIsLogin(false);
         }
-        return response.data.success;
+        return success;
     };
     return useQuery([QUERY_KEY_AUTH], fetchUser, options);
 };
