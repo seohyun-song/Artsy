@@ -22,8 +22,8 @@ const authApi = () => {
     axiosAuthInstance.interceptors.response.use(
         (response) => response,
         (error) => {
-            const type = error?.response?.data?.error?.type;
-            if (!type || type === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
+            const errorType = error?.response?.data?.error?.type;
+            if (!errorType || errorType === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
                 toast.show(ERROR_MESSAGE.unexpected);
             }
 
