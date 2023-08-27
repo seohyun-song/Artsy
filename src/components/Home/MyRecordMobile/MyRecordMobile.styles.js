@@ -15,16 +15,21 @@ const Container = styled(Link)`
 `;
 const BookImage = styled.img`
     width: 18%;
+    max-width: 100px;
     height: auto;
 `;
 const Content = styled.p`
     flex: 1 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-left: 0.8rem;
     font-size: 1.4rem;
 `;
-const Arrow = styled.img`
-    width: 18px;
+const Arrow = styled.span`
+    width: 20px;
+    img {
+        width: 100%;
+    }
 `;
 export { Container, BookImage, Content, Arrow };
