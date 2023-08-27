@@ -7,16 +7,14 @@ import chartUrl from '@assets/icons/icon-chart2.png';
 import onlineUrl from '@assets/icons/icon-online.png';
 
 import * as I from './Intro.styles';
-import useAuthQuery from '@hooks/@queries/useAuthQuery';
 import useAuthContext from '@hooks/useAuthContext';
 
 const Intro = () => {
     const navigate = useNavigate();
-    const { data } = useAuthQuery();
     const { isLogin } = useAuthContext();
 
     const handleStartClick = () => {
-        navigate(`${data && isLogin ? '/home' : '/signin'}`);
+        navigate(`${isLogin ? '/home' : '/signin'}`);
     };
     return (
         <>

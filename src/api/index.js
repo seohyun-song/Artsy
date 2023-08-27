@@ -23,16 +23,8 @@ axiosInstance.interceptors.response.use(
 
         if (!type) {
             alert(ERROR_MESSAGE.unexpected);
-        } else {
-            switch (type) {
-                case ERROR_TYPE.INTERNAL_SERVER_ERROR:
-                    alert(ERROR_MESSAGE.unexpected);
-                    break;
-                case ERROR_TYPE.UNAUTHORIZED:
-                    alert(ERROR_MESSAGE.auth);
-                    window.location.href = '/signin';
-                    break;
-            }
+        } else if (type === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
+            alert(ERROR_MESSAGE.unexpected);
         }
 
         return Promise.reject(error);
