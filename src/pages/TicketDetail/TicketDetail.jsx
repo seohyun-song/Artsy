@@ -10,6 +10,7 @@ import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
 import useToastContext from '@hooks/useToastContext';
 import useHeaderContext from '@hooks/useHeaderContext';
 import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import compareImage from '@utils/compareImage';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -38,6 +39,7 @@ const TicketDetail = () => {
     } = deleteTicket(ticketId);
 
     const [imgSrc, setImgSrc] = useState('');
+    const [imageSize, setImageSize] = useState('height');
 
     const [position, setPosition] = useState(0);
     const onScroll = () => {
@@ -69,7 +71,9 @@ const TicketDetail = () => {
         if (ticketData.files?.length === 0) {
             setImgSrc(BasicTicketUrl);
         } else {
-            setImgSrc(ticketData.files[0].imageUrl);
+            const { imageUrl, width, height } = ticketData.files[0];
+            setImgSrc(imageUrl);
+            setImageSize(compareImage(width, height));
         }
     }, [isGetSuccess]);
 
@@ -123,7 +127,7 @@ const TicketDetail = () => {
                     <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>
-                            <T.TicketImageWrap>
+                            <T.TicketImageWrap $size={imageSize}>
                                 <img src={imgSrc} alt="티켓이미지" />
                             </T.TicketImageWrap>
                             <DetailBox ticketData={ticketData} onUpdate={onUpdate} onDelete={onDelete} />
