@@ -19,8 +19,6 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
     const [passwordCheck, setPasswordCheck] = useState('');
     const [isdisabledButton, setIsdisabledButton] = useState(true);
 
-    const nameInputRef = useRef(null);
-    const passwordInputRef = useRef(null);
     const passwordCheckInputRef = useRef(null);
     const theme = useTheme();
     const navigate = useNavigate();
@@ -102,7 +100,6 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     placeholder="이름(닉네임)을 입력하세요."
                     id="displayName"
                     name="displayName"
-                    inputRef={nameInputRef}
                     onChange={handleChange}
                     value={displayName}
                     rounded
@@ -115,7 +112,6 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     inputType="password"
                     placeholder="비밀번호를 입력하세요."
                     id="password"
-                    inputRef={passwordInputRef}
                     onChange={handleChange}
                     value={password}
                     rounded
