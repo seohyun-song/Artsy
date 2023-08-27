@@ -6,20 +6,16 @@ import useToastContext from '@hooks/useToastContext';
 import { SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
 import useAuthContext from '@hooks/useAuthContext';
-import useAuthQuery from '@hooks/@queries/useAuthQuery';
 
 const SideBar = () => {
-    const [isToggle, setIstoggle] = useState(false);
-    const { isLogin } = useAuthContext();
     const navigate = useNavigate();
     const toast = useToastContext();
-    const { data } = useAuthQuery();
+    const [isToggle, setIstoggle] = useState(false);
+
+    const { isLogin } = useAuthContext();
 
     const { mutate: logout, isSuccess: isLogoutSuccess } = useLogoutQuery();
 
-    useEffect(() => {
-        !isLogin && data;
-    }, []);
     useEffect(() => {
         if (isLogoutSuccess) {
             toast.show(SUCCESS_MESSAGE.successLogout);
