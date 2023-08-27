@@ -13,7 +13,7 @@ import deleteIconUrl from '@assets/icons/icon-delete.png';
 import formatTicketDate from '@utils/formatTicketDate';
 import { useTicketCreateQuery } from '@hooks/@queries/useTicketQuery';
 import { ERROR_TYPE } from '@constants/serverErrorType';
-import { ERROR_MESSAGE } from '@constants/message';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import useInput from '@hooks/useInput';
 import useToastContext from '@hooks/useToastContext';
 import Input from '@components/@common/Input/Input';
@@ -71,7 +71,7 @@ const TicketCreate = () => {
                     break;
 
                 default:
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
             }
         }
     }, [isError]);

@@ -76,7 +76,7 @@ const TicketDetail = () => {
                     navigate('/ticket/list');
                     break;
                 default:
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
             }
         }
     }, [ticketGetQuery.isError]);
@@ -98,7 +98,7 @@ const TicketDetail = () => {
             const errorType = deleteError.response.data.error.type;
             switch (errorType) {
                 default:
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
             }
         }
     }, [isDeleteError]);
