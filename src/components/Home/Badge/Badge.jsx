@@ -3,11 +3,17 @@ import * as B from './Badge.styles';
 import { useTheme } from 'styled-components';
 import { calculateGrade } from '@utils/calculateGrade';
 import { getIconUrl } from '@utils/getImageUrl';
+import { BADGE_GRADE } from '@constants/badgeGrade';
 const Badge = ({ totalTicket }) => {
     const theme = useTheme();
     const { name: userGrade, targetValue, imageName } = calculateGrade(totalTicket);
+
     const isMasterGrade = (grade) => {
-        if (grade === '아티 마스터') return true;
+        const lastIndex = BADGE_GRADE.length - 1;
+        const masterGradeName = BADGE_GRADE[lastIndex].name;
+        if (grade === masterGradeName) {
+            return true;
+        }
         return false;
     };
     return (
