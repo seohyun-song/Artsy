@@ -65,7 +65,7 @@ const TicketDetail = () => {
     // 티켓 불러오기
     useEffect(() => {
         if (!isGetSuccess) return;
-
+        window.scrollTo(0, 0);
         setColor(ticketData?.categoryColor);
 
         if (ticketData.files?.length === 0) {

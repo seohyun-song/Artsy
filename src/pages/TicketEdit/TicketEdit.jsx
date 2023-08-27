@@ -55,6 +55,10 @@ const TicketEdit = () => {
     const [titleValid, setTitleValid] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         if (isSuccess) {
             navigate(`/ticket/detail/${parseInt(ticketId)}`, { state: ticketData.updateDate ?? 'new' });
             toast.show(SUCCESS_MESSAGE.successUpdateTicket);

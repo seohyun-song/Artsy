@@ -54,6 +54,10 @@ const TicketCreate = () => {
     const [titleValid, setTitleValid] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         if (!isSuccess) return;
 
         toast.show(SUCCESS_MESSAGE.successCreateTicket);
