@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as E from './EmailForm.styles';
 import Input from '@components/@common/Input/Input';
 import { useTheme } from 'styled-components';
@@ -6,22 +6,16 @@ import useToastContext from '@hooks/useToastContext';
 import checkValidation from '@utils/checkValidation';
 import useCheckEmailQuery from '@hooks/@queries/useCheckEmailQuery';
 import { ERROR_MESSAGE } from '@constants/message';
+import useValidation from '../../../hooks/useValidation';
 
 const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
-    const [isValidEmail, setIsValidEmail] = useState(true);
     const emailInputRef = useRef(null);
     const theme = useTheme();
     const toast = useToastContext();
     const { email } = userInfo;
     const { data, mutate: checkDuplicatedEmail, isSuccess } = useCheckEmailQuery();
+    const { isValid, errorMessage } = useValidation({ email }, checkValidation, ERROR_MESSAGE.incorrectEmailFormat);
 
-    useEffect(() => {
-        if (email !== '') {
-            checkValidation({ email }) ? setIsValidEmail(true) : setIsValidEmail(false);
-        } else {
-            setIsValidEmail(true);
-        }
-    }, [email]);
     useEffect(() => {
         if (!isSuccess) {
             return;
@@ -35,10 +29,6 @@ const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
 
     const handleCheckEmail = (e) => {
         e.preventDefault();
-        const isCorrectFormat = checkValidation({ email });
-        if (!isCorrectFormat) {
-            return;
-        }
         checkDuplicatedEmail({ email });
     };
     return (
@@ -52,12 +42,12 @@ const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
                 value={email}
                 rounded
                 isRequired
-                isValid={isValidEmail}
+                isValid={errorMessage === ''}
                 inputWidth="100%"
-                errorMessage={'이메일 양식에 맞게 입력해주세요'}
+                errorMessage={errorMessage}
             />
 
-            <E.CheckButton color={theme.colors.point1} size={'large'} disabled={email === '' || !isValidEmail}>
+            <E.CheckButton color={theme.colors.point1} size={'large'} disabled={email === '' || !isValid}>
                 이메일 중복 확인하기
             </E.CheckButton>
         </E.EmailForm>
