@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as T from './TicketDetail.styles';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
-import { useTicketGetQuery, useTicketDeleteQuery } from '@hooks/@queries/useTicketQuery';
 import Loading from '@components/@common/Loading/Loading';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
@@ -10,6 +9,7 @@ import Review from '@components/TicketDetail/Review/Review';
 import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
 import useToastContext from '@hooks/useToastContext';
 import useHeaderContext from '@hooks/useHeaderContext';
+import useTicketQuery from '@hooks/@queries/useTicketQuery';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -17,8 +17,14 @@ const TicketDetail = () => {
     const [updateDate, setUpdateDate] = useState(location?.state);
     const navigate = useNavigate();
     const toast = useToastContext();
-    const ticketGetQuery = useTicketGetQuery(ticketId, updateDate);
-    const ticketData = ticketGetQuery?.data;
+    const { getTicket, deleteTicket } = useTicketQuery();
+    const {
+        data: ticketData,
+        isSuccess: isGetSuccess,
+        isError: isGetError,
+        isLoading: isGetLoading,
+        error: getError,
+    } = getTicket(ticketId, updateDate);
     const { setColor } = useHeaderContext();
 
     const colorBoxRef = useRef();
@@ -29,7 +35,7 @@ const TicketDetail = () => {
         isError: isDeleteError,
         isLoading: isDeleteLoding,
         error: deleteError,
-    } = useTicketDeleteQuery(ticketId);
+    } = deleteTicket(ticketId);
 
     const [imgSrc, setImgSrc] = useState('');
 
@@ -56,30 +62,30 @@ const TicketDetail = () => {
 
     // 티켓 불러오기
     useEffect(() => {
-        if (ticketGetQuery.isSuccess) {
-            setColor(ticketData?.categoryColor);
+        if (!isGetSuccess) return;
 
-            if (ticketData.files?.length === 0) {
-                setImgSrc(BasicTicketUrl);
-            } else {
-                setImgSrc(ticketData.files[0].imageUrl);
-            }
+        setColor(ticketData?.categoryColor);
+
+        if (ticketData.files?.length === 0) {
+            setImgSrc(BasicTicketUrl);
+        } else {
+            setImgSrc(ticketData.files[0].imageUrl);
         }
-    }, [ticketGetQuery.isSuccess]);
+    }, [isGetSuccess]);
 
     useEffect(() => {
-        if (ticketGetQuery.isError) {
-            const errorType = ticketGetQuery.error.response.data.error.type;
-            switch (errorType) {
-                case ERROR_TYPE.DATA_NOT_FOUND:
-                    toast.show(ERROR_MESSAGE.dataNotFoundTicket);
-                    navigate('/ticket/list');
-                    break;
-                default:
-                    toast.show(ERROR_MESSAGE.defaultError);
-            }
+        if (!isGetError) return;
+
+        const errorType = getError.response.data.error.type;
+        switch (errorType) {
+            case ERROR_TYPE.DATA_NOT_FOUND:
+                toast.show(ERROR_MESSAGE.dataNotFoundTicket);
+                navigate('/ticket/list');
+                break;
+            default:
+                toast.show(ERROR_MESSAGE.defaultError);
         }
-    }, [ticketGetQuery.isError]);
+    }, [isGetError]);
 
     // 티켓 삭제
     const onDelete = () => {
@@ -113,7 +119,7 @@ const TicketDetail = () => {
             {ticketData !== undefined && (
                 <div>
                     {isDeleteLoding && <Loading />}
-                    {ticketGetQuery?.isLoading && <Loading />}
+                    {isGetLoading && <Loading />}
                     <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>
