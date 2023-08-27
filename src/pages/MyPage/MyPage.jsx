@@ -10,8 +10,7 @@ import GradeBox from '@components/MyPage/GradeBox/GradeBox.jsx';
 import { getUser } from '@hooks/@queries/useUserInfoQuery';
 import useTotalPriceQuery from '@hooks/@queries/useTotalPriceQuery';
 
-import calculateGrade from '@utils/calculateGrade';
-import calculateNextGrade from '@utils/calculateNextGrade';
+import { calculateGrade, calculateNextGrade } from '@utils/calculateGrade';
 
 import * as M from './MyPage.styles';
 
