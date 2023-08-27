@@ -28,22 +28,22 @@ const UserEdit = () => {
 
     const [displayNameInfo, setDisplayNameInfo] = useState({
         displayName: '',
-        error: '',
-        isValid: true,
+        errorMessage: '',
+        isValid: false,
     });
     const [newPasswordInfo, setNewPasswordInfo] = useState({
         newPassword: '',
-        error: '',
-        isValid: true,
+        errorMessage: '',
+        isValid: false,
     });
     const [confirmPasswordInfo, setConfirmPassword] = useState({
         confirmPassword: '',
-        error: '',
-        isValid: true,
+        errorMessage: '',
+        isValid: false,
     });
 
     useEffect(() => {
-        if (isSuccessGet) setDisplayNameInfo({ ...displayNameInfo, displayName: userInfo.displayName });
+        if (isSuccessGet) setDisplayNameInfo({ ...displayNameInfo, displayName: userInfo.displayName, isValid: true });
     }, [isSuccessGet]);
 
     useEffect(() => {
@@ -59,14 +59,18 @@ const UserEdit = () => {
         setDisplayNameInfo({ ...displayNameInfo, displayName: value });
 
         if (!value.trim()) {
-            setDisplayNameInfo({ displayName: value, error: ERROR_MESSAGE.required, isValid: false });
+            setDisplayNameInfo({ displayName: value, errorMessage: ERROR_MESSAGE.required, isValid: false });
             return;
         }
         if (!checkValidation({ displayName: value })) {
-            setDisplayNameInfo({ displayName: value, error: ERROR_MESSAGE.incorrectDisplayName, isValid: false });
+            setDisplayNameInfo({
+                displayName: value,
+                errorMessage: ERROR_MESSAGE.incorrectDisplayName,
+                isValid: false,
+            });
             return;
         }
-        setDisplayNameInfo({ displayName: value, error: '', isValid: true });
+        setDisplayNameInfo({ displayName: value, errorMessage: '', isValid: true });
     };
 
     const handleChangeNewPassword = (e) => {
@@ -75,15 +79,15 @@ const UserEdit = () => {
         setNewPasswordInfo({ ...newPasswordInfo, newPassword: value });
 
         if (!value) {
-            setConfirmPassword({ confirmPassword: '', error: '', isValid: true });
-            setNewPasswordInfo({ newPassword: '', error: '', isValid: true });
+            setConfirmPassword({ confirmPassword: '', errorMessage: '', isValid: true });
+            setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
             return;
         }
         if (!checkValidation({ password: value })) {
-            setNewPasswordInfo({ newPassword: value, error: ERROR_MESSAGE.incorrectPassword, isValid: false });
+            setNewPasswordInfo({ newPassword: value, errorMessage: ERROR_MESSAGE.incorrectPassword, isValid: false });
             return;
         }
-        setNewPasswordInfo({ newPassword: value, error: '', isValid: true });
+        setNewPasswordInfo({ newPassword: value, errorMessage: '', isValid: true });
     };
 
     const handleChangeConfirmPassword = (e) => {
@@ -93,12 +97,12 @@ const UserEdit = () => {
         if (newPasswordRef.current.value !== confirmPasswordRef.current.value) {
             setConfirmPassword({
                 confirmPassword: value,
-                error: ERROR_MESSAGE.incorrectConfirmPassword,
+                errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
                 isValid: false,
             });
             return;
         }
-        setConfirmPassword({ confirmPassword: value, error: '', isValid: true });
+        setConfirmPassword({ confirmPassword: value, errorMessage: '', isValid: true });
     };
 
     const handleSubmit = (e) => {
@@ -115,25 +119,25 @@ const UserEdit = () => {
                 updateUser({ displayName: displayNameRef.current.value });
             }
 
-            setNewPasswordInfo({ newPassword: '', error: '', isValid: true });
-            setConfirmPassword({ confirmPassword: '', error: '', isValid: true });
+            setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
+            setConfirmPassword({ confirmPassword: '', errorMessage: '', isValid: true });
 
             return;
+        }
+
+        if (!displayNameInfo.isValid) {
+            displayNameRef.current.focus();
+            return;
+        } else if (!newPasswordInfo.isValid) {
+            newPasswordRef.current.focus();
+            return;
         } else {
-            if (!displayNameInfo.isValid) {
-                displayNameRef.current.focus();
-                return;
-            } else if (!newPasswordInfo.isValid) {
-                newPasswordRef.current.focus();
-                return;
-            } else {
-                confirmPasswordRef.current.focus();
-                setConfirmPassword({
-                    ...confirmPasswordInfo,
-                    error: ERROR_MESSAGE.incorrectConfirmPassword,
-                    isValid: false,
-                });
-            }
+            confirmPasswordRef.current.focus();
+            setConfirmPassword({
+                ...confirmPasswordInfo,
+                errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
+                isValid: false,
+            });
         }
     };
     if (isLoadingGet) return <Loading />;
@@ -159,11 +163,11 @@ const UserEdit = () => {
                             id="displayName"
                             inputType="text"
                             labelText="이름(닉네임)"
-                            isValid={displayNameInfo.isValid}
+                            isValid={displayNameInfo.errorMessage.length === 0}
                             isRequired
                             inputWidth="100%"
                             value={displayNameInfo.displayName}
-                            errorMessage={displayNameInfo.error}
+                            errorMessage={displayNameInfo.errorMessage}
                             onChange={handleChangeDisplayName}
                             inputRef={displayNameRef}
                         />
@@ -175,8 +179,8 @@ const UserEdit = () => {
                                 inputType="password"
                                 labelText="비밀번호"
                                 placeholder="새 비밀번호"
-                                isValid={newPasswordInfo.isValid}
-                                errorMessage={newPasswordInfo.error}
+                                isValid={newPasswordInfo.errorMessage.length === 0}
+                                errorMessage={newPasswordInfo.errorMessage}
                                 inputWidth="100%"
                                 value={newPasswordInfo.newPassword}
                                 onChange={handleChangeNewPassword}
@@ -188,8 +192,8 @@ const UserEdit = () => {
                                 id="confirmPassword"
                                 inputType="password"
                                 placeholder="새 비밀번호 확인"
-                                isValid={confirmPasswordInfo.isValid}
-                                errorMessage={confirmPasswordInfo.error}
+                                isValid={confirmPasswordInfo.errorMessage.length === 0}
+                                errorMessage={confirmPasswordInfo.errorMessage}
                                 inputWidth="100%"
                                 value={confirmPasswordInfo.confirmPassword}
                                 onChange={handleChangeConfirmPassword}
