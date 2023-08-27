@@ -19,7 +19,7 @@ const TicketDetail = () => {
     const toast = useToastContext();
     const ticketGetQuery = useTicketGetQuery(ticketId, updateDate);
     const ticketData = ticketGetQuery?.data;
-    const { setColor, setTicketId } = useHeaderContext();
+    const { setColor } = useHeaderContext();
 
     const colorBoxRef = useRef();
 
@@ -48,13 +48,16 @@ const TicketDetail = () => {
     useEffect(() => {
         if (position > colorBoxRef.current?.offsetHeight) setColor('#fff');
         else setColor(ticketData?.categoryColor);
+
+        return () => {
+            setColor('#fff');
+        };
     }, [position]);
 
     // 티켓 불러오기
     useEffect(() => {
         if (ticketGetQuery.isSuccess) {
             setColor(ticketData?.categoryColor);
-            setTicketId(ticketId);
 
             if (ticketData.files?.length === 0) {
                 setImgSrc(BasicTicketUrl);
