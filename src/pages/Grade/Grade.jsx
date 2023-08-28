@@ -33,8 +33,9 @@ const Grade = () => {
                     </p>
                 </G.RoundBox>
                 <G.BadgesContainer>
-                    {BADGE_GRADE.map((grade) => {
-                        return <Badge gradeInfo={grade} />;
+                    {BADGE_GRADE.map((grade, index) => {
+                        const prevGrade = BADGE_GRADE[index - 1];
+                        return <Badge grade={grade} prevGrade={prevGrade} />;
                     })}
                 </G.BadgesContainer>
             </G.Container>

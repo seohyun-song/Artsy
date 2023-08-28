@@ -4,6 +4,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 5rem;
 `;
 
 const TopContent = styled.div`
@@ -27,6 +28,7 @@ const TopContent = styled.div`
             font-size: 2.4rem;
         }
         p {
+            margin-bottom: 4rem;
             font-size: 2rem;
             color: #909090;
         }
@@ -45,9 +47,11 @@ const TopContent = styled.div`
 const Background = styled.div`
     position: absolute;
     top: -80%;
-
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme.media.tablet} {
+        top: -70%;
+    }
     ${({ theme }) => theme.media.labtop} {
         top: -60%;
     }
@@ -55,16 +59,21 @@ const Background = styled.div`
 const ImageWrap = styled.span`
     display: flex;
     width: 15%;
+    max-width: 240px;
     img {
         width: 100%;
         height: auto;
     }
     &:first-of-type {
-        width: 20%;
+        width: 18%;
     }
 
     ${({ theme }) => theme.media.tablet} {
-        width: 12%;
+        width: 13%;
+        max-width: 340px;
+    }
+    ${({ theme }) => theme.media.labtop} {
+        max-width: 400px;
     }
 `;
 const RoundBox = styled.div`
