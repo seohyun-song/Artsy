@@ -19,11 +19,11 @@ const axiosInstance = axios.create(config);
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-        const type = error?.response?.data?.error?.type;
+        const errorType = error?.response?.data?.error?.type;
 
-        if (!type) {
+        if (!errorType) {
             alert(ERROR_MESSAGE.unexpected);
-        } else if (type === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
+        } else if (errorType === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
             alert(ERROR_MESSAGE.unexpected);
         }
 
