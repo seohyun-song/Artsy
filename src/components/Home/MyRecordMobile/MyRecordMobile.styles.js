@@ -12,6 +12,9 @@ const Container = styled(Link)`
     background-color: #fff;
     border-radius: ${({ theme }) => theme.borderRadius.large};
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
+    ${({ theme }) => theme.media.tablet} {
+        display: none;
+    }
 `;
 const BookImage = styled.img`
     width: 18%;
