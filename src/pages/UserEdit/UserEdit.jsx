@@ -162,10 +162,6 @@ const UserEdit = () => {
             } else {
                 mutateUser({ displayName: displayNameRef.current.value });
             }
-
-            setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
-            setConfirmPasswordInfo({ confirmPassword: '', errorMessage: '', isValid: true });
-
             return;
         }
 
