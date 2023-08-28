@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getUser, updateUser } from '@hooks/@queries/useUserInfoQuery';
+import { checkPassword } from '@hooks/@queries/useCheckPassword';
 import useToastContext from '@hooks/useToastContext';
 
 import Container from '@components/@common/Container/Container';
@@ -21,6 +22,7 @@ const UserEdit = () => {
     const navigate = useNavigate();
     const { data: userInfo, isSuccess: isSuccessGet, isLoading: isLoadingGet } = getUser();
     const { mutate: mutateUser, isSuccess: isSuccessUpdate, isError: isErrorUpdate } = updateUser();
+    const { data: isCheckPassword, mutate: mutatePassword, isSuccess: isSuccessCheck } = checkPassword();
     const toast = useToastContext();
     const checkPasswordRef = useRef();
     const displayNameRef = useRef();
@@ -58,13 +60,43 @@ const UserEdit = () => {
 
     useEffect(() => {
         if (isSuccessUpdate) toast.show(SUCCESS_MESSAGE.successUpdateUser);
-    }, [isSuccessUpdate]);
+        if (isErrorUpdate) toast.show(ERROR_MESSAGE.failUpdateUser);
+    }, [isSuccessUpdate, isErrorUpdate]);
 
     useEffect(() => {
-        if (isErrorUpdate) toast.show(ERROR_MESSAGE.failUpdateUser);
-    }, [isErrorUpdate]);
+        if (isSuccessCheck && !isCheckPassword?.isCorrect) {
+            toast.show(ERROR_MESSAGE.failCheckPassword);
+            setCheckPasswordInfo({
+                ...checkPasswordInfo,
+                errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
+                isValid: false,
+            });
 
-    const handleClickCheck = (e) => {};
+            checkPasswordRef.current.focus();
+        }
+    }, [isCheckPassword, isSuccessCheck]);
+
+    const handleClickCheck = (e) => {
+        if (checkPasswordInfo.checkPassword) {
+            mutatePassword({ password: checkPasswordInfo.checkPassword });
+            return;
+        }
+    };
+
+    const handleChangeCheckPassword = (e) => {
+        const { value } = e.target;
+        setCheckPasswordInfo({ ...checkPasswordInfo, checkPassword: value });
+
+        if (!checkValidation({ password: value })) {
+            setCheckPasswordInfo({
+                checkPassword: value,
+                errorMessage: ERROR_MESSAGE.incorrectPassword,
+                isValid: false,
+            });
+            return;
+        }
+        setCheckPasswordInfo({ checkPassword: value, errorMessage: '', isValid: true });
+    };
 
     const handleChangeDisplayName = (e) => {
         const { value } = e.target;
@@ -158,7 +190,7 @@ const UserEdit = () => {
         <Container>
             <U.Wrap>
                 <PageTitle>회원 정보 수정</PageTitle>
-                {true ? (
+                {isCheckPassword?.isCorrect === true ? (
                     <U.EditForm>
                         <U.InputBox>
                             <Input
@@ -234,9 +266,8 @@ const UserEdit = () => {
                         <U.SubTitleWrap>
                             <U.SubTitle>비밀번호 확인</U.SubTitle>
                             <U.SubText>
-                                <b>{userInfo.displayName}</b>님의 회원정보를 안전하게 보호하기 위해
-                                <br />
-                                비밀번호를 한번 더 확인해주세요.
+                                <b>{userInfo.displayName}</b>님의 회원정보를 안전하게 보호하기 위해 비밀번호를 한번 더
+                                확인해주세요.
                             </U.SubText>
                         </U.SubTitleWrap>
                         <U.InputBox>
@@ -250,7 +281,7 @@ const UserEdit = () => {
                                     errorMessage={checkPasswordInfo.errorMessage}
                                     inputWidth="100%"
                                     value={checkPasswordInfo.checkPassword}
-                                    onChange={handleChangeNewPassword}
+                                    onChange={handleChangeCheckPassword}
                                     inputRef={checkPasswordRef}
                                 />
                             </div>
