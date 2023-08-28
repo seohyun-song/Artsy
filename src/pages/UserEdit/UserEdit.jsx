@@ -22,10 +22,16 @@ const UserEdit = () => {
     const { data: userInfo, isSuccess: isSuccessGet, isLoading: isLoadingGet } = getUser();
     const { mutate: mutateUser, isSuccess: isSuccessUpdate, isError: isErrorUpdate } = updateUser();
     const toast = useToastContext();
+    const checkPasswordRef = useRef();
     const displayNameRef = useRef();
     const newPasswordRef = useRef();
     const confirmPasswordRef = useRef();
 
+    const [checkPasswordInfo, setCheckPasswordInfo] = useState({
+        checkPassword: '',
+        errorMessage: '',
+        isValid: false,
+    });
     const [displayNameInfo, setDisplayNameInfo] = useState({
         displayName: '',
         errorMessage: '',
@@ -57,6 +63,8 @@ const UserEdit = () => {
     useEffect(() => {
         if (isErrorUpdate) toast.show(ERROR_MESSAGE.failUpdateUser);
     }, [isErrorUpdate]);
+
+    const handleClickCheck = (e) => {};
 
     const handleChangeDisplayName = (e) => {
         const { value } = e.target;
@@ -150,70 +158,110 @@ const UserEdit = () => {
         <Container>
             <U.Wrap>
                 <PageTitle>회원 정보 수정</PageTitle>
-                <U.Form>
-                    <U.InputBox>
-                        <Input
-                            id="inputEmail"
-                            inputType="text"
-                            labelText="이메일"
-                            readOnly="readonly"
-                            isValid={true}
-                            inputWidth="100%"
-                            value={userInfo?.email || ''}
-                        />
-                    </U.InputBox>
-                    <U.InputBox>
-                        <Input
-                            id="displayName"
-                            inputType="text"
-                            labelText="이름(닉네임)"
-                            isValid={displayNameInfo.errorMessage.length === 0}
-                            isRequired
-                            inputWidth="100%"
-                            value={displayNameInfo.displayName}
-                            errorMessage={displayNameInfo.errorMessage}
-                            onChange={handleChangeDisplayName}
-                            inputRef={displayNameRef}
-                        />
-                    </U.InputBox>
-                    <U.InputBox>
-                        <div>
+                {true ? (
+                    <U.EditForm>
+                        <U.InputBox>
                             <Input
-                                id="newPassword"
-                                inputType="password"
-                                labelText="비밀번호"
-                                placeholder="새 비밀번호"
-                                isValid={newPasswordInfo.errorMessage.length === 0}
-                                errorMessage={newPasswordInfo.errorMessage}
+                                id="inputEmail"
+                                inputType="text"
+                                labelText="이메일"
+                                readOnly="readonly"
+                                isValid={true}
                                 inputWidth="100%"
-                                value={newPasswordInfo.newPassword}
-                                onChange={handleChangeNewPassword}
-                                inputRef={newPasswordRef}
+                                value={userInfo?.email || ''}
                             />
-                        </div>
-                        <div>
+                        </U.InputBox>
+                        <U.InputBox>
                             <Input
-                                id="confirmPassword"
-                                inputType="password"
-                                placeholder="새 비밀번호 확인"
-                                isValid={confirmPasswordInfo.errorMessage.length === 0}
-                                errorMessage={confirmPasswordInfo.errorMessage}
+                                id="displayName"
+                                inputType="text"
+                                labelText="이름(닉네임)"
+                                isValid={displayNameInfo.errorMessage.length === 0}
+                                isRequired
                                 inputWidth="100%"
-                                value={confirmPasswordInfo.confirmPassword}
-                                onChange={handleChangeConfirmPassword}
-                                inputRef={confirmPasswordRef}
+                                value={displayNameInfo.displayName}
+                                errorMessage={displayNameInfo.errorMessage}
+                                onChange={handleChangeDisplayName}
+                                inputRef={displayNameRef}
                             />
-                        </div>
-                    </U.InputBox>
-                    <ButtonWrap>
-                        <Button type="button" size="large" full="full" style="line" onClick={() => navigate('/mypage')}>
-                            취소
-                        </Button>
-                        <Button type="button" size="large" full="full" onClick={handleSubmit}>
-                            수정
-                        </Button>
-                    </ButtonWrap>
-                </U.Form>
+                        </U.InputBox>
+                        <U.InputBox>
+                            <div>
+                                <Input
+                                    id="newPassword"
+                                    inputType="password"
+                                    labelText="비밀번호"
+                                    placeholder="새 비밀번호"
+                                    isValid={newPasswordInfo.errorMessage.length === 0}
+                                    errorMessage={newPasswordInfo.errorMessage}
+                                    inputWidth="100%"
+                                    value={newPasswordInfo.newPassword}
+                                    onChange={handleChangeNewPassword}
+                                    inputRef={newPasswordRef}
+                                />
+                            </div>
+                            <div>
+                                <Input
+                                    id="confirmPassword"
+                                    inputType="password"
+                                    placeholder="새 비밀번호 확인"
+                                    isValid={confirmPasswordInfo.errorMessage.length === 0}
+                                    errorMessage={confirmPasswordInfo.errorMessage}
+                                    inputWidth="100%"
+                                    value={confirmPasswordInfo.confirmPassword}
+                                    onChange={handleChangeConfirmPassword}
+                                    inputRef={confirmPasswordRef}
+                                />
+                            </div>
+                        </U.InputBox>
+                        <ButtonWrap>
+                            <Button
+                                type="button"
+                                size="large"
+                                full="full"
+                                style="line"
+                                onClick={() => navigate('/mypage')}
+                            >
+                                취소
+                            </Button>
+                            <Button type="button" size="large" full="full" onClick={handleSubmit}>
+                                수정
+                            </Button>
+                        </ButtonWrap>
+                    </U.EditForm>
+                ) : (
+                    <U.EditForm>
+                        <U.SubTitleWrap>
+                            <U.SubTitle>비밀번호 확인</U.SubTitle>
+                            <U.SubText>
+                                <b>{userInfo.displayName}</b>님의 회원정보를 안전하게 보호하기 위해
+                                <br />
+                                비밀번호를 한번 더 확인해주세요.
+                            </U.SubText>
+                        </U.SubTitleWrap>
+                        <U.InputBox>
+                            <div>
+                                <Input
+                                    id="checkPassword"
+                                    inputType="password"
+                                    labelText="비밀번호"
+                                    placeholder="비밀번호 확인"
+                                    isValid={checkPasswordInfo.errorMessage.length === 0}
+                                    errorMessage={checkPasswordInfo.errorMessage}
+                                    inputWidth="100%"
+                                    value={checkPasswordInfo.checkPassword}
+                                    onChange={handleChangeNewPassword}
+                                    inputRef={checkPasswordRef}
+                                />
+                            </div>
+                        </U.InputBox>
+                        <ButtonWrap>
+                            <Button type="button" size="large" full="full" onClick={handleClickCheck}>
+                                확인
+                            </Button>
+                        </ButtonWrap>
+                    </U.EditForm>
+                )}
             </U.Wrap>
         </Container>
     );
