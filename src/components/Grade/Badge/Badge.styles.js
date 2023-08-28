@@ -29,25 +29,31 @@ const Container = styled.div`
     }
 
     ${({ theme }) => theme.media.tablet} {
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
         margin-bottom: 0;
         & + div {
             margin-left: 3rem;
         }
         &::after {
-            width: 30px;
-            height: 15px;
+            width: 24px;
+            height: 12px;
             top: 50%;
-            right: -22%;
+            right: -20%;
             transform: rotate(-90deg) translateY(-50%);
         }
     }
     ${({ theme }) => theme.media.labtop} {
-        max-width: 260px;
-        max-height: 260px;
+        width: 200px;
+        height: 200px;
         & + div {
             margin-left: 6rem;
+        }
+        &::after {
+            width: 30px;
+            height: 15px;
+            top: 50%;
+            right: -26%;
         }
     }
 `;
@@ -70,11 +76,15 @@ const Content = styled.div`
     }
     ${({ theme }) => theme.media.tablet} {
         > p:first-of-type {
+            font-size: 1.6rem;
         }
     }
     ${({ theme }) => theme.media.labtop} {
         margin-bottom: 0.4rem;
         font-size: 1.6rem;
+        > p:first-of-type {
+            font-size: 2rem;
+        }
     }
 `;
 export { Container, ImageWrap, Content };

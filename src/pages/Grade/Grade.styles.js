@@ -17,9 +17,19 @@ const TopContent = styled.div`
         font-size: 2rem;
     }
     p {
-        margin-bottom: 2.4rem;
+        margin-bottom: 3.6rem;
         font-size: 1.6rem;
         color: #909090;
+    }
+    ${({ theme }) => theme.media.tablet} {
+        h2 {
+            margin-bottom: 2rem;
+            font-size: 2.4rem;
+        }
+        p {
+            font-size: 2rem;
+            color: #909090;
+        }
     }
     ${({ theme }) => theme.media.labtop} {
         h2 {
@@ -27,7 +37,6 @@ const TopContent = styled.div`
             font-size: 3.4rem;
         }
         p {
-            margin-bottom: 2.4rem;
             font-size: 2rem;
             color: #909090;
         }
@@ -35,10 +44,13 @@ const TopContent = styled.div`
 `;
 const Background = styled.div`
     position: absolute;
-    top: -100%;
+    top: -80%;
 
     display: flex;
     justify-content: space-between;
+    ${({ theme }) => theme.media.labtop} {
+        top: -60%;
+    }
 `;
 const ImageWrap = styled.span`
     display: flex;
@@ -73,6 +85,9 @@ const RoundBox = styled.div`
     }
     span {
         color: #e9be53;
+    }
+    ${({ theme }) => theme.media.tablet} {
+        font-size: 1.6rem;
     }
     ${({ theme }) => theme.media.labtop} {
         font-size: 2rem;
