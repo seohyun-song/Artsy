@@ -35,7 +35,7 @@ const Grade = () => {
                 <G.BadgesContainer>
                     {BADGE_GRADE.map((grade, index) => {
                         const prevGrade = BADGE_GRADE[index - 1];
-                        return <Badge grade={grade} prevGrade={prevGrade} />;
+                        return <Badge key={index} grade={grade} prevGrade={prevGrade} />;
                     })}
                 </G.BadgesContainer>
             </G.Container>
