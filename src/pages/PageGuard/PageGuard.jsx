@@ -13,7 +13,6 @@ const PageGuard = () => {
 
     useEffect(() => {
         if (isLoading === false && isLogin === false) {
-            console.log(isLogin);
             toast.show(ERROR_MESSAGE.auth);
             navigate('/signin');
         }
