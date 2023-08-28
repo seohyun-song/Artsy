@@ -5,20 +5,20 @@ import IntroBox from '@components/introBox/IntroBox';
 
 import EmailForm from '@components/Register/EmailForm/EmailForm';
 import RegisterForm from '@components/Register/RegisterForm/RegisterForm';
+import useInput from '../../hooks/useInput';
 
 const Register = () => {
-    const [userInfo, setUserInfo] = useState({
+    const {
+        input: userInfo,
+        onChange: handleChange,
+        reset: initializeUserInfo,
+    } = useInput({
         displayName: '',
         email: '',
         password: '',
     });
 
     const [isCheckEmail, setIsCheckEmail] = useState(false);
-
-    const handleChange = (e) => {
-        setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-    const initializeUserInfo = () => setUserInfo(() => ({ displayName: '', email: '', password: '' }));
 
     return (
         <>
