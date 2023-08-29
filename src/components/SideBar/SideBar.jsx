@@ -6,10 +6,12 @@ import useToastContext from '@hooks/useToastContext';
 import { SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
 import useAuthContext from '@hooks/useAuthContext';
+import useDarkMode from '@hooks/useDarkMode';
 
 const SideBar = () => {
     const navigate = useNavigate();
     const toast = useToastContext();
+    const { darkMode, toggleDarkMode } = useDarkMode();
     const [isToggle, setIstoggle] = useState(false);
 
     const { isLogin } = useAuthContext();
@@ -39,17 +41,18 @@ const SideBar = () => {
             </S.ExtendToggleButton>
             <S.NavBarContainer $open={isToggle}>
                 <S.NavBarContent $open={isToggle}>
-                    <S.Navbar>
-                        <S.NavbarItem onClick={handleClickToggleBtn}>
-                            <Link to="/home">홈</Link>
+                    <S.Navbar onClick={handleClickToggleBtn}>
+                        <S.NavbarItem>
+                            <S.NavbarItemLink to="/home">홈</S.NavbarItemLink>
                         </S.NavbarItem>
-                        <S.NavbarItem onClick={handleClickToggleBtn}>
-                            <Link to="/ticket/list">기록함</Link>
+                        <S.NavbarItem>
+                            <S.NavbarItemLink to="/ticket/list">기록함</S.NavbarItemLink>
                         </S.NavbarItem>
-                        <S.NavbarItem onClick={handleClickToggleBtn}>
-                            <Link to="/mypage">마이페이지</Link>
+                        <S.NavbarItem>
+                            <S.NavbarItemLink to="/mypage">마이페이지</S.NavbarItemLink>
                         </S.NavbarItem>
                     </S.Navbar>
+                    <button onClick={toggleDarkMode}>{darkMode ? '다크 모드' : '일반 모드'}</button>
                     <S.LogoutButton color={'#fff'} size={'large'} onClick={handleClickAuthBtn} $open={isToggle}>
                         {isLogin ? '로그아웃' : '로그인'}
                     </S.LogoutButton>
