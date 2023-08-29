@@ -29,54 +29,6 @@ const HTTP = {
 const useApi = () => {
     const toast = useToastContext();
 
-    //const api = {
-    //    get: async (path) => {
-    //        return await callApi(HTTP.GET, path);
-    //    },
-    //    post: async (path, data) => {
-    //        return await callApi(HTTP.POST, path, data);
-    //    },
-    //    put: async (path, data) => {
-    //        return await callApi(HTTP.PUT, path, data);
-    //    },
-    //    delete: async (path) => {
-    //        return await callApi(HTTP.DELETE, path);
-    //    },
-    //    multipartPost: async (path, formData) => {
-    //        return await callApi(HTTP.POST, path, formData, true);
-    //    },
-    //    multipartPut: async (path, formData) => {
-    //        return await callApi(HTTP.PUT, path, formData, true);
-    //    },
-    //}
-
-    //const callApi = async (method, path, data, isFormData = false) => {
-    //    const axiosParams = getAxiosParams(method, path, data, isFormData);
-
-    //    try {
-    //        const response = await axiosInstance(axiosParams);
-    //        return response.data.artsyData;
-
-    //    } catch (error) {
-    //        console.error('callApi', error);
-    //        // TODO 에러 핸들링
-            
-    //        throw error;
-    //    }
-    //}
-
-    //const getAxiosParams = (method, path, data, isFormData) => {
-    //    const axiosParams = {
-    //        method: method,
-    //        url: path,
-    //    }
-
-    //    if (data !== undefined) axiosParams.data = data;
-    //    if (isFormData === true) axiosParams.headers = { "Content-Type": "multipart/form-data" };
-
-    //    return axiosParams;
-    //}
-
     const api = useMemo(() => {
         return {
             get: async (path) => {
