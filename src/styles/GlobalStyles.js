@@ -237,6 +237,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 1.6rem;
         font-family: 'Noto Sans KR', sans-serif;
         color: #1B1D21;
+        background-color: ${({ theme }) => theme.colors.white};
     }
 
     h1,
