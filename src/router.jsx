@@ -40,10 +40,6 @@ const router = createBrowserRouter([
                         element: <UserEdit />,
                     },
                     {
-                        path: 'user/search',
-                        element: <SearchPwd />,
-                    },
-                    {
                         path: 'ticket/list',
                         element: <TicketList />,
                     },
@@ -64,6 +60,10 @@ const router = createBrowserRouter([
                         element: <Grade />,
                     },
                 ],
+            },
+            {
+                path: 'user/search',
+                element: <SearchPwd />,
             },
             {
                 path: '*',
