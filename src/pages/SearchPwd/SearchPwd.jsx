@@ -6,45 +6,108 @@ import Container from '@components/@common/Container/Container';
 import Input from '@components/@common/Input/Input';
 import Button from '@components/@common/Button/Button';
 import PageTitle from '@components/UserEdit/PageTitle/PageTitle';
-import Timer from '@components/SearchPwd/Timer/Timer';
 
 import useToastContext from '@hooks/useToastContext';
-import formatTime from '@utils/formatTime';
+import useFindPasswordQuery from '@hooks/@queries/useFindPasswordQuery';
+import useTempLoginQuery from '@hooks/@queries/useTempLoginQuery';
+import { formatTime } from '@utils/formatDate';
 
-import { ERROR_MESSAGE } from '@constants/message';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 
 const SearchPwd = () => {
     const toast = useToastContext();
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const [isDisabled, setisDisabled] = useState(true);
-    const [count, setCount] = useState(600);
+    const navigate = useNavigate();
+    const [isDisabledSend, setIsDisabledSend] = useState(false);
+    const [isDisabledLogin, setIsDisabledLogin] = useState(true);
     const [isRunning, setIsRunning] = useState(false);
-    const [userInfo, setUserInfo] = useState({
+    const [emailInfo, setEmailInfo] = useState({
         email: '',
-        password: '',
+        errorMessage: '',
     });
+    const [passwordInfo, setPasswordInfo] = useState({
+        password: '',
+        errorMessage: '',
+    });
+    const EXPRIRED_TIME = 600;
+    const RETRY_TIME = 30000;
+    const [count, setCount] = useState(EXPRIRED_TIME);
+    const intervalId = useRef(null);
+    const timeoutId = useRef(null);
+
+    const { mutate: sendPassword, isSuccess: isSuccessFind, isError: isErrorFind } = useFindPasswordQuery();
+    const { mutate: login, isSuccess: isSuccessLogin, isError: isErrorLogin } = useTempLoginQuery();
 
     useEffect(() => {
-        let timerId;
         if (isRunning) {
-            timerId = setInterval(() => {
+            intervalId.current = setInterval(() => {
                 setCount((prev) => prev - 1);
             }, 1000);
-        } else {
-            clearInterval(timerId);
+            return;
         }
 
-        return () => clearInterval(timerId);
+        return () => clearInterval(intervalId.current);
     }, [isRunning]);
+
+    useEffect(() => {
+        if (count === 0) {
+            setIsRunning(false);
+            setCount(EXPRIRED_TIME);
+            clearInterval(intervalId.current);
+            clearTimeout(timeoutId.current);
+            setIsDisabledLogin(true);
+            setIsDisabledSend(false);
+        }
+    }, [count]);
+
+    useEffect(() => {
+        if (isSuccessFind) {
+            setIsRunning(true);
+            setIsDisabledSend(true);
+            setIsDisabledLogin(false);
+            timeoutId.current = setTimeout(() => {
+                setIsDisabledSend(false);
+            }, RETRY_TIME);
+        }
+        if (isErrorFind) {
+            toast.show(ERROR_MESSAGE.invalideEmail);
+        }
+
+        return () => clearTimeout(timeoutId.current);
+    }, [isSuccessFind, isErrorFind]);
+
+    useEffect(() => {
+        if (isSuccessLogin) {
+            toast.show(SUCCESS_MESSAGE.successSignin);
+            navigate('/user/edit');
+        }
+        if (isErrorLogin) {
+            toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
+        }
+    }, [isSuccessLogin, isErrorLogin]);
 
     const handleChange = (e) => {
         const { value, name } = e.target;
-        setUserInfo({ ...userInfo, [name]: value });
+        if (name === 'email') {
+            setEmailInfo({ email: value, errorMessage: '', isValid: true });
+            return;
+        }
+        setPasswordInfo({ password: value, errorMessage: '', isValid: true });
     };
 
     const handleClickSend = () => {
-        setIsRunning(true);
+        if (!emailInfo.email) {
+            setEmailInfo({ ...emailInfo, errorMessage: ERROR_MESSAGE.required, isValid: false });
+            return;
+        }
+        sendPassword({ email: emailInfo.email });
+    };
+
+    const handleClickLogin = () => {
+        if (!passwordInfo.password) {
+            setPasswordInfo({ ...passwordInfo, errorMessage: ERROR_MESSAGE.required, isValid: false });
+            return;
+        }
+        login({ email: emailInfo.email, password: passwordInfo.password });
     };
 
     return (
@@ -62,17 +125,24 @@ const SearchPwd = () => {
                             placeholder="이메일주소 입력"
                             isRequired
                             inputWidth="100%"
-                            isValid={true}
-                            value={userInfo.email}
+                            isValid={emailInfo.errorMessage.length === 0}
+                            errorMessage={emailInfo.errorMessage}
+                            value={emailInfo.email}
                             onChange={handleChange}
-                            inputRef={emailRef}
                         />
-                        <Button type="button" size="small" full="full" style="line" onClick={handleClickSend}>
+                        <Button
+                            type="button"
+                            size="small"
+                            full="full"
+                            style="line"
+                            disabled={isDisabledSend}
+                            onClick={handleClickSend}
+                        >
                             임시 비밀번호 발송
                         </Button>
                     </S.InputBox>
                     <S.InputBox>
-                        <S.Timer>{formatTime(count)}</S.Timer>
+                        {isRunning && <S.Timer>{formatTime(count)}</S.Timer>}
                         <Input
                             id="password"
                             name="password"
@@ -81,13 +151,19 @@ const SearchPwd = () => {
                             placeholder="임시비밀번호 입력"
                             isRequired
                             inputWidth="100%"
-                            isValid={true}
-                            value={userInfo.password}
+                            isValid={passwordInfo.errorMessage.length === 0}
+                            errorMessage={passwordInfo.errorMessage}
+                            value={passwordInfo.password}
                             onChange={handleChange}
-                            inputRef={passwordRef}
                         />
                     </S.InputBox>
-                    <Button type="button" size="large" full="full" onClick={''} disabled={isDisabled}>
+                    <Button
+                        type="button"
+                        size="large"
+                        full="full"
+                        disabled={isDisabledLogin}
+                        onClick={handleClickLogin}
+                    >
                         임시 비밀번호로 로그인
                     </Button>
                 </S.Form>

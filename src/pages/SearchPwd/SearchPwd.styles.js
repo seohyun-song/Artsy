@@ -14,6 +14,8 @@ const SubTitleWrap = styled.div`
 
 const Form = styled.div``;
 
+const Timer = styled.div``;
+
 const InputBox = styled.div`
     position: relative;
     margin-bottom: 3.5rem;
@@ -22,16 +24,13 @@ const InputBox = styled.div`
         margin-top: 1rem;
     }
 
-    > span {
+    ${Timer} {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: ${({ theme }) => theme.fontSizes.text};
+        color: ${({ theme }) => theme.colors.point2};
     }
-`;
-
-const Timer = styled.div`
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: ${({ theme }) => theme.fontSizes.text};
-    color: #909090;
 `;
 
 export { Wrap, SubTitleWrap, Form, InputBox, Timer };
