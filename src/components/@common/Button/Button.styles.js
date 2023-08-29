@@ -83,6 +83,9 @@ const StyledButton = styled.button`
             border: 2px solid ${({ $color }) => $color};
             color: ${({ $color }) => $color};
         `}
+    &:disabled {
+        background-color: #909090;
+    }
 `;
 
 export default StyledButton;
