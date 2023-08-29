@@ -1,22 +1,27 @@
-import { useTheme } from 'styled-components';
+import { useEffect, useRef } from 'react';
 import * as S from './Signin.styles';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import useLoginQuery from '@hooks/@queries/useLoginQuery';
-import useWindowWidth from '@hooks/useWindowWidth';
-import useToastContext from '@hooks/useToastContext';
 import Input from '@components/@common/Input/Input';
 import IntroBox from '@components/@common/introBox/IntroBox';
+import useLoginQuery from '@hooks/@queries/useLoginQuery';
+import { useTheme } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import useToastContext from '@hooks/useToastContext';
+import useInput from '@hooks/useInput';
+import useWindowWidth from '@hooks/useWindowWidth';
+import checkValidation from '@utils/checkValidation';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
-import checkValidation from '@utils/checkValidation';
 
 const Signin = () => {
-    const [loginInfo, setLoginInfo] = useState({
+    const {
+        input: loginInfo,
+        onChange: handleChange,
+        reset,
+    } = useInput({
         email: '',
         password: '',
     });
+
     const navigate = useNavigate();
     const { mutate, isSuccess, isError, error } = useLoginQuery();
     const windowWidth = useWindowWidth();
@@ -28,39 +33,27 @@ const Signin = () => {
         if (isSuccess) navigate('/home');
     }, [isSuccess]);
     useEffect(() => {
-        if (isError) {
-            const errorType = error.response?.data?.error.type;
-            switch (errorType) {
-                case ERROR_TYPE.INCORRECT_PASSWORD: {
-                    toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
-                    break;
-                }
-                case ERROR_TYPE.NOT_FOUND_EMAIL: {
-                    toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
-                    break;
-                }
-                default: {
-                    toast.show(ERROR_MESSAGE.defaultError);
-                }
-            }
+        if (!isError) {
+            return;
+        }
+
+        const errorType = error.response?.data?.error.type;
+        if (errorType === ERROR_TYPE.INCORRECT_PASSWORD || ERROR_TYPE.NOT_FOUND_EMAIL || ERROR_TYPE.INVALID_PARAM) {
+            toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
         }
     }, [isError]);
 
-    const handleChange = (e) => {
-        setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
-    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         const email = loginInfo.email;
         const isCorrectFormat = checkValidation({ email });
         if (!isCorrectFormat) {
-            setLoginInfo({ email: '', password: '' });
+            toast.show(ERROR_MESSAGE.incorrectEmailFormat);
             emailInputRef.current.focus();
-
             return;
         }
         mutate(loginInfo);
-        setLoginInfo({ email: '', password: '' });
+        reset();
         emailInputRef.current.focus();
     };
 
