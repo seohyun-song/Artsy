@@ -1,6 +1,6 @@
 import * as R from './Register.styles';
 import { useState } from 'react';
-import IntroBox from '@components/introBox/IntroBox';
+import IntroBox from '@components/@common/introBox/IntroBox';
 
 import EmailForm from '@components/Register/EmailForm/EmailForm';
 import RegisterForm from '@components/Register/RegisterForm/RegisterForm';

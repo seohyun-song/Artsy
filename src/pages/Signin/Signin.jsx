@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
 import useWindowWidth from '@hooks/useWindowWidth';
-import IntroBox from '@components/introBox/IntroBox';
+import IntroBox from '@components/@common/introBox/IntroBox';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
 import checkValidation from '@utils/checkValidation';
@@ -21,6 +21,7 @@ const Signin = () => {
     const windowWidth = useWindowWidth();
     const emailInputRef = useRef();
     const theme = useTheme();
+    const labtopSize = theme.devicesSize.labtop.replace('px', '');
     const toast = useToastContext();
     useEffect(() => {
         if (isSuccess) navigate('/home');
@@ -38,7 +39,7 @@ const Signin = () => {
                     break;
                 }
                 default: {
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
                 }
             }
         }
@@ -70,7 +71,7 @@ const Signin = () => {
         <S.SignInContainer>
             <IntroBox />
             <S.SignInContent>
-                <S.loginTitle>{windowWidth > 1280 ? 'Welcome!' : 'Artsy'}</S.loginTitle>
+                <S.loginTitle>{windowWidth > labtopSize ? 'Welcome!' : 'Artsy'}</S.loginTitle>
                 <S.loginForm onSubmit={handleSubmit}>
                     <Input
                         placeholder="이메일 주소를 입력하세요."

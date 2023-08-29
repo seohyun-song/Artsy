@@ -1,10 +1,26 @@
 import styled, { css } from 'styled-components';
 
+const imageSize = css`
+    ${({ $size }) =>
+        $size === 'width' &&
+        css`
+            width: 290px;
+            height: 200px;
+        `}
+
+    ${({ $size }) =>
+        $size === 'height' &&
+        css`
+            width: 200px;
+            height: 290px;
+        `}
+`;
+
 const Container = styled.div`
     padding-bottom: 4rem;
 
     ${({ theme }) => theme.media.labtop} {
-        max-width: 1280px;
+        max-width: ${({ theme }) => theme.devicesSize.labtop};
         margin: 0 auto;
         padding: 0 4rem;
         padding-bottom: 4rem;
@@ -65,9 +81,8 @@ const TicketDetailWrap = styled.div`
 
 const TicketImageWrap = styled.div`
     max-width: 100%;
-    width: 200px;
-    height: 290px;
     z-index: ${({ theme }) => theme.layer.layer1};
+    ${imageSize}
 
     img {
         width: 100%;

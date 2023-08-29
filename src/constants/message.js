@@ -19,13 +19,16 @@ const ERROR_MESSAGE = {
     incorrectPassword: '비밀번호는 영문 소문자,대문자, 숫자, 특수문자를 포함하여 입력해주세요.',
     incorrectConfirmPassword: '비밀번호가 일치하지 않습니다.',
     failUpdateUser: '회원 정보 수정에 실패했습니다.',
+    defaultError: '관리자에게 문의하세요',
 };
 
 const SUCCESS_MESSAGE = {
     validEmail: '사용가능한 이메일 주소입니다.',
     successRegister: '성공적으로 가입되었습니다!',
     successLogout: '로그아웃 했습니다.',
-    successTicketDelete: '티켓이 삭제되었습니다.',
+    successCreateTicket: '성공적으로 티켓이 추가되었습니다.',
+    successUpdateTicket: '성공적으로 티켓이 수정되었습니다.',
+    successDeleteTicket: '성공적으로 티켓이 삭제되었습니다.',
     successUpdateUser: '성공적으로 회원 정보를 수정했습니다.',
 };
 

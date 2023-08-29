@@ -10,23 +10,32 @@ import CategoryButton from '@components/TicketCreate/CategoryButton/CategoryButt
 import Loading from '@components/@common/Loading/Loading';
 import * as I from '@components/@common/Input/Input.styles';
 import deleteIconUrl from '@assets/icons/icon-delete.png';
-import formatTicketDate from '@utils/formatTicketDate';
-import { useTicketCreateQuery } from '@hooks/@queries/useTicketQuery';
 import { ERROR_TYPE } from '@constants/serverErrorType';
-import { ERROR_MESSAGE } from '@constants/message';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import useInput from '@hooks/useInput';
+import useToastContext from '@hooks/useToastContext';
+import Input from '@components/@common/Input/Input';
+import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import { formatTicketDate } from '@utils/formatDate';
+import setFormData from '@utils/setFormData';
 
 const TicketCreate = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const categoryQuery = useCategoryQuery();
     const [searchParams, setSearchParams] = useSearchParams();
-
+    const toast = useToastContext();
     const categoryId = searchParams.get('categoryId');
 
-    const { mutate, isSuccess, data, isError, error } = useTicketCreateQuery();
+    const { createTicket } = useTicketQuery();
+    const { mutate, isSuccess, data, isError, error } = createTicket();
 
-    const [{ title, place, price, review }, onChangeInput, onNumberChange, inputReset] = useInput({
+    const {
+        input: { title, place, price, review },
+        onChange: onChangeInput,
+        onNumberChange,
+        reset,
+    } = useInput({
         title: '',
         place: '',
         price: '',
@@ -45,27 +54,35 @@ const TicketCreate = () => {
     const [titleValid, setTitleValid] = useState(true);
 
     useEffect(() => {
-        if (isSuccess) navigate(`/ticket/detail/${data.id}`);
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
+        if (!isSuccess) return;
+
+        toast.show(SUCCESS_MESSAGE.successCreateTicket);
+        navigate(`/ticket/detail/${data.id}`);
     }, [isSuccess]);
 
     useEffect(() => {
+        if (!isError) return;
         if (isError) {
             const errorType = error.response.data.error.type;
 
             switch (errorType) {
                 case ERROR_TYPE.LIMIT_FILE_SIZE:
-                    alert(ERROR_MESSAGE.limitFileSize);
+                    toast.show(ERROR_MESSAGE.limitFileSize);
                     break;
                 case ERROR_TYPE.LIMIT_FILE_COUNT:
-                    alert(ERROR_MESSAGE.limitFileCount);
+                    toast.show(ERROR_MESSAGE.limitFileCount);
                     break;
 
                 case ERROR_TYPE.DISALLOW_FILE_TYPE:
-                    alert(ERROR_MESSAGE.disallowFileType);
+                    toast.show(ERROR_MESSAGE.disallowFileType);
                     break;
 
                 default:
-                    alert('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
             }
         }
     }, [isError]);
@@ -90,18 +107,16 @@ const TicketCreate = () => {
         }
 
         // mutate
-        let formData = new FormData();
-
-        // 필수
-        formData.append('categoryId', parseInt(category));
-        formData.append('title', title);
-        formData.append('showDate', formatTicketDate(showDate));
-
-        // 선택사항
-        formData.append('place', place);
-        formData.append('price', price ?? parseInt(price));
-        formData.append('rating', parseInt(rating));
-        formData.append('review', review);
+        const inputData = {
+            categoryId: parseInt(category),
+            title: title,
+            showDate: formatTicketDate(showDate),
+            place: place,
+            price: price ?? parseInt(price),
+            rating: parseInt(rating),
+            review: review,
+        };
+        let formData = setFormData(inputData);
 
         if (imgfile !== '') {
             formData.append('file', imgfile);
@@ -109,14 +124,13 @@ const TicketCreate = () => {
 
         mutate(formData);
 
-        inputReset();
+        reset();
         setTitleError('');
     };
 
-    if (categoryQuery.isLoading) return <Loading></Loading>;
-
     return (
         <T.Container>
+            {categoryQuery?.isLoading && <Loading></Loading>}
             <T.TitleContainer>
                 <h3>티켓 등록</h3>
             </T.TitleContainer>
@@ -133,7 +147,7 @@ const TicketCreate = () => {
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="title"
                         labelText="제목"
                         onChange={onChangeInput}
@@ -164,7 +178,7 @@ const TicketCreate = () => {
                         selected={showDate}
                         onChange={(date) => setShowDate(date)}
                         customInput={
-                            <T.StyledInput
+                            <Input
                                 id="title"
                                 labelText="관람일"
                                 isRequired
@@ -176,7 +190,7 @@ const TicketCreate = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="place"
                         labelText="장소"
                         onChange={onChangeInput}
@@ -188,7 +202,7 @@ const TicketCreate = () => {
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
-                    <T.StyledInput
+                    <Input
                         id="price"
                         labelText="금액"
                         onChange={onNumberChange}

@@ -11,6 +11,8 @@ import TicketEdit from '@pages/TicketEdit/TicketEdit.jsx';
 import PageNotFound from '@pages/PageNotFound/PageNotFound.jsx';
 import Signin from '@pages/Signin/Signin.jsx';
 import Register from '@pages/Register/Register.jsx';
+import PageGuard from '@pages/PageGuard/PageGuard.jsx';
+import Grade from '@pages/Grade/Grade.jsx';
 
 const router = createBrowserRouter([
     {
@@ -22,32 +24,41 @@ const router = createBrowserRouter([
                 element: <Intro />,
             },
             {
-                path: 'home',
-                element: <Home />,
-            },
-            {
-                path: 'mypage',
-                element: <MyPage />,
-            },
-            {
-                path: 'user/edit',
-                element: <UserEdit />,
-            },
-            {
-                path: 'ticket/list',
-                element: <TicketList />,
-            },
-            {
-                path: 'ticket/create',
-                element: <TicketCreate />,
-            },
-            {
-                path: 'ticket/detail/:ticketId',
-                element: <TicketDetail />,
-            },
-            {
-                path: 'ticket/edit/:ticketId',
-                element: <TicketEdit />,
+                element: <PageGuard />,
+                children: [
+                    {
+                        path: 'home',
+                        element: <Home />,
+                    },
+                    {
+                        path: 'mypage',
+                        element: <MyPage />,
+                    },
+                    {
+                        path: 'user/edit',
+                        element: <UserEdit />,
+                    },
+                    {
+                        path: 'ticket/list',
+                        element: <TicketList />,
+                    },
+                    {
+                        path: 'ticket/create',
+                        element: <TicketCreate />,
+                    },
+                    {
+                        path: 'ticket/detail/:ticketId',
+                        element: <TicketDetail />,
+                    },
+                    {
+                        path: 'ticket/edit/:ticketId',
+                        element: <TicketEdit />,
+                    },
+                    {
+                        path: 'grade',
+                        element: <Grade />,
+                    },
+                ],
             },
             {
                 path: '*',
