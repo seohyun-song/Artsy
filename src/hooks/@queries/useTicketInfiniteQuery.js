@@ -1,10 +1,11 @@
 import { useInfiniteQuery } from 'react-query';
 
-import api from '@utils/api';
+import useApi from '@hooks/useApi';
 
 export const QUERY_KEY = '/api/user/tickets';
 
 const useTicketInfiniteQuery = (categoryId) => {
+    const api = useApi();
     const limit = 10;
 
     const fetcher = ({ pageParam }) => {
