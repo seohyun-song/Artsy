@@ -8,7 +8,17 @@ import GlobalStyle from '@styles/GlobalStyles';
 import { ToastContextProvider } from '@contexts/ToastContext.jsx';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { HeaderContextProvider } from '@contexts/HeaderContext';
-const queryClient = new QueryClient();
+import GlobalStyle from '@styles/GlobalStyles';
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 1000 * 60 * 30,
+            refetchOnMount: false,
+            refetchOnWindowFocus: false,
+        },
+    },
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useValidation = (value, validationFn, ERROR_MESSAGE) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [isValid, setIsValid] = useState(false);
-    const isEmpty = Object.values(value)[0].length === 0;
+
     useEffect(() => {
+        const isEmpty = Object.values(value)[0].length === 0;
         if (!isEmpty) {
             const validationResult = validationFn(value);
             validationResult ? setIsValid(true) : setIsValid(false);
