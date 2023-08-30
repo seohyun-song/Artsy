@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as U from './UserStats.styles';
 import Wrap from '@components/@common/Wrap/Wrap';
-import Loading from '@components/@common/Loading/Loading';
+import ContentsLoading from '@components/@common/ContentsLoading/ContentsLoading';
 import StatsBox from '@components/UserStats/StatsBox/StatsBox';
 import CoinIconUrl from '@assets/icons/icon-coin.png';
 import CalendarIconUrl from '@assets/icons/icon-calendar.png';
@@ -52,7 +52,7 @@ const UserStats = () => {
     return (
         <>
             {isChartLoading ? (
-                <Loading />
+                <ContentsLoading />
             ) : (
                 <Wrap>
                     <U.StatsContainer>
