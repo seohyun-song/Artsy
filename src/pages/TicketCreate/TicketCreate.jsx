@@ -10,7 +10,6 @@ import CategoryButton from '@components/TicketCreate/CategoryButton/CategoryButt
 import Loading from '@components/@common/Loading/Loading';
 import Wrap from '@components/@common/Wrap/Wrap';
 import * as I from '@components/@common/Input/Input.styles';
-import deleteIconUrl from '@assets/icons/icon-delete.png';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import useInput from '@hooks/useInput';
