@@ -84,12 +84,12 @@ const StyledButton = styled.button`
             color: ${({ $color }) => $color};
 
             &:disabled {
-                border-color: #909090;
+                background-color: ${({ theme }) => theme.colors.background8};
                 color: #fff;
             }
         `}
     &:disabled {
-        background-color: #909090;
+        background-color: ${({ theme }) => theme.colors.background8};
     }
 `;
 
