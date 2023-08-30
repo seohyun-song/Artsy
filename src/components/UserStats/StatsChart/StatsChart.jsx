@@ -4,6 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import LeftIconUrl from '@assets/icons/icon-left.png';
 import RightIconUrl from '@assets/icons/icon-right.png';
+import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -45,13 +46,13 @@ const StatsChart = ({ chartdata, year, month, onLeft, onRight, cntSum }) => {
         <S.Container>
             <S.TextWrap>
                 <S.ImageWrap onClick={onLeft}>
-                    <img src={LeftIconUrl} />
+                    <SlArrowLeft />
                 </S.ImageWrap>
                 <h5>
                     {year}년 {month}월
                 </h5>
                 <S.ImageWrap onClick={onRight}>
-                    <img src={RightIconUrl} />
+                    <SlArrowRight />
                 </S.ImageWrap>
             </S.TextWrap>
 
