@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as E from './EmailForm.styles';
 import Input from '@components/@common/Input/Input';
 import { useTheme } from 'styled-components';
