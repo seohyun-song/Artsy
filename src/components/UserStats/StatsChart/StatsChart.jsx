@@ -26,9 +26,18 @@ const StatsChart = ({ chartdata, year, month, onLeft, onRight, cntSum }) => {
     };
 
     const options = {
+        layout: {
+            padding: 20,
+        },
+
         plugins: {
             legend: {
-                position: 'right',
+                position: 'bottom',
+                labels: {
+                    boxWidth: 16,
+                    boxHeight: 16,
+                    padding: 10,
+                },
             },
         },
     };
@@ -46,7 +55,9 @@ const StatsChart = ({ chartdata, year, month, onLeft, onRight, cntSum }) => {
                 </S.ImageWrap>
             </S.TextWrap>
 
-            <Doughnut data={data} options={options} />
+            <div style={{ width: '360px', height: '360px' }}>
+                <Doughnut data={data} options={options} />
+            </div>
         </S.Container>
     );
 };
