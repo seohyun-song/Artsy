@@ -8,7 +8,6 @@ import GlobalStyle from '@styles/GlobalStyles';
 import { ToastContextProvider } from '@contexts/ToastContext.jsx';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { HeaderContextProvider } from '@contexts/HeaderContext';
-import GlobalStyle from '@styles/GlobalStyles';
 
 const queryClient = new QueryClient({
     defaultOptions: {
