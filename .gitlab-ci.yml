@@ -26,7 +26,7 @@ build:
     - /^feature\/deploy/
   artifacts:
     paths:
-      - 'build/'
+      - 'dist/'
 
 deploy:
   stage: deploy
@@ -36,7 +36,7 @@ deploy:
     - apt-get update -y
     - apt-get install -y zip
     - mkdir build_artifacts
-    - mv build/ build_artifacts/
+    - mv dist/ build_artifacts/
     - cd build_artifacts
     - zip -r $S3_ZIP .
     - pip install awscli
