@@ -217,6 +217,7 @@ const TicketCreate = () => {
                         isValid={true}
                         placeholder="금액을 입력하세요"
                         inputWidth="100%"
+                        onWheel={(e) => e.target.blur()}
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>

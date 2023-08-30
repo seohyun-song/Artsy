@@ -223,6 +223,7 @@ const TicketEdit = () => {
                         placeholder="금액을 입력하세요"
                         inputWidth="100%"
                         maxLength={9}
+                        onWheel={(e) => e.target.blur()}
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
