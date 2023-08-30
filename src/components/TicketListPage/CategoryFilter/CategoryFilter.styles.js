@@ -5,7 +5,7 @@ const StyledCategoryFilter = styled.select`
     outline: none;
     border: none;
     background-color: transparent;
-
+    color: ${({ theme }) => theme.colors.font2};
     /* 스타일 */
     padding: 0.4rem 1rem;
     font-size: ${({ theme }) => theme.fontSizes.text};
