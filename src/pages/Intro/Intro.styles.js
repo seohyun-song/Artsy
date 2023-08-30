@@ -97,7 +97,7 @@ const ServiceIcon = styled.div`
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background4};
 
     img {
         width: 2rem;
