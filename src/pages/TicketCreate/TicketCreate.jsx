@@ -143,7 +143,7 @@ const TicketCreate = () => {
                         <T.ImgWrap>
                             <img alt="티켓 이미지" src={imgSrc} />
                             <T.IconWrap>
-                                <img alt="삭제" src={deleteIconUrl} onClick={onResetImage} />
+                                <T.StyledSlClose onClick={onResetImage} />
                             </T.IconWrap>
                         </T.ImgWrap>
                     </T.ImgContainer>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from '@components/@common/Button/Button';
 import Input from '@components/@common/Input/Input';
+import { SlClose } from 'react-icons/sl';
 
 const TitleContainer = styled.div`
     h3 {
@@ -30,7 +31,7 @@ const ImgWrap = styled.div`
     height: 20rem;
 
     img {
-        width: 80%;
+        width: 75%;
         height: 100%;
         object-fit: contain;
     }
@@ -40,16 +41,16 @@ const IconWrap = styled.div`
     cursor: pointer;
     display: inline-block;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 3rem;
-    height: 3rem;
+    bottom: 3px;
+    right: 3px;
+    width: 30px;
+    height: 30px;
+`;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+const StyledSlClose = styled(SlClose)`
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
 `;
 
 const ReviewContainer = styled.div`
@@ -102,6 +103,7 @@ export {
     TicketForm,
     ImgContainer,
     IconWrap,
+    StyledSlClose,
     ImgWrap,
     ReviewContainer,
     Label,
