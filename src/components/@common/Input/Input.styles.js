@@ -60,7 +60,6 @@ const StyledInput = styled.input`
 `;
 
 const StyledErrorMessage = styled.span`
-    margin-left: 1.2rem;
     margin-top: 0.4rem;
     color: #ff624d;
     font-size: ${({ theme }) => theme.fontSizes.text};
