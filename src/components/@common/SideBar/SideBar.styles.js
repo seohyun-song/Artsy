@@ -15,7 +15,7 @@ const NavBarContainer = styled.div`
     transform: translateX(100%);
 
     transition: transform 0.5s ease-in-out;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background3};
     ${({ $open }) =>
         $open &&
         css`
@@ -58,21 +58,22 @@ const Navbar = styled.ul`
 `;
 const NavbarItem = styled.li`
     width: 100%;
-    text-align: left;
     font-size: 1.6rem;
     margin-bottom: 3rem;
     ${({ theme }) => theme.media.tablet} {
         font-size: 1.8rem;
     }
-    ${({ theme }) => theme.media.labtop} {
-        text-align: center;
-    }
 `;
 
 const NavbarItemLink = styled(Link)`
     display: flex;
+    justify-content: flex-start;
     &:hover {
         color: ${({ theme }) => theme.colors.point1};
+    }
+    ${({ theme }) => theme.media.labtop} {
+        text-align: center;
+        justify-content: center;
     }
 `;
 const LogoutButton = styled(Button)`
@@ -81,7 +82,8 @@ const LogoutButton = styled(Button)`
     margin-bottom: 20px;
     align-self: center;
     border: 1px solid ${({ theme }) => theme.colors.black};
-    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.background4};
+    color: ${({ theme }) => theme.colors.font2};
     ${({ theme }) => theme.media.tablet} {
         font-size: 1.8rem;
     }

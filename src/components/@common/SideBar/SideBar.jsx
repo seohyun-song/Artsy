@@ -52,7 +52,7 @@ const SideBar = () => {
                             <S.NavbarItemLink to="/mypage">마이페이지</S.NavbarItemLink>
                         </S.NavbarItem>
                     </S.Navbar>
-                    <button onClick={toggleDarkMode}>{darkMode ? '다크 모드' : '일반 모드'}</button>
+                    <button onClick={toggleDarkMode}>{!darkMode ? '다크 모드' : '일반 모드'}</button>
                     <S.LogoutButton color={'#fff'} size={'large'} onClick={handleClickAuthBtn} $open={isToggle}>
                         {isLogin ? '로그아웃' : '로그인'}
                     </S.LogoutButton>
