@@ -247,6 +247,7 @@ const GlobalStyle = createGlobalStyle`
     h5,
     h6 {
         margin: 0;
+        font-weight: 500;
     }
 
     dl,
