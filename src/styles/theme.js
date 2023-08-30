@@ -81,7 +81,7 @@ const lightTheme = {
         font2: gray.gray85,
         font3: mainColor.blue, //point1 => sub1
         font4: mainColor.purple, //point2 => sub2
-        font5: gray.gray40,
+        font5: gray.gray40, //#909090
         font6: gray.gray60,
         font7: gray.gray70,
         font8: gray.gray05,
@@ -89,7 +89,7 @@ const lightTheme = {
         background2: gray.gray00,
         background3: gray.gray00, //contents박스
         background4: gray.gray00, //버튼
-        background5: gray.gray05,
+        background5: gray.gray05, //grey바탕의 contents박스
         background6: gray.gray05,
         background7: gray.gray05,
         background8: gray.gray50,
