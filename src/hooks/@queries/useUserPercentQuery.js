@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
 import useApi from '@hooks/useApi';
 
-export const QUERY_KEY = '/api/categories';
+export const QUERY_KEY = '/api/user/percentage';
 
-const useCategoryQuery = () => {
+const useUserPercentQuery = () => {
     const api = useApi();
     const fetcher = () => api.get(QUERY_KEY);
     const options = {
@@ -12,4 +12,4 @@ const useCategoryQuery = () => {
     return useQuery([QUERY_KEY], fetcher, options);
 };
 
-export default useCategoryQuery;
+export default useUserPercentQuery;

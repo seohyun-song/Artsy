@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from 'react-query';
 import useApi from '@hooks/useApi';
 import useAuthContext from '@hooks/useAuthContext';
 
-export const QUERY_KEY = '/api/user/login';
+export const QUERY_KEY = '/api/user/temp-login';
 
-const useLoginQuery = () => {
+const useTempLoginQuery = () => {
     const { setIsLogin } = useAuthContext();
 
     const queryClient = useQueryClient();
@@ -20,4 +20,4 @@ const useLoginQuery = () => {
     });
 };
 
-export default useLoginQuery;
+export default useTempLoginQuery;
