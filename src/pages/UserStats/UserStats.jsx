@@ -66,6 +66,7 @@ const UserStats = () => {
                                     month={month}
                                     onLeft={onLeft}
                                     onRight={onRight}
+                                    cntSum={chartData?.cntPerMonth}
                                 />
                             </U.StatsChartWrap>
                             <U.StatsBoxWrap>

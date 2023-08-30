@@ -7,19 +7,19 @@ import RightIconUrl from '@assets/icons/icon-right.png';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const StatsChart = ({ chartdata, year, month, onLeft, onRight }) => {
+const StatsChart = ({ chartdata, year, month, onLeft, onRight, cntSum }) => {
     const categoryNameArr = chartdata?.map((item) => item.categoryName);
     const categoryColorArr = chartdata?.map((item) => item.categoryColor);
     const cntArr = chartdata?.map((item) => item.cnt);
 
     const data = {
-        labels: categoryNameArr,
+        labels: cntSum === 0 ? ['없음'] : categoryNameArr,
         datasets: [
             {
                 label: '관람 횟수',
-                data: cntArr,
-                backgroundColor: categoryColorArr,
-                borderColor: categoryColorArr,
+                data: cntSum === 0 ? [1] : cntArr,
+                backgroundColor: cntSum === 0 ? ['#A4A4A4'] : categoryColorArr,
+                borderColor: cntSum === 0 ? ['#A4A4A4'] : categoryColorArr,
                 borderWidth: 1,
             },
         ],
