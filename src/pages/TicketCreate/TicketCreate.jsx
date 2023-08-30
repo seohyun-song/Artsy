@@ -8,6 +8,7 @@ import RatingSliderBar from '@components/TicketCreate/RatingSliderBar/RatingSlid
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
 import CategoryButton from '@components/TicketCreate/CategoryButton/CategoryButton';
 import Loading from '@components/@common/Loading/Loading';
+import Wrap from '@components/@common/Wrap/Wrap';
 import * as I from '@components/@common/Input/Input.styles';
 import deleteIconUrl from '@assets/icons/icon-delete.png';
 import { ERROR_TYPE } from '@constants/serverErrorType';
@@ -130,7 +131,7 @@ const TicketCreate = () => {
     };
 
     return (
-        <T.Container>
+        <Wrap>
             {categoryQuery?.isLoading && <Loading></Loading>}
             <T.TitleContainer>
                 <h3>티켓 추가</h3>
@@ -141,10 +142,10 @@ const TicketCreate = () => {
                     <T.ImgContainer>
                         <T.ImgWrap>
                             <img alt="티켓 이미지" src={imgSrc} />
+                            <T.IconWrap>
+                                <img alt="삭제" src={deleteIconUrl} onClick={onResetImage} />
+                            </T.IconWrap>
                         </T.ImgWrap>
-                        <T.IconWrap>
-                            <img alt="삭제" src={deleteIconUrl} onClick={onResetImage} />
-                        </T.IconWrap>
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
@@ -189,7 +190,7 @@ const TicketCreate = () => {
                                 isRequired
                                 isValid={true}
                                 inputWidth="100%"
-                                style={{ cursor: 'pointer' }}
+                                style={{ cursor: 'pointer', caretColor: 'transparent' }}
                             />
                         }
                     />
@@ -238,7 +239,7 @@ const TicketCreate = () => {
                     </T.CreateButton>
                 </T.ButtonContaienr>
             </T.TicketForm>
-        </T.Container>
+        </Wrap>
     );
 };
 export default TicketCreate;

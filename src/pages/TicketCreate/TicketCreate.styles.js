@@ -1,32 +1,14 @@
 import styled from 'styled-components';
 import Button from '@components/@common/Button/Button';
 
-const Container = styled.div`
-    margin: 0 auto;
-    padding: 0 3rem 0 2rem;
-
-    ${({ theme }) => theme.media.tablet} {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-`;
-
 const TitleContainer = styled.div`
     h3 {
         font-size: ${({ theme }) => theme.fontSizes.h5};
-        margin-bottom: 2rem;
-    }
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
+        margin-bottom: 3rem;
     }
 `;
 
-const TicketForm = styled.div`
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
-    }
-`;
+const TicketForm = styled.div``;
 
 const ImgContainer = styled.div`
     display: flex;
@@ -36,18 +18,18 @@ const ImgContainer = styled.div`
 
 const ImgWrap = styled.div`
     overflow: hidden;
-    display: block;
+    display: flex;
     position: relative;
+    justify-content: center;
 
     border: 1px solid #c5c5c5;
     border-radius: ${({ theme }) => theme.borderRadius.large};
 
-    width: 30rem;
+    width: 100%;
     height: 20rem;
-    margin-right: 1rem;
 
     img {
-        width: 100%;
+        width: 80%;
         height: 100%;
         object-fit: contain;
     }
@@ -55,7 +37,10 @@ const ImgWrap = styled.div`
 
 const IconWrap = styled.div`
     cursor: pointer;
-
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     width: 3rem;
     height: 3rem;
 
@@ -110,7 +95,6 @@ const MarginContainer = styled.div`
 `;
 
 export {
-    Container,
     TitleContainer,
     TicketForm,
     ImgContainer,
