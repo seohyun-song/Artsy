@@ -22,7 +22,6 @@ build:
     - echo "VITE_URL=$VITE_URL" >> .env
     - echo "build"
     - npm run build
-    - mv appspec.yml dist/
   only:
     - /^feature\/deploy/
   artifacts:
@@ -38,6 +37,7 @@ deploy:
     - apt-get install -y zip
     - mkdir build_artifacts
     - mv dist/ build_artifacts/
+    - mv appspec.yml build_artifacts/
     - cd build_artifacts
     - zip -r $S3_ZIP .
     - pip install awscli
