@@ -10,7 +10,7 @@ const CheckButton = styled(Button)`
     font-size: 1.4rem;
     margin-top: 1.2rem;
     &:disabled {
-        background-color: #909090;
+        background-color: ${({ theme }) => theme.colors.background8};
     }
 `;
 export { EmailForm, CheckButton };
