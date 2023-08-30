@@ -29,6 +29,7 @@ const SideBar = () => {
 
     const handleClickAuthBtn = () => {
         setIstoggle((cur) => !cur);
+        unLockScroll();
         if (isLogin) {
             logout();
             navigate('/');
