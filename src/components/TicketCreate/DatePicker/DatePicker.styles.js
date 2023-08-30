@@ -42,6 +42,7 @@ const DatePickerWrap = styled.div`
     .react-datepicker__input-time-container {
         display: flex;
         align-items: center;
+        justify-content: center;
         text-align: center;
     }
 
@@ -62,7 +63,7 @@ const DatePickerWrap = styled.div`
     }
 
     .react-datepicker__month-container {
-        width: 25rem;
+        width: 27rem;
         font-size: ${({ theme }) => theme.fontSizes.text};
     }
 
@@ -95,16 +96,6 @@ const DatePickerWrap = styled.div`
         height: 30px;
         vertical-align: middle; /* 텍스트 수직 가운데 정렬 */
         line-height: 2; /* 수직 가운데 정렬을 위한 줄 높이 조절 */
-    }
-
-    .react-datepicker__time-list {
-        width: 90%;
-        li {
-            margin-right: 10px;
-
-            height: 30px;
-            margin-bottom: 10px;
-        }
     }
 
     .react-datepicker__day--keyboard-selected,
