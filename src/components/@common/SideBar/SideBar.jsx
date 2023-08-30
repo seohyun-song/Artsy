@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './SideBar.styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
 import useToastContext from '@hooks/useToastContext';
 import { SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
 import useAuthContext from '@hooks/useAuthContext';
 import useDarkMode from '@hooks/useDarkMode';
+import lightToggleUrl from '@assets/icons/icon-lightToggle.png';
+import darkToggleUrl from '@assets/icons/icon-darkToggle.png';
 
 const SideBar = () => {
     const navigate = useNavigate();
@@ -40,6 +42,15 @@ const SideBar = () => {
                 <ToggleButton isActive={isToggle} onClick={handleClickToggleBtn} />
             </S.ExtendToggleButton>
             <S.NavBarContainer $open={isToggle}>
+                <S.DarkButtonContainer>
+                    <S.DarkToggleButtonWrap onClick={toggleDarkMode}>
+                        {darkMode ? (
+                            <img src={darkToggleUrl} alt={'dark toggle'} />
+                        ) : (
+                            <img src={lightToggleUrl} alt={'light toggle'} />
+                        )}
+                    </S.DarkToggleButtonWrap>
+                </S.DarkButtonContainer>
                 <S.NavBarContent $open={isToggle}>
                     <S.Navbar onClick={handleClickToggleBtn}>
                         <S.NavbarItem>
@@ -52,7 +63,6 @@ const SideBar = () => {
                             <S.NavbarItemLink to="/mypage">마이페이지</S.NavbarItemLink>
                         </S.NavbarItem>
                     </S.Navbar>
-                    <button onClick={toggleDarkMode}>{!darkMode ? '다크 모드' : '일반 모드'}</button>
                     <S.LogoutButton color={'#fff'} size={'large'} onClick={handleClickAuthBtn} $open={isToggle}>
                         {isLogin ? '로그아웃' : '로그인'}
                     </S.LogoutButton>
