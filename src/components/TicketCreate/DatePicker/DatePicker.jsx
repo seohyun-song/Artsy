@@ -22,6 +22,7 @@ const Datepicker = ({ selected, onChange, customInput, minDate, maxDate, minTime
                 maxDate={maxDate}
                 minTime={minTime}
                 maxTime={maxTime}
+                shouldCloseOnSelect={false}
                 filterTime={filterTime}
                 containerStyle={{ width: '100%' }}
                 renderCustomHeader={({
