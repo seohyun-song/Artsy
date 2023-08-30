@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import Container from '@components/@common/Container/Container.jsx';
+import Wrap from '@components/@common/Wrap/Wrap.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
 import MyGreeting from '@components/MyPage/MyGreeting/MyGreeting.jsx';
 import MyIconMenu from '@components/MyPage/MyIconMenu/MyIconMenu.jsx';
@@ -33,7 +34,7 @@ const MyPage = () => {
     return (
         <>
             <Container>
-                <M.MyPage>
+                <Wrap>
                     <M.ViewWrap>
                         <MyGreeting username={userInfo?.displayName} />
                         <MyIconMenu />
@@ -46,7 +47,7 @@ const MyPage = () => {
                             percentage={percentageInfo?.percentage ?? '0'}
                         />
                     </M.DataWrap>
-                </M.MyPage>
+                </Wrap>
             </Container>
         </>
     );
