@@ -9,13 +9,14 @@ import useAuthContext from '@hooks/useAuthContext';
 import useDarkMode from '@hooks/useDarkMode';
 import lightToggleUrl from '@assets/icons/icon-lightToggle.png';
 import darkToggleUrl from '@assets/icons/icon-darkToggle.png';
+import useLockScroll from '@hooks/useLockScroll';
 
 const SideBar = () => {
     const navigate = useNavigate();
     const toast = useToastContext();
     const { darkMode, toggleDarkMode } = useDarkMode();
     const [isToggle, setIstoggle] = useState(false);
-
+    const { lockScroll, unLockScroll } = useLockScroll();
     const { isLogin } = useAuthContext();
 
     const { mutate: logout, isSuccess: isLogoutSuccess } = useLogoutQuery();
@@ -23,7 +24,6 @@ const SideBar = () => {
     useEffect(() => {
         if (isLogoutSuccess) {
             toast.show(SUCCESS_MESSAGE.successLogout);
-            navigate('/');
         }
     }, [isLogoutSuccess]);
 
@@ -31,11 +31,15 @@ const SideBar = () => {
         setIstoggle((cur) => !cur);
         if (isLogin) {
             logout();
+            navigate('/');
         } else {
             navigate('/signin');
         }
     };
-    const handleClickToggleBtn = () => setIstoggle((cur) => !cur);
+    const handleClickToggleBtn = () => {
+        setIstoggle((cur) => !cur);
+        isToggle ? unLockScroll() : lockScroll();
+    };
     return (
         <>
             <S.ExtendToggleButton>
@@ -68,7 +72,7 @@ const SideBar = () => {
                     </S.LogoutButton>
                 </S.NavBarContent>
             </S.NavBarContainer>
-            <S.BackModal $open={isToggle}></S.BackModal>
+            <S.BackModal $open={isToggle} onClick={handleClickToggleBtn}></S.BackModal>
         </>
     );
 };

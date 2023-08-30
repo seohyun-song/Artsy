@@ -6,7 +6,7 @@ import useToastContext from '@hooks/useToastContext';
 import checkValidation from '@utils/checkValidation';
 import useCheckEmailQuery from '@hooks/@queries/useCheckEmailQuery';
 import { ERROR_MESSAGE } from '@constants/message';
-import useValidation from '../../../hooks/useValidation';
+import useValidation from '@hooks/useValidation';
 
 const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
     const theme = useTheme();
