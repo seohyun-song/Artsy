@@ -22,6 +22,7 @@ build:
     - echo "VITE_URL=$VITE_URL" >> .env
     - echo "build"
     - npm run build
+    - mv appspec.yml dist/
   only:
     - /^feature\/deploy/
   artifacts:
