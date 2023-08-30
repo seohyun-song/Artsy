@@ -18,17 +18,6 @@ const DatePickerWrap = styled.div`
         font-weight: 500;
     }
 
-    .react-datepicker-time__header {
-        background-color: ${({ theme }) => theme.colors.point1};
-        font-size: ${({ theme }) => theme.fontSizes.body};
-        font-weight: 500;
-        height: 40px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
     .custom-header {
         display: flex;
         justify-content: center;
@@ -50,6 +39,23 @@ const DatePickerWrap = styled.div`
         }
     }
 
+    .react-datepicker__input-time-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .react-datepicker-time__input {
+        font-size: ${({ theme }) => theme.fontSizes.text};
+        border: none;
+        background-color: #fff;
+    }
+
+    .react-datepicker-time__caption {
+        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-weight: 500;
+    }
+
     .react-datepicker__day--outside-month {
         color: #a8a8a8;
         pointer-events: none;
@@ -58,16 +64,6 @@ const DatePickerWrap = styled.div`
     .react-datepicker__month-container {
         width: 25rem;
         font-size: ${({ theme }) => theme.fontSizes.text};
-    }
-
-    .react-datepicker__time-container {
-        width: 10rem;
-        font-size: ${({ theme }) => theme.fontSizes.text};
-    }
-
-    .react-datepicker-time__header {
-        font-size: ${({ theme }) => theme.fontSizes.body};
-        font-weight: 500;
     }
 
     .react-datepicker__day--selected {
@@ -127,23 +123,6 @@ const DatePickerWrap = styled.div`
         font-weight: 500;
         color: white;
         border-radius: ${({ theme }) => theme.borderRadius.large};
-    }
-
-    .react-datepicker__time-box {
-        ::-webkit-scrollbar {
-            width: 13px; /* 스크롤바의 너비 */
-        }
-
-        ::-webkit-scrollbar-thumb {
-            height: 30%; /* 스크롤바의 길이 */
-            background: ${({ theme }) => theme.colors.point1};
-
-            border-radius: ${({ theme }) => theme.borderRadius.large};
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #8b97ff33; /*스크롤바 뒷 배경 색상*/
-        }
     }
 `;
 

@@ -190,6 +190,7 @@ const TicketEdit = () => {
                             <T.StyledInput
                                 id="title"
                                 labelText="관람일"
+                                inputMode="none"
                                 isRequired
                                 isValid={true}
                                 inputWidth="100%"

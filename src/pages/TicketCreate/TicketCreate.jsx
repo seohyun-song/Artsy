@@ -183,7 +183,7 @@ const TicketCreate = () => {
                         onChange={(date) => setShowDate(date)}
                         customInput={
                             <Input
-                                inputmode="none"
+                                inputMode="none"
                                 id="title"
                                 labelText="관람일"
                                 isRequired
