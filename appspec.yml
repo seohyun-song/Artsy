@@ -15,4 +15,4 @@ hooks:
   BeforeInstall:
     - location: scripts/move_previous.sh
       timeout: 300
-      runas: www-data
+      runas: root
