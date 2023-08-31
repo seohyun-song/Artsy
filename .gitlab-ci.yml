@@ -23,10 +23,10 @@ build:
     - echo "build"
     - npm run build
   only:
-    - dev
+    - /^feature\/deploy/
   artifacts:
     paths:
-      - /^feature\/deploy/
+      - 'dist/'
 
 deploy:
   stage: deploy
