@@ -45,7 +45,7 @@ const Comment = styled.p`
     font-size: 1.8rem;
     line-height: 2.6rem;
     font-weight: 500;
-    color: white;
+    color: #fff;
     margin-bottom: 0.4rem;
 `;
 const ExtendGradeBar = styled(GradeBar)`

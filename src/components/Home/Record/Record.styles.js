@@ -13,7 +13,7 @@ const RecordHeader = styled.div`
     }
     p {
         position: absolute;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         color: ${({ theme }) => theme.colors.font6};
     }
     ${({ theme }) => theme.media.tablet} {
@@ -21,9 +21,6 @@ const RecordHeader = styled.div`
             font-size: 2.4rem;
             margin-bottom: 0.8rem;
             line-height: 3.6rem;
-        }
-        p {
-            font-size: 1.4rem;
         }
     }
     ${({ theme }) => theme.media.labtop} {
