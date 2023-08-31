@@ -110,7 +110,7 @@ const LogoutButton = styled(Button)`
     width: 100%;
     margin-bottom: 20px;
     align-self: center;
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    border: 1px solid ${({ theme }) => theme.colors.font1};
     background-color: ${({ theme }) => theme.colors.background4};
     color: ${({ theme }) => theme.colors.font2};
     ${({ theme }) => theme.media.tablet} {

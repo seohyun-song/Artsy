@@ -38,7 +38,7 @@ const TypeColorBox = styled.div`
 
     ${({ theme }) => theme.media.labtop} {
         width: 100%;
-        color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.font1};
         height: 50rem;
 
         top: 24rem;
@@ -53,14 +53,14 @@ const MainWrap = styled.div`
         font-weight: 500;
         font-size: ${({ theme }) => theme.fontSizes.h4};
         margin: 2rem 0 4rem 0;
-        color: white;
+        color: #fff;
     }
 
     ${({ theme }) => theme.media.labtop} {
         justify-content: flex-start;
 
         h2 {
-            color: ${({ theme }) => theme.colors.black};
+            color: ${({ theme }) => theme.colors.font1};
             margin: 1rem 0 7rem 0;
         }
     }

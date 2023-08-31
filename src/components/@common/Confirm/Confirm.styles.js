@@ -17,7 +17,7 @@ const StyledOverlay = styled.div`
 
 const StyledContentBox = styled.div`
     border-radius: ${({ theme }) => theme.borderRadius.large};
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.background1};
     padding: 24px 16px 16px 16px;
     width: 90%;
     max-width: 420px;
@@ -56,11 +56,4 @@ const StyledButton = styled(Button)`
     height: 40px;
 `;
 
-export {
-    StyledOverlay,
-    StyledContentBox,
-    StyledTitle,
-    StyledDescription,
-    StyledButtonContainer,
-    StyledButton
-};
+export { StyledOverlay, StyledContentBox, StyledTitle, StyledDescription, StyledButtonContainer, StyledButton };

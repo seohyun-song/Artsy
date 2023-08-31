@@ -41,7 +41,7 @@ const IconButton = styled(Link)`
     > span {
         margin-top: 1rem;
         font-size: ${({ theme }) => theme.fontSizes.text};
-        color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.font1};
     }
 `;
 
