@@ -74,6 +74,7 @@ const ReviewInput = styled.textarea`
     resize: none;
     overflow: hidden;
     background-color: ${({ theme }) => theme.colors.background3};
+    color: ${({ theme }) => theme.colors.font1};
     &:focus {
         outline: none;
         border-color: ${({ theme }) => theme.colors.point1};
