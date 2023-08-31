@@ -21,7 +21,6 @@ const Greeting = styled.div`
         h2 {
             font-size: 3.4rem;
             line-height: 3.8rem;
-            font-weight: bold;
         }
         p {
             display: block;

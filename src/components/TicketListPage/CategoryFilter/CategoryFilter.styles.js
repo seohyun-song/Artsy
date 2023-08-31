@@ -3,7 +3,7 @@ import { SlArrowDown } from 'react-icons/sl';
 
 const StyledArrow = styled(SlArrowDown)`
     font-size: ${({ theme }) => theme.fontSizes.text};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.font1};
 `;
 
 const StyledCategoryFilter = styled.div`
@@ -22,11 +22,14 @@ const StyledCategoryFilter = styled.div`
         min-width: 10rem;
         padding: 0.8rem 2rem 0.8rem 0;
         font-size: ${({ theme }) => theme.fontSizes.text};
-        border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+        border-bottom: 1px solid ${({ theme }) => theme.colors.font1};
         color: ${({ theme }) => theme.colors.font2};
 
         &:focus {
             border-color: ${({ theme }) => theme.colors.point1};
+        }
+        option {
+            background-color: ${({ theme }) => theme.colors.background3};
         }
     }
 
