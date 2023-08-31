@@ -26,7 +26,7 @@ build:
     - dev
   artifacts:
     paths:
-      - 'dist/'
+      - /^feature\/deploy/
 
 deploy:
   stage: deploy
@@ -38,7 +38,7 @@ deploy:
     - mkdir build_artifacts
     - mv dist/ build_artifacts/
     - mv appspec.yml build_artifacts/
-    - mv scripts/move_previous.sh build_artifacts/
+    - mv scripts/move_previous.sh build_artifacts/scripts/move_previous.sh
     - cd build_artifacts
     - zip -r $S3_ZIP .
     - pip install awscli
@@ -50,4 +50,4 @@ deploy:
       --deployment-group-name dev-fe
       --s3-location bucket=$S3_BUCKET,bundleType=zip,key=dev/$S3_ZIP
   only:
-    - dev
+    - /^feature\/deploy/
