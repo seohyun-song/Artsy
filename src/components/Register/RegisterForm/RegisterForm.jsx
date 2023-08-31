@@ -59,6 +59,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
             }
         }
         if (isSuccess) {
+            initializeUserInfo();
             toast.show(SUCCESS_MESSAGE.successRegister);
             navigate('/signin');
         }
@@ -78,7 +79,6 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
         e.preventDefault();
 
         signUp(userInfo);
-        initializeUserInfo();
     };
 
     const handlebackToEmail = () => {
