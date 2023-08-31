@@ -23,7 +23,7 @@ build:
     - echo "build"
     - npm run build
   only:
-    - /^feature\/deploy/
+    - dev
   artifacts:
     paths:
       - 'dist/'
@@ -50,4 +50,4 @@ deploy:
       --deployment-group-name dev-fe
       --s3-location bucket=$S3_BUCKET,bundleType=zip,key=dev/$S3_ZIP
   only:
-    - /^feature\/deploy/
+    - dev
