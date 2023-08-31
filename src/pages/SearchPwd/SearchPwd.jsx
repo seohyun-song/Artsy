@@ -128,17 +128,19 @@ const SearchPwd = () => {
                         errorMessage={emailInfo.errorMessage}
                         value={emailInfo.email}
                         onChange={handleChange}
+                        inputRightComponent={
+                            <S.StyledButton
+                                type="button"
+                                size="medium"
+                                //full="full"
+                                style="line"
+                                disabled={isDisabledSend}
+                                onClick={handleClickSend}
+                            >
+                                이메일 발송
+                            </S.StyledButton>
+                        }
                     />
-                    <Button
-                        type="button"
-                        size="small"
-                        full="full"
-                        style="line"
-                        disabled={isDisabledSend}
-                        onClick={handleClickSend}
-                    >
-                        임시 비밀번호 발송
-                    </Button>
                 </S.InputBox>
                 <S.InputBox>
                     {isRunning && <S.Timer>{formatTime(count)}</S.Timer>}
