@@ -27,7 +27,7 @@ build:
     - mv appspec.yml build_artifacts/
     - mv scripts/move_previous.sh build_artifacts/scripts/
   only:
-    - /^feature\/deploy/
+    - dev
   artifacts:
     paths:
       - 'build_artifacts/'
@@ -52,4 +52,4 @@ deploy:
       --deployment-group-name dev-fe
       --s3-location bucket=$S3_BUCKET,bundleType=zip,key=dev/$S3_ZIP
   only:
-    - /^feature\/deploy/
+    - dev
