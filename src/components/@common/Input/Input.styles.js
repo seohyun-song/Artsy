@@ -18,6 +18,10 @@ const StyledLabel = styled.label`
 const StyledRequired = styled.span`
     color: #ff624d;
 `;
+const StyledInputContainer = styled.div`
+    display: flex;
+    width: 100%;
+`;
 const StyledInput = styled.input`
     box-sizing: border-box;
     width: ${(props) => props.$inputWidth};
@@ -65,4 +69,4 @@ const StyledErrorMessage = styled.span`
     font-size: ${({ theme }) => theme.fontSizes.text};
 `;
 
-export { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessage };
+export { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessage, StyledInputContainer };
