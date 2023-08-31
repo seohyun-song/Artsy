@@ -63,7 +63,7 @@ const InfoBox = styled.div`
     padding: 2rem 2rem 2rem 1rem;
     box-sizing: border-box;
     background-color: ${({ theme }) => theme.colors.background3};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.font1};
 `;
 
 const Title = styled.div`

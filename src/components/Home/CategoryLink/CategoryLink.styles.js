@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { SlArrowRight } from 'react-icons/sl';
+
 const CategoryLink = styled.div`
     display: flex;
     flex-direction: column;
@@ -43,9 +45,14 @@ const CategoryTitle = styled.h3`
 
 const MakeTicketLink = styled.div`
     align-self: flex-end;
+    display: flex;
+    align-items: flex-end;
     font-size: 1.2rem;
     ${({ theme }) => theme.media.labtop} {
         font-size: 1.4rem;
     }
 `;
-export { CategoryLink, CategoryImage, CategoryTitle, MakeTicketLink };
+const RightArrow = styled(SlArrowRight)`
+    margin-left: 0.4rem;
+`;
+export { CategoryLink, CategoryImage, CategoryTitle, MakeTicketLink, RightArrow };

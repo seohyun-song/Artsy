@@ -52,9 +52,9 @@ const StyledInput = styled.input`
     &:autofill:hover,
     &:autofill:focus,
     &:autofill:active {
-        -webkit-text-fill-color: #000;
-        -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-        box-shadow: 0 0 0px 1000px #fff inset;
+        -webkit-text-fill-color: ${({ theme }) => theme.colors.font1};
+        -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.colors.background3} inset;
+        box-shadow: 0 0 0px 1000px ${({ theme }) => theme.colors.background3} inset;
         transition: background-color 5000s ease-in-out 0s;
     }
     &::placeholder {
