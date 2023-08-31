@@ -2,11 +2,17 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/artsy
+    destination: /home/artsy/fe
     overwrite: yes
 
 permissions:
   - object: /home/ubuntu
     pattern: '**'
-    owner: ubuntu
-    group: ubuntu
+    owner: www-data
+    group: www-data
+
+hooks:
+  BeforeInstall:
+    - location: move_previous.sh
+      timeout: 300
+      runas: ubuntu

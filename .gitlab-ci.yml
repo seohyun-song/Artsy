@@ -38,6 +38,7 @@ deploy:
     - mkdir build_artifacts
     - mv dist/ build_artifacts/
     - mv appspec.yml build_artifacts/
+    - mv scripts/move_previous.sh build_artifacts/
     - cd build_artifacts
     - zip -r $S3_ZIP .
     - pip install awscli
