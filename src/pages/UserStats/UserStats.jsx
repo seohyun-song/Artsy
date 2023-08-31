@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as U from './UserStats.styles';
-import Container from '@components/@common/Container/Container';
-import Loading from '@components/@common/Loading/Loading';
+import Wrap from '@components/@common/Wrap/Wrap';
+import ContentsLoading from '@components/@common/ContentsLoading/ContentsLoading';
 import StatsBox from '@components/UserStats/StatsBox/StatsBox';
 import CoinIconUrl from '@assets/icons/icon-coin.png';
 import CalendarIconUrl from '@assets/icons/icon-calendar.png';
@@ -23,8 +23,6 @@ const UserStats = () => {
         error: chartError,
     } = useTicketStatsQuery(year, month);
 
-    console.log(chartData);
-
     useEffect(() => {
         if (!isChartError) return;
         if (isChartError) {
@@ -45,7 +43,10 @@ const UserStats = () => {
     };
 
     const onRight = () => {
-        if (month === 12) {
+        if (year === new Date().getFullYear() && month === new Date().getMonth() + 1) {
+            toast.show('해당 월까지만 선택 가능합니다.');
+            return;
+        } else if (month === 12) {
             setYear((prev) => prev + 1);
             setMonth(1);
         } else setMonth((prev) => prev + 1);
@@ -54,9 +55,9 @@ const UserStats = () => {
     return (
         <>
             {isChartLoading ? (
-                <Loading />
+                <ContentsLoading />
             ) : (
-                <Container>
+                <Wrap>
                     <U.StatsContainer>
                         <U.StatsWrap>
                             <U.StatsChartWrap>
@@ -77,17 +78,13 @@ const UserStats = () => {
                                 />
                                 <StatsBox
                                     title={`${month}월 지출`}
-                                    content={
-                                        chartData?.pricePerMonth === null
-                                            ? '0원'
-                                            : `${chartData?.pricePerMonth.toLocaleString() ?? 0}원`
-                                    }
+                                    content={`${chartData?.pricePerMonth.toLocaleString() ?? 0}원`}
                                     imgSrc={CoinIconUrl}
                                 />
                             </U.StatsBoxWrap>
                         </U.StatsWrap>
                     </U.StatsContainer>
-                </Container>
+                </Wrap>
             )}
         </>
     );

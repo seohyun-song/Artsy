@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { SlArrowRight } from 'react-icons/sl';
 
 const Container = styled(Link)`
     display: flex;
@@ -17,7 +18,7 @@ const Container = styled(Link)`
     }
 `;
 const BookImage = styled.img`
-    width: 18%;
+    width: 16%;
     max-width: 100px;
     height: auto;
 `;
@@ -29,10 +30,8 @@ const Content = styled.p`
     margin-left: 0.8rem;
     font-size: 1.4rem;
 `;
-const Arrow = styled.span`
-    width: 20px;
-    img {
-        width: 100%;
-    }
+
+const RightArrow = styled(SlArrowRight)`
+    font-size: 1.4rem;
 `;
-export { Container, BookImage, Content, Arrow };
+export { Container, BookImage, Content, RightArrow };

@@ -13,6 +13,7 @@ const Badge = styled.div`
     border-radius: 10px;
     background: ${({ theme }) => `linear-gradient(146deg, ${theme.colors.point1} 0%, #7a85e0 100%)`};
 
+    cursor: pointer;
     ${({ $theme }) => $theme.media.tablet} {
         max-width: 480px;
         width: 55%;
@@ -43,8 +44,8 @@ const ImageWrapper = styled.div`
 const Comment = styled.p`
     font-size: 1.8rem;
     line-height: 2.6rem;
-    font-weight: bold;
-    color: white;
+    font-weight: 500;
+    color: #fff;
     margin-bottom: 0.4rem;
 `;
 const ExtendGradeBar = styled(GradeBar)`

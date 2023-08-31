@@ -8,6 +8,7 @@ const RowContainer = styled.div`
 
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
+        align-items: center;
 
         ${({ $review }) =>
             $review &&
@@ -19,7 +20,7 @@ const RowContainer = styled.div`
 
 const TitleText = styled.span`
     font-size: ${({ theme }) => theme.fontSizes.body};
-    font-weight: 600;
+    font-weight: 500;
 
     ${({ theme }) => theme.media.labtop} {
         text-align: left;

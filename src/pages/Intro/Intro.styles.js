@@ -40,7 +40,7 @@ const MainText = styled.div`
 
     /* media */
     ${({ theme }) => theme.media.tablet} {
-        color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.font1};
 
         h2 {
             font-size: ${({ theme }) => theme.fontSizes.h4};
