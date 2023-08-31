@@ -23,7 +23,7 @@ build:
     - echo "build"
     - npm run build
   only:
-    - dev
+    - /^feature\/deploy/
   artifacts:
     paths:
       - 'dist/'
@@ -31,6 +31,8 @@ build:
 deploy:
   stage: deploy
   image: python:3.9
+  variables:
+    GIT_STRATEGY: none
   script:
     - echo "Uploading to S3"
     - apt-get update -y
@@ -50,4 +52,4 @@ deploy:
       --deployment-group-name dev-fe
       --s3-location bucket=$S3_BUCKET,bundleType=zip,key=dev/$S3_ZIP
   only:
-    - dev
+    - /^feature\/deploy/
