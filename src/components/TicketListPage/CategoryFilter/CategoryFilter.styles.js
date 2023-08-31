@@ -28,6 +28,9 @@ const StyledCategoryFilter = styled.div`
         &:focus {
             border-color: ${({ theme }) => theme.colors.point1};
         }
+        option {
+            background-color: ${({ theme }) => theme.colors.background3};
+        }
     }
 
     ${StyledArrow} {
