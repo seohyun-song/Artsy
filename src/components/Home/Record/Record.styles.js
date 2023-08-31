@@ -19,7 +19,6 @@ const RecordHeader = styled.div`
     ${({ theme }) => theme.media.tablet} {
         h2 {
             font-size: 2.4rem;
-            font-weight: bold;
             margin-bottom: 0.8rem;
             line-height: 3.6rem;
         }

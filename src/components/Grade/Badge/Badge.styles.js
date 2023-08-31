@@ -75,7 +75,7 @@ const Content = styled.div`
     font-size: 1.6rem;
     > p:first-of-type {
         font-size: 2rem;
-        font-weight: bold;
+        font-weight: 500;
         line-height: 2.4rem;
     }
     ${({ theme }) => theme.media.tablet} {
