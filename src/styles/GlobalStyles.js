@@ -222,6 +222,7 @@ const GlobalStyle = createGlobalStyle`
     /* reset override */
     * {
         box-sizing: border-box;
+        word-break: keep-all;
     }
     
     html,
