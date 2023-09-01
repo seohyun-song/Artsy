@@ -75,9 +75,7 @@ const lightTheme = {
         point2: mainColor.purple,
         sub1: mainColor.lightBlue, //point1 높은 채도 색상
         sub2: mainColor.lightPurple, //point2 높은 채도 색상
-        black: gray.gray85,
-        white: gray.gray00,
-        font1: gray.gray85,
+        font1: gray.gray85, //기존 black을 font1으로 수정
         font2: gray.gray85,
         font3: mainColor.blue, //point1 => sub1
         font4: mainColor.purple, //point2 => sub2
@@ -92,8 +90,9 @@ const lightTheme = {
         background5: gray.gray05, //grey바탕의 contents박스
         background6: gray.gray05,
         background7: gray.gray05,
-        background8: gray.gray50,
-        background9: gray.gray95,
+        background8: gray.gray10,
+        background9: gray.gray20,
+        background10: gray.gray95,
         border1: mainColor.blue,
         border2: gray.gray20,
     },
@@ -110,8 +109,6 @@ const darkTheme = {
         point2: mainColor.purple,
         sub1: mainColor.lightBlue,
         sub2: mainColor.lightPurple,
-        black: gray.gray00,
-        white: gray.gray85,
         font1: gray.gray00,
         font2: gray.gray05,
         font3: mainColor.lightBlue, // sub1 =>point1
@@ -127,8 +124,9 @@ const darkTheme = {
         background5: gray.gray80,
         background6: gray.gray70,
         background7: gray.gray50,
-        background8: gray.gray40,
-        background9: gray.gray70,
+        background8: gray.gray70,
+        background9: gray.gray40,
+        background10: gray.gray80,
         border1: gray.gray70,
         border2: gray.gray70,
     },
