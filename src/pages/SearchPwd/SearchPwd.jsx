@@ -78,7 +78,11 @@ const SearchPwd = () => {
     useEffect(() => {
         if (isSuccessLogin) {
             toast.show(SUCCESS_MESSAGE.successSignin);
-            navigate('/user/edit');
+            navigate('/user/edit', {
+                state: {
+                    requiredSkipCurPassword: true
+                }
+            });
         }
         if (isErrorLogin) {
             toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { getUser, updateUser } from '@hooks/@queries/useUserInfoQuery';
 import { checkPassword } from '@hooks/@queries/useCheckPassword';
@@ -20,14 +20,19 @@ import * as U from './UserEdit.styles';
 
 const UserEdit = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
     const { data: userInfo, isSuccess: isSuccessGet, isLoading: isLoadingGet } = getUser();
     const { mutate: mutateUser, isSuccess: isSuccessUpdate, isError: isErrorUpdate } = updateUser();
     const { data: isCheckPassword, mutate: mutatePassword, isSuccess: isSuccessCheck } = checkPassword();
+
     const toast = useToastContext();
     const checkPasswordRef = useRef();
     const displayNameRef = useRef();
     const newPasswordRef = useRef();
     const confirmPasswordRef = useRef();
+
+    const [isCorrectCurrentPassword, setIsCorrectCurrentPassword] = useState(false);
 
     const [checkPasswordInfo, setCheckPasswordInfo] = useState({
         checkPassword: '',
@@ -49,6 +54,14 @@ const UserEdit = () => {
         errorMessage: '',
         isValid: false,
     });
+
+    useEffect(() => {
+        const _requiredSkipCurPassword = location.state?.requiredSkipCurPassword;
+
+        if (_requiredSkipCurPassword === true) {
+            setIsCorrectCurrentPassword(true);
+        }
+    }, []);
 
     useEffect(() => {
         if (isSuccessGet) {
@@ -73,6 +86,10 @@ const UserEdit = () => {
             });
 
             checkPasswordRef.current.focus();
+        }
+
+        if (isCheckPassword?.isCorrect === true) {
+            setIsCorrectCurrentPassword(true);
         }
     }, [isCheckPassword, isSuccessCheck]);
 
@@ -189,7 +206,7 @@ const UserEdit = () => {
     return (
         <Wrap>
             <PageTitle>회원 정보 수정</PageTitle>
-            {isCheckPassword?.isCorrect === true ? (
+            {isCorrectCurrentPassword === true ? (
                 <U.EditForm>
                     <U.InputBox>
                         <Input
