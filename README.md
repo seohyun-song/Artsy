@@ -49,7 +49,7 @@ master -----dev
 | 최원진 | Back-End | |
 
 ## 사용 기술 스택
-- 프론트엔드: <img alt="EJS" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/> 
+- 프론트엔드: <img alt="react" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> <img alt="reactquery" src ="https://img.shields.io/badge/reactquery-FF4154.svg?&style=for-the-badge&logo=reactquery&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/> 
 - 백엔드: <img alt="Node.js" src ="https://img.shields.io/badge/Node.js-3776AB.svg?&style=for-the-badge&logo=Node.js&logoColor=white"/> <img alt="Express.js" src ="https://img.shields.io/badge/Express.js-000000.svg?&style=for-the-badge&logo=Express.js&logoColor=black"/> <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-02569B.svg?&style=for-the-badge&logo=MongoDB&logoColor=white"/> 
 
 
