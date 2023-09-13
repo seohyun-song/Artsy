@@ -21,7 +21,7 @@ src
  ┣ constants # constants(confirm, error msg, regexp...)
  ┣ contexts # contexts provider
  ┣ hooks # custom hooks
- ┃ ┗ @queries # React query 훅 
+ ┃ ┗ @queries # react query 훅 
  ┣ pages # majority of the app pages
  ┣ styles # global styles
  ┣ utils # utilities(data formating, API...)
@@ -42,11 +42,11 @@ master -----dev
 ## 팀원 및 역할
 |  이름  |   파트   | 담당 업무                                                                                                                                                            |
 | :----: | :-------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 송서현 | Front-End(FE Team Leader)| 프로젝트 초기 셋팅, 티켓목록화면구현(무한스크롤페지네이션), 토스트팝업구현(Context API), 비밀번호찾기 화면 구현, 회원정보수정 화면 구현, 마이페이지 구현, 인트로화면 구현, PWA 및 오픈그래프 구현 |
-| 이지영 | Front-End | 홈화면 구현, 로그인/회원가입화면 구현, 등급안내화면 구현, 다크모드 구현 |
-| 김지윤 | Front-End | 티켓 상세/수정/삭제화면 구현 |
-| 최하은 | Back-End(Leader) |  |
-| 최원진 | Back-End | |
+| 송서현 | Front-End(FE Team Leader)| 프로젝트 초기 셋팅(folder architecture, dependencies)<br> 티켓목록 화면 구현(무한스크롤페지네이션)<br> 토스트팝업 구현(Context API)<br> 비밀번호찾기 화면 구현<br> 회원정보수정 화면 구현<br> 마이페이지 구현<br> 인트로 화면 구현<br> PWA 및 오픈그래프 구현 |
+| 이지영 | Front-End | 홈화면 구현<br> 로그인/ 회원가입 화면 구현<br> 등급안내 화면 구현<br> 다크모드 구현 |
+| 김지윤 | Front-End | 티켓 상세/ 수정/ 삭제 화면 구현<br> 마이 통계 화면 구현 |
+| 최하은 | Back-End(Leader) | db 스키마 관리<br>프로젝트 초기구조 구축(di, dto)<br>티켓관련 api<br>ci/cd 구축 |
+| 최원진 | Back-End | user관련 api<br> 공통 에러 관리<br> 레디스를 이용한 리프레쉬 토큰<br>s3를 이용한 파일서버관리<br> 메일발송기능|
 
 ## 사용 기술 스택
 - 프론트엔드: <img alt="react" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> <img alt="reactquery" src ="https://img.shields.io/badge/reactquery-FF4154.svg?&style=for-the-badge&logo=reactquery&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=white"/> <img alt="styledcomponents" src ="https://img.shields.io/badge/styledcomponents-DB7093.svg?&style=for-the-badge&logo=styledcomponents&logoColor=white"/> 
@@ -55,10 +55,7 @@ master -----dev
 
 
 ## 테스트 계정 정보
-##### 사용자 로그인 1
-- ID: test1@test.com
+##### 사용자 로그인
+- ID: test@test.com
 - PW: qwer1234!
 
-##### 사용자 로그인 2
-- ID: test2@test.com
-- PW: qwer1234!
