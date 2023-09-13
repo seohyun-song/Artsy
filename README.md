@@ -52,7 +52,7 @@ master -----dev
 | 이지영 | Front-End | 홈화면 구현<br> 로그인/ 회원가입 화면 구현<br> 등급안내 화면 구현<br> 다크모드 구현 |
 | 김지윤 | Front-End | 티켓 상세/ 수정/ 삭제 화면 구현<br> 마이 통계 화면 구현 |
 | 최하은 | Back-End(Leader) | db 스키마 관리<br>프로젝트 초기구조 구축(di, dto)<br>티켓관련 api<br>ci/cd 구축 |
-| 최원진 | Back-End | user관련 api<br> 공통 에러 관리<br> 레디스를 이용한 리프레쉬 토큰<br>s3를 이용한 파일서버관리<br> 메일발송기능|
+| 최원진 | Back-End |유저, 카테고리 api<br> 유저 인증<br> 공통 에러 관리<br> 레디스를 이용한 리프레쉬 토큰<br>s3를 이용한 파일서버관리<br> 메일발송기능|
 
 ## 사용 기술 스택
 - 프론트엔드: <img alt="react" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> <img alt="reactquery" src ="https://img.shields.io/badge/reactquery-FF4154.svg?&style=for-the-badge&logo=reactquery&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=white"/> <img alt="styledcomponents" src ="https://img.shields.io/badge/styledcomponents-DB7093.svg?&style=for-the-badge&logo=styledcomponents&logoColor=white"/> 
